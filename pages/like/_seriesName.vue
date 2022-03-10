@@ -40,9 +40,6 @@
       <div id="mainColumns" class="columns mt-5 is-multiline is-mobile is-centered">
         <div class="column is-narrow" v-for="(item, index) in this.data" v-if="index<limit">
           <CardV2
-            :render-ghost="true"
-            :render-all-circle="true"
-            :renderCircle="true"
             :id="`innerDiv`"
             :aCardID="index"
             :showModalPROP="showModal"
@@ -51,11 +48,12 @@
             :seriesYear="item[2]"
             :seriesRate="Math.round(item[0]*100)"
             :seriesId="item[7]"
+            :render-rate-prop="true"
           />
         </div>
         <div class=" is-12 column has-text-centered">
           <button v-bind:class="buttonClass" @click="More" style="border-radius: 10px">
-            <img id="moreCustom" src="/templates/moreCustom.svg">
+            <img id="moreCustom" src="/templates/moreCustom.svg" alt="moreCustom svg">
             &nbspMore
           </button>
         </div>
