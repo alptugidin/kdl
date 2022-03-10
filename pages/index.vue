@@ -45,7 +45,7 @@
           <h1 id="mostPopularKoreanDramas" style="text-align: center"
               class="has-text-weight-semibold is-size-3 is-size-5-mobile">
             Most popular Korean Dramas
-            <select @change="ChangeYear" id="yearSelector" class="has-text-dark has-text-weight-semibold">
+            <select @change="ChangeYear" id="yearSelector" class="has-text-dark has-text-weight-semibold" style="background-color: #F2F6FC; border: 1px solid #F2F6FC">
               <option v-for="year in years(2010,2021).reverse()">{{ year }}</option>
             </select>
           </h1>
