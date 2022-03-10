@@ -9,7 +9,7 @@ const Tags = mongoose.model("Tags", {
 
 app.use((req, res) => {
     // mongoose.connect("mongodb://kdramalike:aLp+905547528301aLp@localhost:27017/kdramalike?authSource=admin")
-    mongoose.connect("mongodb://localhost:27017/kdramalike2 ")
+    mongoose.connect("mongodb://localhost:27017/kdramalike2")
 
         .then((r) => {
             const reqData = Object.values(req.query)[0]
