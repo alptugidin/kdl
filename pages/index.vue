@@ -16,9 +16,6 @@
              class="column is-narrow" style="padding-left: 5px; padding-right: 5px;">
 
           <CardV2
-            :render-ghost="false"
-            :render-all-circle="true"
-            :renderCircle="false"
             :id="`innerDiv`"
             :showModalPROP="showModal"
             :aCardID="i-1"
@@ -28,6 +25,7 @@
             :seriesRate="Math.round(newDramas[i-1].co * 100)"
             :seriesId="newDramas[i-1].idx"
             :rankNumber="i"
+            :render-rank-prop="true"
           />
 
 
@@ -58,9 +56,6 @@
              class="column is-narrow" style="padding-left: 5px; padding-right: 5px;">
 
           <CardV2
-            :render-ghost="false"
-            :render-all-circle="true"
-            :renderCircle="false"
             :id="`innerDiv`"
             :showModalPROP="showModal"
             :aCardID="i-1"
@@ -70,6 +65,7 @@
             :seriesRate="Math.round(popDramas[i-1].co * 100)"
             :seriesId="popDramas[i-1].idx"
             :rankNumber="i"
+            :render-rank-prop="true"
           />
         </div>
 
