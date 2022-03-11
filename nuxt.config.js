@@ -21,7 +21,7 @@ export default {
 
     ],
     link: [
-      {rel: 'icon', type: 'image/x-icon', href: '/assets/favicoT2.ico'}
+      {rel: 'icon', type: 'image/x-icon', href: '/templates/favicoT2.ico'}
     ],
     script:[
       {type: "text/javascript", src: "/scripts/metric.js"}
