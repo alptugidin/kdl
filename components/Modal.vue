@@ -18,34 +18,52 @@
           </div>
           <div id="infoCol" class="column" :style="{textAlign:this.textAlign}">
             <p
-              id="modalInfo"
-              class="has-text-weight-semibold is-size-4 is-size-5-mobile"
+                id="modalInfo"
+                class="has-text-weight-semibold is-size-4 is-size-5-mobile"
             >{{ modalInfoPROP }}</p>
             <p id="modalHang">{{ modalHangPROP }}</p>
             <p id="modalYear" class="is-size-5">{{ modalYearPROP }}</p>
-            <p id="commonTagP" v-if="renderCommonTags">Common tags: <span v-html="ColoredTags(modalCommonTagsProp)"></span> </p>
+            <p id="commonTagP" v-if="renderCommonTags">Common tags: <span
+                v-html="ColoredTags(modalCommonTagsProp)"></span></p>
           </div>
           <div id="rateCol" class="column" :style="{display:rateColDisplayState}">
             <div class="columns mb-0">
-              <div class="column is-7 is-offset-4">
-                <client-only>
-                  <div id="rateDiv">
-                    <circleProgress
-                      id="cpid"
-                      :value="valuePROP"
-                      :options="options"
-                      style="margin-top: -25%"
-                    />
-                  </div>
-                </client-only>
+              <div class="column is-7 is-offset-4" >
+
+                <svg v-if="renderRateProp" id="svgProgressModal" height="90" width="90" viewBox="0 0 100 100">
+                  <circle
+                      cx="50"
+                      cy="50"
+                      :r="rProp"
+                      stroke="#dbdbdb"
+                      stroke-width="6"
+                      fill-opacity="0.7"
+                      :stroke-dasharray="2*Math.PI*rProp"
+                      :stroke-dashoffset="0"
+                      transform="rotate(-90 50 50)"/>
+                  <circle
+                      cx="50"
+                      cy="50"
+                      :r="rProp"
+                      stroke="#C71B2B"
+                      fill="transparent"
+                      stroke-width="6"
+                      :stroke-dasharray="2*Math.PI*rProp"
+                      :stroke-dashoffset="2*Math.PI*rProp - (2*Math.PI*rProp*(valuePROP/100))"
+                      transform="rotate(-90 50 50)"/>
+                  <text text-anchor="middle" x="50%" y="60%" fill="#ffc107" font-size="30px">{{ valuePROP }}%</text>
+                </svg>
+
+
               </div>
             </div>
-            <div class="columns has-text-centered" style="margin-top: -20px">
+            <!--            <div class="columns has-text-centered" style="margin-top: -20px">-->
+            <div class="columns has-text-centered">
               <div id="rateCol2" class="column is-9 is-offset-3 py-0 px-0">
                 <p>Similar to</p>
                 <p
-                  id="similarName"
-                  class="has-text-weight-semibold is-size-6-mobile"
+                    id="similarName"
+                    class="has-text-weight-semibold is-size-6-mobile"
                 >{{ modalSimilarNamePROP }}</p>
               </div>
             </div>
@@ -65,13 +83,13 @@
           <div class="column">
             <figure class="image is-16by9">
               <iframe
-                id="frame"
-                class="has-ratio"
-                width="640"
-                height="360"
-                v-bind:src="modalVideoPROP"
-                frameborder="0"
-                allowfullscreen
+                  id="frame"
+                  class="has-ratio"
+                  width="640"
+                  height="360"
+                  v-bind:src="modalVideoPROP"
+                  frameborder="0"
+                  allowfullscreen
               ></iframe>
             </figure>
           </div>
@@ -104,7 +122,9 @@ export default {
     "modalSumLinkPROP",
     "modalSumTextPROP",
     "modalSimilarNamePROP",
-    "modalCommonTagsProp"
+    "modalCommonTagsProp",
+    "renderRateProp",
+    "rProp"
   ],
   components: {
     circleProgress: () => process.client ? import("vuejs-progress-bar") : null
@@ -116,7 +136,7 @@ export default {
       document.getElementsByTagName("HTML")[0].classList.remove("is-clipped")
     },
 
-    ColoredTags(param){
+    ColoredTags(param) {
       let coloredTagsArray = []
 
       param.forEach(tag => {
@@ -136,49 +156,16 @@ export default {
     // path !== "like" ? this.textAlign = "center" : null
     path === "like" ? this.renderCommonTags = true : null
 
-    const isMobile = () => (window.innerWidth <= 768)
-    if (isMobile()) {
-      const path = this.options
-      path.layout.height = 70
-      path.layout.width = 70
-      path.layout.horizontalTextAlign = 15
-      path.layout.verticalTextAlign = 47
-      path.text.fontSize = 20
-    }
   },
 
   data() {
     return {
-
       isMobile: () => (window.innerWidth <= 768),
       rateColDisplayState: "block",
       textAlign: "left",
       renderCommonTags: false,
       value: 50,
       randomColor: ["is-primary", "is-link", "is-info", "is-success", "is-warning", "is-danger"],
-      options: {
-        text: {
-          color: "#B30934",
-          shadowEnable: false,
-          shadowColor: '',
-          fontSize: 35,
-          fontFamily: 'Ubuntu',
-          hideText: false
-        },
-        progress: {
-          color: '#B30934',
-          backgroundColor: '#8d8a8a',
-          inverted: false
-        },
-        layout: {
-          height: 120,
-          width: 120,
-          verticalTextAlign: 75,
-          horizontalTextAlign: 25,
-          strokeWidth: 6,
-          type: 'circle'
-        }
-      }
     }
   }
 
@@ -188,29 +175,44 @@ export default {
 
 <style>
 
-.tag{
+.tag {
   border: 1px solid #dbdbdb;
   height: unset !important;
 }
 
-#commonTagP{
+#commonTagP {
   display: block;
 }
 
+#svgProgressModal {
+  margin-left: calc(calc(100% - 90px)/2);
+}
+
 @media only screen and (max-width: 768px) {
-  .modal-card{
+  .modal-card {
     width: 95%;
   }
-  #modSumCol{
+
+  #svgProgressModal{
+    width: 60px;
+    height: 60px;
+  }
+
+  #svgProgressModal {
+    margin-left: calc(calc(100% - 60px)/2);
+  }
+  #modSumCol {
     padding-right: 0.75rem !important;
   }
-  #infoCol{
+
+
+  #infoCol {
     /*text-align: center;*/
   }
 }
 
 @media only screen and (max-width: 1023px) {
-  .modal-card{
+  .modal-card {
     width: 95%;
   }
 }
