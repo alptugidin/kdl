@@ -22,7 +22,7 @@
 
 
 <script>
-import headerComp from "/components/HeaderV2"
+import headerComp from "/components/Header"
 import footerComp from "/components/Footer"
 
 

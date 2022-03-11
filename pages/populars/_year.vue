@@ -16,7 +16,7 @@
 
         <div class="column is-narrow" v-for="i in takenData.length">
 
-          <cardV2
+          <card
             :render-ghost="false"
             :renderaAllCircle="false"
             :renderCircle="false"

@@ -15,7 +15,7 @@
         <div v-bind:id="`col1Card${i - 1}`" v-for="i in newDramas.length"
              class="column is-narrow" style="padding-left: 5px; padding-right: 5px;">
 
-          <CardV2
+          <card
             :id="`innerDiv`"
             :showModalPROP="showModal"
             :aCardID="i-1"
@@ -55,7 +55,7 @@
         <div v-bind:id="`col1Card${i-1}`" v-for="i in popDramas.length"
              class="column is-narrow" style="padding-left: 5px; padding-right: 5px;">
 
-          <CardV2
+          <card
             :id="`innerDiv`"
             :showModalPROP="showModal"
             :aCardID="i-1"
