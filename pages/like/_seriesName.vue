@@ -70,6 +70,8 @@
         v-bind:modalImagePROP="idToModal"
         v-bind:modalSimilarNamePROP="similarNameToModal"
         :modal-common-tags-prop="commonTagsToModal"
+        :render-rate-prop="true"
+        :r-prop="45"
       />
     </div>
 
@@ -174,7 +176,6 @@ export default {
   },
 
   mounted() {
-    // console.log(document.getElementsByClassName("card").length)
 
   },
 
