@@ -4,10 +4,11 @@
     <!--    <div id="inputSkeleton" v-if="!svgStatus">-->
     <!--      <b-skeleton height="40"/>-->
     <!--    </div>-->
-    <form id="formID" style="display: none">
-      <img id="svgSearch" src="/templates/searchCustom.svg" alt="" @load="SvgLoadStatus">
-      <input id="inputId" class="inp" @input="Search" :placeholder="placeholder" autocomplete="off">
-      <select id="searchType" @change="ChangeSearchType" name="" class="has-text-black has-text-weight-semibold">
+    <form id="formID">
+      <img id="svgSearch" src="/templates/searchCustom.svg" alt="">
+      <input id="inputId" class="inp" @input="Search" :placeholder="this.placeholder" autocomplete="off">
+<!--      <select id="searchType" @change="ChangeSearchType" name="" class="has-text-grey-darker has-text-weight-semibold">-->
+      <select id="searchType" @change="ChangeSearchType" name="">
         <option value="name">Search by Name</option>
         <option value="tag">Search by Tag</option>
       </select>
@@ -99,14 +100,13 @@ export default {
       } else {
         document.getElementById("dropDown").style.display = "block"
       }
-
       document.getElementById("ghost").style.display = "block"
       document.getElementById("inputId").style.borderBottomRightRadius = "0"
       document.getElementById("inputId").style.borderBottomLeftRadius = "0"
       document.getElementById("inputId").style.background = "white"
-      document.getElementById("inputId").style.borderBottom = "1px solid white"
+      // document.getElementById("inputId").style.borderBottom = "1px solid white"
       document.getElementById("searchType").style.borderBottomRightRadius = "0"
-      document.getElementById("searchType").style.borderBottom = "0"
+      // document.getElementById("searchType").style.borderBottom = "0"
     },
 
     NoneEffect(param) {
@@ -118,11 +118,10 @@ export default {
       document.getElementById("ghost").style.display = "none"
       document.getElementById("inputId").style.borderBottomRightRadius = "12px"
       document.getElementById("inputId").style.borderBottomLeftRadius = "12px"
-      document.getElementById("inputId").style.background = "#FAFAFA"
-      document.getElementById("inputId").style.borderBottom = "1px solid #dbdbdb"
+      document.getElementById("inputId").style.background = "#F2F6FC"
+      // document.getElementById("inputId").style.borderBottom = "1px solid #dbdbdb"
       document.getElementById("searchType").style.borderBottomRightRadius = "12px"
-      document.getElementById("searchType").style.borderBottom = "1px solid #dbdbdb"
-
+      // document.getElementById("searchType").style.borderBottom = "1px solid #dbdbdb"
     },
 
     Search() {
@@ -149,34 +148,34 @@ export default {
     Get(type, value) {
       if (type === "t") { //tag ile arama yapıldığında
         axios.get("/api/tags?q=" + value)
-          .then((res) => {
-            let tagArray = []
-            res.data.forEach(element => {
-              tagArray.push(this.PointedWord(element, value, "t"))
-            })
+            .then((res) => {
+              let tagArray = []
+              res.data.forEach(element => {
+                tagArray.push(this.PointedWord(element, value, "t"))
+              })
 
-            tagArray.length === 0 ? this.NoneEffect("t") : this.BlockEffect("t");
-            // document.getElementById("dropDown2").style.display = "block"
-            document.getElementById("dropDown2UL").innerHTML = tagArray.join("")
-          })
-          .catch((err) => {
-            console.log("t param error " + err)
-          })
+              tagArray.length === 0 ? this.NoneEffect("t") : this.BlockEffect("t");
+              // document.getElementById("dropDown2").style.display = "block"
+              document.getElementById("dropDown2UL").innerHTML = tagArray.join("")
+            })
+            .catch((err) => {
+              console.log("t param error " + err)
+            })
       } else {// isim ile arama yapıldığında
         let nameArray = []
         axios.get("/api/series?q=" + value)
-          .then((res) => {
-            res.data.forEach(element => {
-              nameArray.push(this.PointedWord(element, value, type))
+            .then((res) => {
+              res.data.forEach(element => {
+                nameArray.push(this.PointedWord(element, value, type))
+              })
+
+              nameArray.length === 0 ? this.NoneEffect("q") : this.BlockEffect("q");
+              document.getElementById("dropDown").innerHTML = nameArray.join("")
+
             })
-
-            nameArray.length === 0 ? this.NoneEffect("q") : this.BlockEffect("q");
-            document.getElementById("dropDown").innerHTML = nameArray.join("")
-
-          })
-          .catch((err) => {
-            console.log("q param error " + err);
-          })
+            .catch((err) => {
+              console.log("q param error " + err);
+            })
       }
 
 
@@ -277,23 +276,54 @@ export default {
 
 .inp {
   width: 100%;
-  /*height: 35px;*/
   height: 40px;
   border-radius: 12px;
   padding-left: 35px;
-  font-size: 15px;
   color: #666666;
-  border: 1px solid #dbdbdb;
-  background-color: #FAFAFA;
+  border: 1px solid #D3E2FD;
+  background-color: #F2F6FC;
 }
 
 .inp:focus {
-  border: 1px solid #dbdbdb;
+  border: 1px solid white;
   background-color: white !important;
   outline: unset;
   box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
 }
 
+.inp:focus + #searchType{
+  background-color: white;
+  border-left: 1px solid #F2F6FC;
+}
+
+.inp:focus + #searchType:hover{
+  background-color: #F2F6FC;
+}
+
+
+
+#searchType {
+  /*border-radius: 15px;*/
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  outline: unset;
+  position: absolute;
+  right: 0;
+  height: 40px;
+  background-color: #D3E2FD;
+  border-left: unset;
+  border-top: unset;
+  border-bottom: unset;
+  border-right: unset;
+  z-index: 20;
+  color: gray;
+  font-weight: normal;
+}
+
+#searchType:hover {
+  background-color: #c9dbf6;
+  cursor: pointer;
+}
 
 #svgSearch {
   position: absolute;
@@ -314,11 +344,11 @@ form {
 #dropDown {
   position: absolute;
   font-size: 14px;
-  border-left: 1px solid #dbdbdb;
-  border-right: 1px solid #dbdbdb;
-  border-bottom: 1px solid #dbdbdb;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
+  /*border-left: 1px solid white;*/
+  /*border-right: 1px solid white;*/
+  /*border-bottom: 1px solid white;*/
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
   display: none;
   background-color: white;
   box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
@@ -336,11 +366,10 @@ form {
 
 
 .liclass:hover {
-  background-color: #e8e8e8;
-  /*transition: all .2s;*/
+  background-color: #F2F6FC;
   height: inherit;
-
 }
+
 
 .liclass:hover:last-child {
   /*border-bottom-left-radius: 12px;*/
@@ -358,8 +387,8 @@ form {
   z-index: 15;
   /*background-color: #FAFAFA;*/
   background-color: white;
-  border-left: 1px solid #dbdbdb;
-  border-right: 1px solid #dbdbdb;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
   height: 5px;
   width: 100%;
 }
@@ -371,7 +400,7 @@ form {
   z-index: 16;
   width: 100%;
   /*margin-left: 1.5%;*/
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid #F2F6FC;
 
 }
 
@@ -390,16 +419,15 @@ form {
 }
 
 
-
 /************************************************************************/
 #dropDown2 {
   display: none;
   height: 300px;
   position: absolute;
   font-size: 14px;
-  border-left: 1px solid #dbdbdb;
-  border-right: 1px solid #dbdbdb;
-  border-bottom: 1px solid #dbdbdb;
+  /*border-left: 1px solid #dbdbdb;*/
+  /*border-right: 1px solid #dbdbdb;*/
+  /*border-bottom: 1px solid #dbdbdb;*/
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   background-color: white;
@@ -463,25 +491,6 @@ form {
 
 }
 
-#searchType {
-  /*border-radius: 15px;*/
-  border-top-right-radius: 12px;
-  border-bottom-right-radius: 12px;
-  position: absolute;
-  right: 0;
-  height: 40px;
-  border: 1px solid #dbdbdb;
-  /*background-color: #eaeaea;*/
-  outline: unset;
-  /*transition: ease-in-out 0.1s;*/
-  z-index: 20;
-}
-
-#searchType:hover {
-  background-color: #FAFAFA;
-  cursor: pointer;
-  /*border: 1px solid #a7a7a7;*/
-}
 
 ::-webkit-scrollbar {
   width: 10px;
@@ -514,7 +523,7 @@ form {
 
 @media only screen and (max-width: 768px) {
   #pInSearchCol2 {
-  text-align: center;
+    text-align: center;
   }
 }
 
