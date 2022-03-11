@@ -39,7 +39,7 @@
 
       <div id="mainColumns" class="columns mt-5 is-multiline is-mobile is-centered">
         <div class="column is-narrow" v-for="(item, index) in this.data" v-if="index<limit">
-          <CardV2
+          <card
             :id="`innerDiv`"
             :aCardID="index"
             :showModalPROP="showModal"
@@ -81,7 +81,7 @@
 <script>
 
 
-import CardV2 from "/components/CardV2"
+import CardV2 from "/components/Card"
 import Modal from "/components/Modal"
 import axios from "axios"
 
