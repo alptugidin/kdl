@@ -7,7 +7,7 @@
     <form id="formID">
       <img id="svgSearch" src="/templates/searchCustom.svg" alt="">
       <input id="inputId" class="inp" @input="Search" :placeholder="this.placeholder" autocomplete="off">
-<!--      <select id="searchType" @change="ChangeSearchType" name="" class="has-text-grey-darker has-text-weight-semibold">-->
+      <!--      <select id="searchType" @change="ChangeSearchType" name="" class="has-text-grey-darker has-text-weight-semibold">-->
       <select id="searchType" @change="ChangeSearchType" name="">
         <option value="name">Search by Name</option>
         <option value="tag">Search by Tag</option>
@@ -32,7 +32,7 @@
           <div id="searchCol2" class="column is-narrow">
 
             <a @click="SearchByTag">
-              <span id="searchInnerText" class="has-text-grey-light has-text-weight-nromal">Search</span>
+              <span id="searchInnerText" class="has-text-grey-light">Search</span>
             </a>
           </div>
         </div>
@@ -100,13 +100,16 @@ export default {
       } else {
         document.getElementById("dropDown").style.display = "block"
       }
+      // document.getElementById("inputId").style.boxShadow= "0 1px 6px rgb(32 33 36 / 28%);"
       document.getElementById("ghost").style.display = "block"
       document.getElementById("inputId").style.borderBottomRightRadius = "0"
       document.getElementById("inputId").style.borderBottomLeftRadius = "0"
       document.getElementById("inputId").style.background = "white"
+      // document.getElementById("inputId").style.boxShadow = "0 1px 6px rgb(32 33 36 / 28%);"
       // document.getElementById("inputId").style.borderBottom = "1px solid white"
       document.getElementById("searchType").style.borderBottomRightRadius = "0"
       // document.getElementById("searchType").style.borderBottom = "0"
+      console.log("blockEffect")
     },
 
     NoneEffect(param) {
@@ -118,10 +121,12 @@ export default {
       document.getElementById("ghost").style.display = "none"
       document.getElementById("inputId").style.borderBottomRightRadius = "12px"
       document.getElementById("inputId").style.borderBottomLeftRadius = "12px"
-      document.getElementById("inputId").style.background = "#F2F6FC"
+      document.getElementById("inputId").style.background = "#E2ECFC"
+      // document.getElementById("inputId").style.boxShadow = "0 1px 6px rgb(32 33 36 / 28%);"
       // document.getElementById("inputId").style.borderBottom = "1px solid #dbdbdb"
       document.getElementById("searchType").style.borderBottomRightRadius = "12px"
       // document.getElementById("searchType").style.borderBottom = "1px solid #dbdbdb"
+      console.log("none effect")
     },
 
     Search() {
@@ -280,8 +285,10 @@ export default {
   border-radius: 12px;
   padding-left: 35px;
   color: #666666;
-  border: 1px solid #D3E2FD;
-  background-color: #F2F6FC;
+  border: unset;
+  background-color: #E2ECFC;
+
+
 }
 
 .inp:focus {
@@ -291,27 +298,33 @@ export default {
   box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
 }
 
-.inp:focus + #searchType{
+.inp:focus + #searchType {
   background-color: white;
   border-left: 1px solid #F2F6FC;
 }
 
-.inp:focus + #searchType:hover{
+.inp:focus + #searchType:hover {
   background-color: #F2F6FC;
 }
 
 
-
 #searchType {
-  /*border-radius: 15px;*/
+  background-image: url("/templates/select-svg.svg");
+  background-repeat: no-repeat;
+  background-position-y: 12px;
+  background-position-x: -1px;
+  background-size: 20px;
+  appearance: none;
+  padding-right: 4px;
+  padding-left: 18px;
   border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
   outline: unset;
   position: absolute;
   right: 0;
   height: 40px;
-  background-color: #D3E2FD;
-  border-left: unset;
+  background-color: #E2ECFC;
+  border-left: 1px solid #c9dbf6;
   border-top: unset;
   border-bottom: unset;
   border-right: unset;
@@ -437,9 +450,9 @@ form {
 }
 
 
-#dropDown2:focus .inp {
+#dropDown2:focus > .inp {
   /*box-shadow: 0 1px 6px rgb(32 33 36 / 28%);*/
-
+  outline: 1px solid red !important;
 }
 
 #resultCol {
@@ -526,6 +539,5 @@ form {
     text-align: center;
   }
 }
-
 
 </style>
