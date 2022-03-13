@@ -20,7 +20,7 @@ app.use((req, res) => {
                     pocket.push(element.tag)
                 })
                 res.send(pocket)
-            }).limit(5)
+            }).limit(10)
         })
         .catch(err => {
             console.log("TAG ERROR: " + err)

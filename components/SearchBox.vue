@@ -4,11 +4,10 @@
     <!--    <div id="inputSkeleton" v-if="!svgStatus">-->
     <!--      <b-skeleton height="40"/>-->
     <!--    </div>-->
-    <form id="formID">
-      <img id="svgSearch" src="/templates/searchCustom.svg" alt="">
-      <input id="inputId" class="inp" @input="Search" :placeholder="this.placeholder" autocomplete="off">
-      <!--      <select id="searchType" @change="ChangeSearchType" name="" class="has-text-grey-darker has-text-weight-semibold">-->
-      <select id="searchType" @change="ChangeSearchType" name="">
+    <form id="formID" style="display: none">
+      <img id="svgSearch" src="/templates/searchCustom.svg" alt="" @load="SvgLoadStatus">
+      <input id="inputId" class="inp" @input="Search" :placeholder="placeholder" autocomplete="off">
+      <select id="searchType" @change="ChangeSearchType" name="" class="has-text-black has-text-weight-semibold">
         <option value="name">Search by Name</option>
         <option value="tag">Search by Tag</option>
       </select>
@@ -32,7 +31,7 @@
           <div id="searchCol2" class="column is-narrow">
 
             <a @click="SearchByTag">
-              <span id="searchInnerText" class="has-text-grey-light">Search</span>
+              <span id="searchInnerText" class="has-text-grey-light has-text-weight-nromal">Search</span>
             </a>
           </div>
         </div>
@@ -100,16 +99,14 @@ export default {
       } else {
         document.getElementById("dropDown").style.display = "block"
       }
-      // document.getElementById("inputId").style.boxShadow= "0 1px 6px rgb(32 33 36 / 28%);"
+
       document.getElementById("ghost").style.display = "block"
       document.getElementById("inputId").style.borderBottomRightRadius = "0"
       document.getElementById("inputId").style.borderBottomLeftRadius = "0"
       document.getElementById("inputId").style.background = "white"
-      // document.getElementById("inputId").style.boxShadow = "0 1px 6px rgb(32 33 36 / 28%);"
-      // document.getElementById("inputId").style.borderBottom = "1px solid white"
+      document.getElementById("inputId").style.borderBottom = "1px solid white"
       document.getElementById("searchType").style.borderBottomRightRadius = "0"
-      // document.getElementById("searchType").style.borderBottom = "0"
-      console.log("blockEffect")
+      document.getElementById("searchType").style.borderBottom = "0"
     },
 
     NoneEffect(param) {
@@ -121,12 +118,11 @@ export default {
       document.getElementById("ghost").style.display = "none"
       document.getElementById("inputId").style.borderBottomRightRadius = "12px"
       document.getElementById("inputId").style.borderBottomLeftRadius = "12px"
-      document.getElementById("inputId").style.background = "#E2ECFC"
-      // document.getElementById("inputId").style.boxShadow = "0 1px 6px rgb(32 33 36 / 28%);"
-      // document.getElementById("inputId").style.borderBottom = "1px solid #dbdbdb"
+      document.getElementById("inputId").style.background = "#FAFAFA"
+      document.getElementById("inputId").style.borderBottom = "1px solid #dbdbdb"
       document.getElementById("searchType").style.borderBottomRightRadius = "12px"
-      // document.getElementById("searchType").style.borderBottom = "1px solid #dbdbdb"
-      console.log("none effect")
+      document.getElementById("searchType").style.borderBottom = "1px solid #dbdbdb"
+
     },
 
     Search() {
@@ -153,34 +149,34 @@ export default {
     Get(type, value) {
       if (type === "t") { //tag ile arama yapıldığında
         axios.get("/api/tags?q=" + value)
-            .then((res) => {
-              let tagArray = []
-              res.data.forEach(element => {
-                tagArray.push(this.PointedWord(element, value, "t"))
-              })
+          .then((res) => {
+            let tagArray = []
+            res.data.forEach(element => {
+              tagArray.push(this.PointedWord(element, value, "t"))
+            })
 
-              tagArray.length === 0 ? this.NoneEffect("t") : this.BlockEffect("t");
-              // document.getElementById("dropDown2").style.display = "block"
-              document.getElementById("dropDown2UL").innerHTML = tagArray.join("")
-            })
-            .catch((err) => {
-              console.log("t param error " + err)
-            })
+            tagArray.length === 0 ? this.NoneEffect("t") : this.BlockEffect("t");
+            // document.getElementById("dropDown2").style.display = "block"
+            document.getElementById("dropDown2UL").innerHTML = tagArray.join("")
+          })
+          .catch((err) => {
+            console.log("t param error " + err)
+          })
       } else {// isim ile arama yapıldığında
         let nameArray = []
         axios.get("/api/series?q=" + value)
-            .then((res) => {
-              res.data.forEach(element => {
-                nameArray.push(this.PointedWord(element, value, type))
-              })
-
-              nameArray.length === 0 ? this.NoneEffect("q") : this.BlockEffect("q");
-              document.getElementById("dropDown").innerHTML = nameArray.join("")
-
+          .then((res) => {
+            res.data.forEach(element => {
+              nameArray.push(this.PointedWord(element, value, type))
             })
-            .catch((err) => {
-              console.log("q param error " + err);
-            })
+
+            nameArray.length === 0 ? this.NoneEffect("q") : this.BlockEffect("q");
+            document.getElementById("dropDown").innerHTML = nameArray.join("")
+
+          })
+          .catch((err) => {
+            console.log("q param error " + err);
+          })
       }
 
 
@@ -281,62 +277,23 @@ export default {
 
 .inp {
   width: 100%;
+  /*height: 35px;*/
   height: 40px;
   border-radius: 12px;
   padding-left: 35px;
+  font-size: 15px;
   color: #666666;
-  border: unset;
-  background-color: #E2ECFC;
-
-
+  border: 1px solid #dbdbdb;
+  background-color: #FAFAFA;
 }
 
 .inp:focus {
-  border: 1px solid white;
+  border: 1px solid #dbdbdb;
   background-color: white !important;
   outline: unset;
   box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
 }
 
-.inp:focus + #searchType {
-  background-color: white;
-  border-left: 1px solid #F2F6FC;
-}
-
-.inp:focus + #searchType:hover {
-  background-color: #F2F6FC;
-}
-
-
-#searchType {
-  background-image: url("/templates/select-svg.svg");
-  background-repeat: no-repeat;
-  background-position-y: 12px;
-  background-position-x: -1px;
-  background-size: 20px;
-  appearance: none;
-  padding-right: 4px;
-  padding-left: 18px;
-  border-top-right-radius: 12px;
-  border-bottom-right-radius: 12px;
-  outline: unset;
-  position: absolute;
-  right: 0;
-  height: 40px;
-  background-color: #E2ECFC;
-  border-left: 1px solid #c9dbf6;
-  border-top: unset;
-  border-bottom: unset;
-  border-right: unset;
-  z-index: 20;
-  color: gray;
-  font-weight: normal;
-}
-
-#searchType:hover {
-  background-color: #c9dbf6;
-  cursor: pointer;
-}
 
 #svgSearch {
   position: absolute;
@@ -357,11 +314,11 @@ form {
 #dropDown {
   position: absolute;
   font-size: 14px;
-  /*border-left: 1px solid white;*/
-  /*border-right: 1px solid white;*/
-  /*border-bottom: 1px solid white;*/
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
+  border-left: 1px solid #dbdbdb;
+  border-right: 1px solid #dbdbdb;
+  border-bottom: 1px solid #dbdbdb;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
   display: none;
   background-color: white;
   box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
@@ -379,10 +336,11 @@ form {
 
 
 .liclass:hover {
-  background-color: #F2F6FC;
+  background-color: #e8e8e8;
+  /*transition: all .2s;*/
   height: inherit;
-}
 
+}
 
 .liclass:hover:last-child {
   /*border-bottom-left-radius: 12px;*/
@@ -400,8 +358,8 @@ form {
   z-index: 15;
   /*background-color: #FAFAFA;*/
   background-color: white;
-  border-left: 1px solid white;
-  border-right: 1px solid white;
+  border-left: 1px solid #dbdbdb;
+  border-right: 1px solid #dbdbdb;
   height: 5px;
   width: 100%;
 }
@@ -413,7 +371,7 @@ form {
   z-index: 16;
   width: 100%;
   /*margin-left: 1.5%;*/
-  border-bottom: 1px solid #F2F6FC;
+  border-bottom: 1px solid #e8e8e8;
 
 }
 
@@ -432,15 +390,16 @@ form {
 }
 
 
+
 /************************************************************************/
 #dropDown2 {
   display: none;
   height: 300px;
   position: absolute;
   font-size: 14px;
-  /*border-left: 1px solid #dbdbdb;*/
-  /*border-right: 1px solid #dbdbdb;*/
-  /*border-bottom: 1px solid #dbdbdb;*/
+  border-left: 1px solid #dbdbdb;
+  border-right: 1px solid #dbdbdb;
+  border-bottom: 1px solid #dbdbdb;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   background-color: white;
@@ -450,9 +409,9 @@ form {
 }
 
 
-#dropDown2:focus > .inp {
+#dropDown2:focus .inp {
   /*box-shadow: 0 1px 6px rgb(32 33 36 / 28%);*/
-  outline: 1px solid red !important;
+
 }
 
 #resultCol {
@@ -504,6 +463,25 @@ form {
 
 }
 
+#searchType {
+  /*border-radius: 15px;*/
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  position: absolute;
+  right: 0;
+  height: 40px;
+  border: 1px solid #dbdbdb;
+  /*background-color: #eaeaea;*/
+  outline: unset;
+  /*transition: ease-in-out 0.1s;*/
+  z-index: 20;
+}
+
+#searchType:hover {
+  background-color: #FAFAFA;
+  cursor: pointer;
+  /*border: 1px solid #a7a7a7;*/
+}
 
 ::-webkit-scrollbar {
   width: 10px;
@@ -536,8 +514,9 @@ form {
 
 @media only screen and (max-width: 768px) {
   #pInSearchCol2 {
-    text-align: center;
+  text-align: center;
   }
 }
+
 
 </style>

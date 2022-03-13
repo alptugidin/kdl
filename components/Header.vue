@@ -14,7 +14,8 @@
         </div>
         <div id="colCenter" class="column is-4-desktop is-offset-0-desktop is-6-tablet is-offset-3-tablet">
 <!--        <div id="colCenter" class="column is-4">-->
-          <search-box @hook:mounted="Mounted"/>
+<!--          <search-box @hook:mounted="Mounted"/>-->
+          <test/>
         </div>
       </div>
     </div>
