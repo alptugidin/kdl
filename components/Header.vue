@@ -2,20 +2,16 @@
 
   <nav>
     <div class="container">
-      <div class="columns is-vcentered is-multiline" >
+      <div class="columns is-vcentered is-multiline">
         <div id="colLeft" class="column is-4-desktop is-offset-0-desktop is-6-tablet is-offset-3-tablet ">
-<!--        <div id="colLeft" class="column is-4">-->
           <figure id="headerFigure">
-            <a  href="/" style="text-decoration: none">
-<!--              <img id="headerLogo" src="/templates/bannerV3x64.png" alt="">-->
+            <a href="/" style="text-decoration: none">
               <img id="headerLogo" src="/templates/bannerV3x64.png" alt="">
             </a>
           </figure>
         </div>
         <div id="colCenter" class="column is-4-desktop is-offset-0-desktop is-6-tablet is-offset-3-tablet">
-<!--        <div id="colCenter" class="column is-4">-->
-<!--          <search-box @hook:mounted="Mounted"/>-->
-          <test/>
+          <search-box/>
         </div>
       </div>
     </div>
@@ -24,7 +20,6 @@
 </template>
 
 <script>
-// import SearchBox from "@/components/SearchBoxV2";
 
 export default {
 
@@ -59,49 +54,50 @@ nav {
   padding-top: 16px;
 }
 
-#headerFigure{
+#headerFigure {
   height: 68px;
 }
 
 @media only screen and (max-width: 768px) {
-  #headerLogo{
+  #headerLogo {
     width: 150px;
-    margin-left: calc(calc(100% - 150px)/2);
+    margin-left: calc(calc(100% - 150px) / 2);
   }
 
-  #headerFigure{
+  #headerFigure {
     height: unset;
   }
 
-  #colLeft{
+  #colLeft {
     padding-bottom: 0;
   }
 
-  #colCenter{
+  #colCenter {
     padding-top: 5px;
   }
 
-  nav{
+  nav {
     /*height: 15vh;*/
     height: 130px;
   }
 
 }
 
-@media only screen and (max-width: 1023px){
-  #headerLogo{
+@media only screen and (max-width: 1023px) {
+  #headerLogo {
     width: 180px;
-    margin-left: calc(calc(100% - 180px)/2);
+    margin-left: calc(calc(100% - 180px) / 2);
   }
 
-  #headerFigure{
+  #headerFigure {
     height: unset;
   }
-  nav{
+
+  nav {
     /*height: 19vh;*/
   }
 
-  .inp{
+  .inp {
     /*margin-bottom: 10px;*/
   }
 }
