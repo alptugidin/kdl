@@ -1,521 +1,400 @@
 <template>
-
   <div>
-    <!--    <div id="inputSkeleton" v-if="!svgStatus">-->
-    <!--      <b-skeleton height="40"/>-->
-    <!--    </div>-->
-    <form id="formID" style="display: none">
-      <img id="svgSearch" src="/templates/searchCustom.svg" alt="" @load="SvgLoadStatus">
-      <input id="inputId" class="inp" @input="Search" :placeholder="placeholder" autocomplete="off">
-      <select id="searchType" @change="ChangeSearchType" name="" class="has-text-black has-text-weight-semibold">
-        <option value="name">Search by Name</option>
-        <option value="tag">Search by Tag</option>
-      </select>
-      <div id="ghost">
-        <div id="innerGhost">
-        </div>
+
+    <form id="form-element">
+      <div class="custom-div">
+        <input @input="search" placeholder="Korean Dramas like..." autocomplete="off" id="custom-input"
+               class="custom-input">
+        <div class="full-page-background"></div>
+        <img class="search-custom-svg" src="/templates/searchCustom.svg" alt="">
+        <select @change="changeSearchType" class="search-in-input">
+          <option value="name">Search by Name</option>
+          <option value="tag">Search by Tag</option>
+        </select>
+        <div class="ghost"></div>
+        <div class="left-border"></div>
       </div>
-      <ul id="dropDown" @click="Selection">
-      </ul>
-      <div id="dropDown2">
+      <div class="series-dropdown">
+        <ul @click="setInputValue" class="series-dropdown-ul"></ul>
+      </div>
+      <div class="tags-dropdown">
         <div class="columns">
-          <div class="column p-0" id="resultCol">
-            <ul id="dropDown2UL" @click="AddCart"></ul>
-            <p id="pInSearchCol2">You can choose tags to multiple</p>
+          <div class="column tag-result-left">
+            <ul @click="addTag" class="tag-result-left-ul"></ul>
           </div>
-          <div class="column p-0" id="searchCol">
-
-            <div @click="RemoveCart" id="cart" class="columns is-centered is-multiline"></div>
-            <div id="cart2" class="columns"></div>
+          <div class="column tag-result-right">
+            <div @click="removeTag" id="tag-result-columns" class="columns is-centered is-multiline"></div>
           </div>
-          <div id="searchCol2" class="column is-narrow">
-
-            <a @click="SearchByTag">
-              <span id="searchInnerText" class="has-text-grey-light has-text-weight-nromal">Search</span>
-            </a>
-          </div>
+          <a @click="searchByTag" class="tag-search-button">Search</a>
         </div>
       </div>
     </form>
 
-    <!--    <button @click="Random">click</button>-->
-
   </div>
-
 </template>
 
 <script>
 import axios from "axios";
+import Custom from "@/layouts/custom";
 
 export default {
-  name: "SearchBoxV2",
+  components: {Custom},
+  layout: "custom",
   data() {
     return {
-      isMobile: () => window.innerWidth <= 800,
-      svgStatus: false,
-      searchType: null,
-      placeholder: null,
+      searchType: "name",
+      arr: [],
+      len: 0,
       randomColor: ["is-primary", "is-link", "is-info", "is-success", "is-warning", "is-danger"]
     }
   },
 
   mounted() {
-
-
-    this.searchType = "name"
-    this.placeholder = "Korean Dramas like..."
-
-    document.getElementById("searchType").addEventListener("change", (e) => {
-      if (document.getElementById("searchType").value === "name") {
-        this.placeholder = "Korean Dramas like..."
-      } else {
-        this.placeholder = "e.g. Romance"
+    window.addEventListener("click", (e) => {
+      if (!document.getElementById("form-element").contains(e.target)) {
+        this.seriesDropdownCSS(0)
       }
     })
 
 
-    window.addEventListener("click", ((e) => {
-      if (!document.getElementById("dropDown").contains(e.target) && !document.getElementById("dropDown2").contains(e.target) && !document.getElementById("colCenter").contains(e.target)) {
-        this.NoneEffect("q")
-        this.NoneEffect("t")
-      }
-    }))
-
-
   },
-
   methods: {
-    SvgLoadStatus() {
-      this.svgStatus = true
-      // document.getElementById("inputSkeleton").style.display = "block"
-      document.getElementById("formID").style.display = "block"
-      this.customWidth = document.getElementById("inputId").offsetWidth.toString() + "px" // ilk açılış için genişlik
-      this.ghostWidth = document.getElementById("inputId").offsetWidth.toString() + "px"
+    setInputValue(e) {
+      document.getElementsByClassName("custom-input")[0].value = e.target.tagName === "LI" ? e.target.textContent : e.target.parentNode.textContent
+      this.seriesDropdownCSS(0)
+      if (this.searchType === "tag") {
+        this.seriesDropdownCSS(1)
+      }
     },
 
-    BlockEffect(param) {
-      if (param === "t") {
-        document.getElementById("dropDown2").style.display = "block"
+    search() {
+      const value = document.getElementById("custom-input").value.toLowerCase()
+      const className = this.searchType === "name" ? "series-dropdown-ul" : "tag-result-left-ul"
+      if (value.length > 2) {
+        const path = this.searchType === "name" ? "/api/series?q=" : "/api/tags?q="
+        axios.get(path + value)
+            .then(res => {
+              this.arr = []
+              res.data.forEach(element => {
+                this.arr.push(this.pointedWords(element, value, this.searchType))
+              })
+
+              document.getElementsByClassName(className)[0].innerHTML = this.arr.join("")
+              if (res.data.length > 1) {
+                this.seriesDropdownCSS(1)
+              } else if (res.data.length === 0 && this.searchType === "name") {
+                this.seriesDropdownCSS(0)
+              } else {
+                this.seriesDropdownCSS(1)
+              }
+
+            })
+            .catch((err) => {
+              console.log("q param error " + err);
+            })
+
       } else {
-        document.getElementById("dropDown").style.display = "block"
+        document.getElementsByClassName(className)[0].innerHTML = ""
+
+        this.searchType === "name" ? this.seriesDropdownCSS(0) : null
+      }
+    },
+
+    pointedWords(element, value, type) {
+      const id = type === "name" ? element[0] : null
+      const word = type === "name" ? element[1] : element
+      const year = type === "name" ? element[2] : null
+      const firstPos = word.toLowerCase().match(value)["index"]
+      const lastPos = word.toLowerCase().match(value)["index"] + value.length
+      const pointedWord = word.substring(firstPos, lastPos)
+      const firstPart = word.substring(0, firstPos)
+      const lastPart = word.substring(lastPos, word.length)
+      let urlx = word.replace(/[^a-zA-Z0-9 ]/g, "")
+      let url = urlx.replace(/ /g, "-")
+
+      const pointedHTML = `<span id="span1">${firstPart}</span><span id="span2" class="has-text-weight-bold">${pointedWord}</span><span id="span3">${lastPart}</span>`
+      if (type === "name") {
+        const href = "like/" + url + "--" + id
+        return `<li class="li-class"><a href=${href} class="custom-dropdown-item"><span style="margin-left: 36px">${pointedHTML} (${year})</span></a></li>`
+      } else if (type === "tag") {
+        const href = "#"
+        return `<li class="li-class"><a href="${href}" class="custom-dropdown-item"><span style="margin-left: 4px">${pointedHTML}</span></a></li>`
       }
 
-      document.getElementById("ghost").style.display = "block"
-      document.getElementById("inputId").style.borderBottomRightRadius = "0"
-      document.getElementById("inputId").style.borderBottomLeftRadius = "0"
-      document.getElementById("inputId").style.background = "white"
-      document.getElementById("inputId").style.borderBottom = "1px solid white"
-      document.getElementById("searchType").style.borderBottomRightRadius = "0"
-      document.getElementById("searchType").style.borderBottom = "0"
     },
 
-    NoneEffect(param) {
-      if (param === "t") {
-        document.getElementById("dropDown2").style.display = "none"
-      } else {
-        document.getElementById("dropDown").style.display = "none"
+    changeSearchType() {
+      document.getElementsByClassName("custom-input")[0].value = ""
+      this.searchType = document.getElementsByClassName("search-in-input")[0].value
+      this.seriesDropdownCSS(0)
+      this.searchType === "name" ? document.getElementsByClassName("tags-dropdown")[0].style.display = "none" : null
+      this.searchType === "tag" ? document.getElementsByClassName("series-dropdown")[0].style.display = "none" : null
+
+      if (this.searchType === "name"){
+        document.querySelector(".tags-dropdown").style.display = "none"
+        document.querySelector(".custom-input").placeholder = "Korean Dramas like..."
+      }else{
+        document.querySelector(".series-dropdown").style.display = "none"
+        document.querySelector(".custom-input").placeholder = "e.g. Romance"
       }
-      document.getElementById("ghost").style.display = "none"
-      document.getElementById("inputId").style.borderBottomRightRadius = "12px"
-      document.getElementById("inputId").style.borderBottomLeftRadius = "12px"
-      document.getElementById("inputId").style.background = "#FAFAFA"
-      document.getElementById("inputId").style.borderBottom = "1px solid #dbdbdb"
-      document.getElementById("searchType").style.borderBottomRightRadius = "12px"
-      document.getElementById("searchType").style.borderBottom = "1px solid #dbdbdb"
 
     },
 
-    Search() {
-
-      const value = document.getElementById("inputId").value
+    seriesDropdownCSS(state) {
       if (this.searchType === "name") {
-        if (value.length > 2) {
-          if (this.isMobile()) {
-            this.Get("qm", value)
-          } else {
-            this.Get("q", value)
-          }
-
-        } else {
-          this.NoneEffect("q")
-        }
-      } else if (this.searchType === "tag") {
-        value.length > 2 ? this.Get("t", value) : document.getElementById("dropDown2UL").innerHTML = ""
-      }
-
-
-    },
-
-    Get(type, value) {
-      if (type === "t") { //tag ile arama yapıldığında
-        axios.get("/api/tags?q=" + value)
-          .then((res) => {
-            let tagArray = []
-            res.data.forEach(element => {
-              tagArray.push(this.PointedWord(element, value, "t"))
-            })
-
-            tagArray.length === 0 ? this.NoneEffect("t") : this.BlockEffect("t");
-            // document.getElementById("dropDown2").style.display = "block"
-            document.getElementById("dropDown2UL").innerHTML = tagArray.join("")
-          })
-          .catch((err) => {
-            console.log("t param error " + err)
-          })
-      } else {// isim ile arama yapıldığında
-        let nameArray = []
-        axios.get("/api/series?q=" + value)
-          .then((res) => {
-            res.data.forEach(element => {
-              nameArray.push(this.PointedWord(element, value, type))
-            })
-
-            nameArray.length === 0 ? this.NoneEffect("q") : this.BlockEffect("q");
-            document.getElementById("dropDown").innerHTML = nameArray.join("")
-
-          })
-          .catch((err) => {
-            console.log("q param error " + err);
-          })
-      }
-
-
-    },
-
-    Selection(e) {
-
-      const seriesName = e.target.parentNode.textContent.substring(0, e.target.parentNode.textContent.length - 7)
-      const seriesYear = e.target.parentNode.textContent.substring(e.target.parentNode.textContent.length - 5, e.target.parentNode.textContent.length - 1)
-      const url1 = seriesName.replace(/[^a-zA-Z0-9 ]/g, "")
-      const url = url1.replace(/ /g, "-")
-      let seriesId
-
-      if (e.target.tagName === "SPAN") {
-        seriesId = e.target.parentNode.attributes.id.value
+        document.getElementsByClassName("series-dropdown")[0].style.display = state === 1 ? "block" : "none"
       } else {
-        seriesId = e.target.attributes.id.value
+        document.getElementsByClassName("tags-dropdown")[0].style.display = state === 1 ? "block" : "none"
       }
-
-      document.getElementById("inputId").value = `${seriesName} (${seriesYear})`
-      this.NoneEffect("q")
-      window.location.href = `/like/${url}--${seriesId}`
-
+      document.getElementsByClassName("ghost")[0].style.display = state === 1 ? "block" : "none"
+      document.getElementsByClassName("custom-input")[0].style.borderBottomLeftRadius = state === 1 ? "0" : "12px"
+      document.getElementsByClassName("custom-input")[0].style.borderBottomRightRadius = state === 1 ? "0" : "12px"
+      document.getElementsByClassName("search-in-input")[0].style.borderBottom = state === 1 ? "1px solid #dbdbdb" : null
+      document.getElementsByClassName("search-in-input")[0].style.borderBottomRightRadius = state === 1 ? "0" : "12px"
+      const input = document.getElementsByClassName("custom-input")[0]
+      state === 1 ? input.classList.add("custom-shadow") : input.classList.remove("custom-shadow")
     },
 
-    PointedWord(element, value, type) {
-
-      if (type === "t") {
-        const firstPos = element.toLowerCase().match(value)["index"]
-        const lastPos = element.toLowerCase().match(value)["index"] + value.length
-        const pointedWord = element.substring(firstPos, lastPos)
-        const firstPart = element.substring(0, firstPos)
-        const lastPart = element.substring(lastPos, element.length)
-        const pointedHTML = `<span id="span1">${firstPart}</span><span id="span2" class="has-text-weight-bold">${pointedWord}</span><span id="span3">${lastPart}</span>`
-        return `<li class="liclass"><a class="dropdownItem has-text-black">${pointedHTML}</a></li>`
-      } else {
-        const firstPos = element[1].toLowerCase().match(value)["index"]
-        const lastPos = element[1].toLowerCase().match(value)["index"] + value.length
-        const pointedWord = element[1].substring(firstPos, lastPos)
-        const firstPart = element[1].substring(0, firstPos)
-        const lastPart = element[1].substring(lastPos, element[1].length)
-        const pointedHTML = `<span id="span1">${firstPart}</span><span id="span2" class="has-text-weight-bold">${pointedWord}</span><span id="span3">${lastPart}</span>`
-        return `<li class="liclass"><a id= ${element[0]} class="dropdownItem has-text-black" style="padding-left: 35px">${pointedHTML} (${element[2]})</a></li>`
-      }
-
-
-    },
-
-    ChangeSearchType(e) {
-      this.searchType = e.target.value
-      document.getElementById("inputId").value = ""
-      e.target.value === "name" ? this.NoneEffect("t") : this.NoneEffect("q")
-
-    },
-
-    AddCart(e) {
-      let text = e.target.tagName === "A" ? e.target.textContent : e.target.parentNode.textContent
+    addTag(e) {
+      let text = e.target.tagName === "LI" ? e.target.textContent : e.target.parentNode.textContent
       const dataAttribute = text
-      text.length > 26 ? text = text.substring(0, 26) + "..." : null
       const randomColor = this.randomColor[Math.floor(Math.random() * this.randomColor.length)]
+      text.length > 26 ? text = text.substring(0, 26) + "..." : null
       const tag = `<div class="column is-narrow p-1" style="display: block"><span data-innertext="${dataAttribute}" style="border: 1px solid #dbdbdb" class="tag ${randomColor} is-light">${text}<button type="button" class="delete is-small"></button></span></div>`
-      document.getElementById("inputId").value = ""
-      document.getElementById("cart").innerHTML += tag
-
-
+      document.getElementById("tag-result-columns").innerHTML += tag
+      document.querySelector(".custom-input").value = ""
+      document.querySelector(".custom-input").focus()
     },
 
-    RemoveCart(e) {
+    removeTag(e) {
       e.target.type === "button" ? e.target.parentNode.parentNode.style.display = "none" : null
+      document.querySelector(".custom-input").focus()
     },
 
-    SearchByTag() {
-      const carts = document.getElementById("cart").childNodes
+    searchByTag(){
+      const carts = document.getElementById("tag-result-columns").childNodes
       const tags = []
       carts.forEach(element => {
         if (element.style.display === "block") {
           tags.push(element.childNodes[0].attributes[0].value.replaceAll(" ", "_"))
         }
       })
-
-
-      const unique = new Set(tags)
+      const unique = [...new Set(tags)]
+      unique.sort()
       const query = unique.join("--")
       window.location.href = "/tag/" + query + "?p=1"
     }
 
   }
-
 }
 </script>
 
+
 <style>
-.b-skeleton > .b-skeleton-item.is-rounded {
-  border-radius: 12px;
-  border: 1px solid #dbdbdb;
-}
 
 
-.inp {
+.custom-input {
   width: 100%;
-  /*height: 35px;*/
-  height: 40px;
+  height: 36px;
   border-radius: 12px;
-  padding-left: 35px;
-  font-size: 15px;
+  outline: none;
+  border: none;
+  background-color: #EFEFEF;
+  padding-left: 36px;
   color: #666666;
-  border: 1px solid #dbdbdb;
-  background-color: #FAFAFA;
-}
-
-.inp:focus {
-  border: 1px solid #dbdbdb;
-  background-color: white !important;
-  outline: unset;
-  box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
-}
-
-
-#svgSearch {
-  position: absolute;
-  margin-top: 12px;
-  margin-left: 9px;
-  width: 16px;
-  z-index: 20;
-
-}
-
-
-form {
-  display: block;
-  position: relative;
-}
-
-
-#dropDown {
-  position: absolute;
   font-size: 14px;
-  border-left: 1px solid #dbdbdb;
-  border-right: 1px solid #dbdbdb;
-  border-bottom: 1px solid #dbdbdb;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  display: none;
-  background-color: white;
-  box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
-  z-index: 10;
-  width: 100%;
-}
-
-
-.dropdownItem {
-  /*height: 30px;*/
-  line-height: normal;
-  padding: 0.375rem 1rem;
-  display: block;
-}
-
-
-.liclass:hover {
-  background-color: #e8e8e8;
-  /*transition: all .2s;*/
-  height: inherit;
-
-}
-
-.liclass:hover:last-child {
-  /*border-bottom-left-radius: 12px;*/
-  /*border-bottom-right-radius: 12px ;*/
-  border-radius: inherit;
-}
-
-
-#ghost {
-  position: absolute;
-  margin-top: -5px;
-  padding-left: 1px;
-  padding-right: 1px;
-  display: none;
-  z-index: 15;
-  /*background-color: #FAFAFA;*/
-  background-color: white;
-  border-left: 1px solid #dbdbdb;
-  border-right: 1px solid #dbdbdb;
-  height: 5px;
-  width: 100%;
-}
-
-#innerGhost {
-  /*background-color: red;*/
   position: relative;
-  height: 6px;
-  z-index: 16;
-  width: 100%;
-  /*margin-left: 1.5%;*/
-  border-bottom: 1px solid #e8e8e8;
-
+  /*z-index: 11;*/
 }
 
-
-#dd {
-  /*width: 32%;*/
-  position: relative;
-  top: 0;
+.custom-input:focus {
+  box-shadow: 0 1px 6px rgb(32 33 36 / 30%);
+  border: none;
+  outline: none;
 }
 
-
-#icon {
+.search-custom-svg {
   position: absolute;
-  margin-left: 10px;
-  margin-top: 12px;
+  width: 20px;
+  top: 8px;
+  left: 8px;
+  /*z-index: 11;*/
 }
 
 
-
-/************************************************************************/
-#dropDown2 {
-  display: none;
-  height: 300px;
+.search-in-input {
   position: absolute;
-  font-size: 14px;
-  border-left: 1px solid #dbdbdb;
-  border-right: 1px solid #dbdbdb;
-  border-bottom: 1px solid #dbdbdb;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  background-color: white;
-  box-shadow: 0 1px 6px rgb(32 33 36 / 28%);
-  z-index: 10;
-  width: 100%;
-}
-
-
-#dropDown2:focus .inp {
-  /*box-shadow: 0 1px 6px rgb(32 33 36 / 28%);*/
-
-}
-
-#resultCol {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 50%;
-  border-right: 1px solid #dbdbdb;
-  overflow: auto;
-}
-
-#searchCol {
-  position: absolute;
-  top: 0;
   right: 0;
-  width: 50%;
-  height: 270px;
-  overflow: auto;
-}
-
-#searchCol2 {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  height: 30px;
-  width: 50%;
-  border-top: 1px solid #dbdbdb;
-  transition: .2s;
-  border-bottom-right-radius: 15px;
-}
-
-#searchCol2:hover {
-  background-color: #f1f1f1;
-}
-
-#searchCol2:hover #searchInnerText {
-  color: #4A4A4A !important;
-}
-
-#searchInnerText {
-  font-size: 18px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  position: absolute;
-  text-align: center;
-  transition: .2s;
-
-}
-
-#searchType {
-  /*border-radius: 15px;*/
+  height: 36px;
+  background-color: #EFEFEF;
   border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
+  outline: none;
+  z-index: 11;
+  border-bottom: 1px solid #efefef;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+
+}
+
+
+.search-in-input:hover {
+  background-color: #dbdbdb;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+
+
+.custom-input:focus ~ .search-in-input:hover {
+  border-bottom-right-radius: 0;
+}
+
+
+.left-border {
+  background-color: #dbdbdb;
+  position: absolute;
+  width: 1px;
+  height: 30px;
+  top: 3px;
+  left: calc(100% - 117px);
+  z-index: 11;
+}
+
+.series-dropdown {
+  display: none;
+  position: absolute;
+  width: 100%;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  box-shadow: 0 1px 6px rgb(32 33 36 / 30%);
+  background-color: white;
+  z-index: 6;
+}
+
+.series-dropdown-ul li:last-child{
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.tags-dropdown {
+  display: none;
+  position: absolute;
+  height: 360px;
+  width: 100%;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+  box-shadow: 0 1px 6px rgb(32 33 36 / 30%);
+  background-color: white;
+  z-index: 6;
+}
+
+.custom-input:focus ~ .tags-dropdown .tag-result-left {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.custom-input:focus ~ .tags-dropdown .tag-result-right {
+  border-top-right-radius: 0;
+}
+
+.ghost {
+  top: 30px;
+  z-index: 10;
+  display: none;
+  width: 100%;
+  height: 6px;
+  position: absolute;
+  background-color: #EFEFEF;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+
+.tag-result-left {
+  height: 100%;
+  width: 50%;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-bottom-left-radius: 12px;
+  border-right: 1px solid #dbdbdb;
+  overflow-x: auto;
+}
+
+.tag-result-right {
+  height: calc(100% - 36px);
+  width: 50%;
   position: absolute;
   right: 0;
-  height: 40px;
-  border: 1px solid #dbdbdb;
-  /*background-color: #eaeaea;*/
-  outline: unset;
-  /*transition: ease-in-out 0.1s;*/
-  z-index: 20;
+  top: 0;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  overflow-x: auto;
 }
 
-#searchType:hover {
-  background-color: #FAFAFA;
-  cursor: pointer;
-  /*border: 1px solid #a7a7a7;*/
+.tag-search-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+  border-bottom-right-radius: 12px;
+  border-top: 1px solid #dbdbdb;
+  height: 36px;
+  background-color: #EFEFEF;
+  text-align: center;
+  line-height: 36px;
+  font-size: 18px;
+  color: #666666;
 }
 
-::-webkit-scrollbar {
-  width: 10px;
+.tag-search-button:hover {
+  background-color: #dbdbdb;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #b6b6b6;
-  border-radius: 4px;
-
+  border-radius: 0;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #9a9a9a;
-
+.li-class {
+  line-height: 36px;
+  padding-right: 3px;
+  font-size: 14px;
 }
 
-#cart {
-  margin-left: 0;
-  margin-top: 5px;
-  width: 100%;
+.li-class:hover {
+  background-color: #efefef;
 }
 
-#pInSearchCol2 {
-  position: absolute;
-  bottom: 0;
-  margin-left: calc(calc(100% - 190px) / 2);
-  color: #9a9a9a;
-  font-style: italic;
+
+
+.custom-dropdown-item {
+  display: block;
+  color: #4A4A4A;
 }
 
-@media only screen and (max-width: 768px) {
-  #pInSearchCol2 {
-  text-align: center;
-  }
+.custom-shadow {
+  box-shadow: 0 1px 6px rgb(32 33 36 / 30%);
+}
+
+.full-page-background{
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  background-color: black;
+  z-index: 10;
+  opacity: .1;
+}
+
+.custom-input:focus ~ .full-page-background{
+  /*display: block;*/
+}
+form {
+  display: block;
+  position: relative;
 }
 
 
