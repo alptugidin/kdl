@@ -124,11 +124,11 @@ export default {
     },
 
     changeSearchType() {
-      document.getElementsByClassName("custom-input")[0].value = ""
-      this.searchType = document.getElementsByClassName("search-in-input")[0].value
+      document.querySelector(".custom-input").value = ""
+      this.searchType = document.querySelector(".search-in-input").value
       this.seriesDropdownCSS(0)
-      this.searchType === "name" ? document.getElementsByClassName("tags-dropdown")[0].style.display = "none" : null
-      this.searchType === "tag" ? document.getElementsByClassName("series-dropdown")[0].style.display = "none" : null
+      this.searchType === "name" ? document.querySelector(".tags-dropdown").style.display = "none" : null
+      this.searchType === "tag" ? document.querySelector(".series-dropdown").style.display = "none" : null
 
       if (this.searchType === "name"){
         document.querySelector(".tags-dropdown").style.display = "none"
@@ -142,16 +142,16 @@ export default {
 
     seriesDropdownCSS(state) {
       if (this.searchType === "name") {
-        document.getElementsByClassName("series-dropdown")[0].style.display = state === 1 ? "block" : "none"
+        document.querySelector(".series-dropdown").style.display = state === 1 ? "block" : "none"
       } else {
-        document.getElementsByClassName("tags-dropdown")[0].style.display = state === 1 ? "block" : "none"
+        document.querySelector(".tags-dropdown").style.display = state === 1 ? "block" : "none"
       }
-      document.getElementsByClassName("ghost")[0].style.display = state === 1 ? "block" : "none"
-      document.getElementsByClassName("custom-input")[0].style.borderBottomLeftRadius = state === 1 ? "0" : "12px"
-      document.getElementsByClassName("custom-input")[0].style.borderBottomRightRadius = state === 1 ? "0" : "12px"
-      document.getElementsByClassName("search-in-input")[0].style.borderBottom = state === 1 ? "1px solid #dbdbdb" : null
-      document.getElementsByClassName("search-in-input")[0].style.borderBottomRightRadius = state === 1 ? "0" : "12px"
-      const input = document.getElementsByClassName("custom-input")[0]
+      document.querySelector(".ghost").style.display = state === 1 ? "block" : "none"
+      document.querySelector(".custom-input").style.borderBottomLeftRadius = state === 1 ? "0" : "12px"
+      document.querySelector(".custom-input").style.borderBottomRightRadius = state === 1 ? "0" : "12px"
+      document.querySelector(".search-in-input").style.borderBottom = state === 1 ? "1px solid #dbdbdb" : null
+      document.querySelector(".search-in-input").style.borderBottomRightRadius = state === 1 ? "0" : "12px"
+      const input = document.querySelector(".custom-input")
       state === 1 ? input.classList.add("custom-shadow") : input.classList.remove("custom-shadow")
     },
 
