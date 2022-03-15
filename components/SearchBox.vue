@@ -130,10 +130,10 @@ export default {
       this.searchType === "name" ? document.querySelector(".tags-dropdown").style.display = "none" : null
       this.searchType === "tag" ? document.querySelector(".series-dropdown").style.display = "none" : null
 
-      if (this.searchType === "name"){
+      if (this.searchType === "name") {
         document.querySelector(".tags-dropdown").style.display = "none"
         document.querySelector(".custom-input").placeholder = "Korean Dramas like..."
-      }else{
+      } else {
         document.querySelector(".series-dropdown").style.display = "none"
         document.querySelector(".custom-input").placeholder = "e.g. Romance"
       }
@@ -171,7 +171,7 @@ export default {
       document.querySelector(".custom-input").focus()
     },
 
-    searchByTag(){
+    searchByTag() {
       const carts = document.getElementById("tag-result-columns").childNodes
       const tags = []
       carts.forEach(element => {
@@ -225,6 +225,7 @@ export default {
 .search-in-input {
   position: absolute;
   right: 0;
+  top: 0;
   height: 36px;
   background-color: #EFEFEF;
   border-top-right-radius: 12px;
@@ -235,7 +236,7 @@ export default {
   border-top: none;
   border-left: none;
   border-right: none;
-
+  width: 120px;
 }
 
 
@@ -243,7 +244,6 @@ export default {
   background-color: #dbdbdb;
   border-bottom: 1px solid #dbdbdb;
 }
-
 
 
 .custom-input:focus ~ .search-in-input:hover {
@@ -257,7 +257,7 @@ export default {
   width: 1px;
   height: 30px;
   top: 3px;
-  left: calc(100% - 117px);
+  left: calc(100% - 120px);
   z-index: 11;
 }
 
@@ -272,7 +272,7 @@ export default {
   z-index: 6;
 }
 
-.series-dropdown-ul li:last-child{
+.series-dropdown-ul li:last-child {
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
 }
@@ -367,7 +367,6 @@ export default {
 }
 
 
-
 .custom-dropdown-item {
   display: block;
   color: #4A4A4A;
@@ -377,7 +376,7 @@ export default {
   box-shadow: 0 1px 6px rgb(32 33 36 / 30%);
 }
 
-.full-page-background{
+.full-page-background {
   display: none;
   position: fixed;
   left: 0;
@@ -389,9 +388,10 @@ export default {
   opacity: .1;
 }
 
-.custom-input:focus ~ .full-page-background{
+.custom-input:focus ~ .full-page-background {
   /*display: block;*/
 }
+
 form {
   display: block;
   position: relative;
