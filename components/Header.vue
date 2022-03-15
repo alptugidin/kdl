@@ -1,9 +1,7 @@
 <template>
-
-  <nav>
+  <nav id="custom-header" :class="!flag ? 'custom-header': 'custom-header minimised' ">
     <div class="container">
       <div class="columns is-vcentered is-multiline">
-
         <div id="colLeft"
              class="column is-3-tablet is-offset-0-tablet is-2-desktop is-offset-0-desktop is-4-fullhd is-offset-0-fullhd">
           <figure id="headerFigure" class="p-1">
@@ -25,21 +23,54 @@
 
 <script>
 
-export default {}
+export default {
+  data() {
+    return {
+      flag: false,
+    }
+  },
+  methods:{
+
+  },
+  mounted() {
+    const customHeight = parseInt(window.getComputedStyle(document.getElementById("custom-header")).getPropertyValue("height").substring(0,2))
+    window.onscroll = () => {
+      this.flag = window.scrollY > customHeight;
+    }
+
+  }
+
+}
 
 </script>
 
 
 <style>
-nav {
+.custom-header {
   background-color: white;
   border-bottom: 1px solid #dbdbdb;
-  /*position: fixed;*/
-  /*left: 0;*/
-  /*right: 0;*/
-  /*top: 0;*/
-  /*z-index: 10;*/
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 10;
+  height: 73px;
 }
+
+.minimised {
+  position: fixed;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(13px);
+  -webkit-backdrop-filter: blur(13px);
+  border: 1px solid rgba(219, 219, 219, 0.1);
+}
+
+body {
+  padding-top: 73px;
+
+}
+
 
 #colLeft {
   padding-top: 16px;
@@ -102,14 +133,10 @@ nav {
 }
 
 @media screen and (min-width: 1408px) {
-  #headerLogo{
+  #headerLogo {
     width: 50%;
   }
 }
 
-
-body {
-  /*margin-top: 73px;*/
-}
 
 </style>
