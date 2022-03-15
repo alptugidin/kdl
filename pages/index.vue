@@ -1,8 +1,8 @@
 <template>
   <div id="top-level-div" @click="closeModalOutside">
     <div class="container">
-      <div class="columns is-vcentered is-centered mt-5 ">
-        <div class="column is-narrow">
+      <div class="columns is-vcentered is-centered my-0">
+        <div class="column is-narrow mt-4">
           <h1 style="text-align: center" id="newKoreanDramas"
               class="has-text-weight-semibold is-size-3 is-size-5-mobile">
             Latest Korean Dramas
@@ -40,8 +40,8 @@
 
       </div>
 
-      <div class="columns is-vcentered is-centered mt-5 ">
-        <div class="column is-narrow">
+      <div class="columns is-vcentered is-centered my-0 ">
+        <div class="column is-narrow mt-4">
           <h1 id="mostPopularKoreanDramas" style="text-align: center"
               class="has-text-weight-semibold is-size-3 is-size-5-mobile">
             Most popular Korean Dramas
@@ -268,6 +268,10 @@ export default {
 </script>
 
 <style scoped>
+
+#carousel1,#carousel2{
+  margin: 0;
+}
 
 #carousel2, #carousel1 {
   /*width: 1344px;*/

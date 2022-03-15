@@ -2,9 +2,9 @@
   <div @click="closeModalOutside">
     <div id="cont" class="container">
 
-      <div class="columns">
+      <div class="columns my-0">
         <div id="koreanDramasLikeCol"
-             class="column mt-6 is-4-desktop is-offset-4-desktop is-10-mobile is-offset-1-mobile is-6-tablet is-offset-3-tablet">
+             class="column my-5 is-4-desktop is-offset-4-desktop is-10-mobile is-offset-1-mobile is-6-tablet is-offset-3-tablet">
           <div class="columns is-mobile">
             <div class="column is-narrow pr-0">
               <div style="overflow: hidden; border-radius: 12px; box-shadow: 0 7px 7px rgb(32 33 36 / 25%);;">
@@ -38,7 +38,7 @@
       <!--      />-->
 
 
-      <div id="mainColumns" class="columns mt-5 is-multiline is-mobile is-centered">
+      <div id="mainColumns" class="columns my-0 pb-5 is-multiline is-mobile is-centered">
         <div class="column is-narrow" v-for="(item, index) in this.data" v-if="index<limit">
           <card
               :id="`innerDiv`"
@@ -177,13 +177,14 @@ export default {
   },
 
   mounted() {
-
   },
 
   components: {
     Modal, CardV2
   },
   methods: {
+
+
     More() {
 
       if (this.count === 0) {

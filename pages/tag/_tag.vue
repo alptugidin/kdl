@@ -3,57 +3,58 @@
     <div class="container">
 
 
-      <div class="columns my-6 is-centered">
-        <div class="column is-narrow">
+      <div class="columns my-0 is-centered">
+        <div class="column my-5 is-narrow">
           <div class="column is-narrow">
             <h1 v-if="takenData.length === 0" id="nores" class="is-size-4 has-text-dark ">No Result</h1>
             <h1 v-else id="koreanDramaAbout" class="is-size-4 is-size-5-mobile has-text-dark "
                 style="text-align: center">Korean dramas about <span
-              class="has-text-weight-semibold ">{{ tagsSSR }}</span></h1>
+                class="has-text-weight-semibold ">{{ tagsSSR }}</span></h1>
           </div>
         </div>
       </div>
 
 
-      <div id="mainColumns" class="columns is-multiline is-centered is-mobile">
+      <div id="mainColumns" class="columns is-multiline is-centered is-mobile my-0">
 
         <div class="column is-narrow" v-for="i in takenData.length">
 
           <card
-            :render-ghost="false"
-            :renderaAllCircle="false"
-            :renderCircle="false"
-            :id="`innerDiv`"
-            :aCardID="i"
-            :showModalPROP="showModal"
-            :seriesName="takenData[i-1].name"
-            :seriesHang="takenData[i-1].title"
-            :seriesYear="takenData[i-1].year"
-            :seriesRate="Math.round(100)"
-            :seriesId="takenData[i-1].idx"
+              :render-ghost="false"
+              :renderaAllCircle="false"
+              :renderCircle="false"
+              :id="`innerDiv`"
+              :aCardID="i"
+              :showModalPROP="showModal"
+              :seriesName="takenData[i-1].name"
+              :seriesHang="takenData[i-1].title"
+              :seriesYear="takenData[i-1].year"
+              :seriesRate="Math.round(100)"
+              :seriesId="takenData[i-1].idx"
           />
         </div>
       </div>
 
 
       <Pagination :currentPageProp="this.page"
-                   :totalPageProp="this.pageCount"
-                   :tagsProp="this.tags"
+                  :totalPageProp="this.pageCount"
+                  :tagsProp="this.tags"
+
       />
 
     </div>
 
     <modal
-      v-bind:RenderCircleIfModalPROP="false"
-      v-bind:valuePROP=0
-      v-bind:modalInfoPROP="nameToModal"
-      v-bind:modalYearPROP="yearToModal"
-      v-bind:modalHangPROP="hangToModal"
-      v-bind:modalSumTextPROP="sumToModal"
-      v-bind:modalSumLinkPROP="sumLinkToModal"
-      v-bind:modalVideoPROP="videoToModal"
-      v-bind:modalImagePROP="idToModal"
-      v-bind:modalSimilarNamePROP="similarNameToModal"
+        v-bind:RenderCircleIfModalPROP="false"
+        v-bind:valuePROP=0
+        v-bind:modalInfoPROP="nameToModal"
+        v-bind:modalYearPROP="yearToModal"
+        v-bind:modalHangPROP="hangToModal"
+        v-bind:modalSumTextPROP="sumToModal"
+        v-bind:modalSumLinkPROP="sumLinkToModal"
+        v-bind:modalVideoPROP="videoToModal"
+        v-bind:modalImagePROP="idToModal"
+        v-bind:modalSimilarNamePROP="similarNameToModal"
     />
 
 
@@ -104,8 +105,8 @@ export default {
 
 
     let res = await axios.get("http://localhost:3000/api/tagCalc?q=" + tags + "&page=" + page)
-    // let res = await axios.get("https://kdramalike.com/api/tagCalc?q=" + tags + "&page=" + page)
-      .catch(err => console.log("ERR :: " + err))
+        // let res = await axios.get("https://kdramalike.com/api/tagCalc?q=" + tags + "&page=" + page)
+        .catch(err => console.log("ERR :: " + err))
     let takenData = res.data
     // takenData[0] === 0 ? ctx.redirect("/404") : null
     let pageCount = Math.ceil((takenData.at(-1) / 60))
@@ -181,7 +182,8 @@ export default {
 }
 
 #mainColumns {
-  min-height: calc(100vh - 530px);
+  min-height: calc(100vh - 502px);
+
 }
 
 .pagination {

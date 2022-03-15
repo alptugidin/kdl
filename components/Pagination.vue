@@ -30,7 +30,7 @@
 
     </div>
 
-    <div id="pagination2" class="columns is-mobile is-centered" v-else>
+    <div id="pagination2" class="columns is-mobile is-centered my-0" v-else>
 
       <div v-if="parseInt(currentPageProp ) > 1" class="column is-narrow">
         <div class="prev-page">
@@ -128,12 +128,18 @@ export default {
       }
     })
 
-    if (this.currentPageProp === "1"){
-      document.querySelector(".pagination-main").style.marginLeft = "60px"
-    }else if(this.currentPageProp === this.totalPageProp.toString()){
-      document.querySelector(".pagination-main").style.marginRight = "60px"
-      console.log("yes")
+
+    if (this.totalPageProp.toString() !== "1"){
+
+      if (this.currentPageProp === "1"){
+        document.querySelector(".pagination-main").style.marginLeft = "60px"
+        console.log("if")
+      }else if(this.currentPageProp === this.totalPageProp.toString()){
+        document.querySelector(".pagination-main").style.marginRight = "60px"
+        console.log("else")
+      }
     }
+
 
 
 
@@ -243,8 +249,10 @@ export default {
 }
 
 #pagination1, #pagination2 {
-  margin-bottom: 10vh;
-  margin-top: 5vh;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
 .first-page-style {

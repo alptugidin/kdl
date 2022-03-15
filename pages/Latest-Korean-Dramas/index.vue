@@ -2,8 +2,8 @@
   <div @click="closeModalOutside">
     <div class="container">
 
-      <div class="columns my-6 is-centered">
-        <div class="column is-narrow">
+      <div class="columns my-0 is-centered">
+        <div class="column my-5 is-narrow">
           <div class="column is-narrow" style="text-align: center">
             <h1 id="koreanDramaAbout" class="is-size-4 has-text-dark ">Latest Korean Dramas</h1>
           </div>
@@ -133,7 +133,8 @@ export default {
 }
 
 #mainColumns{
-  margin-bottom: 180px;
+  padding-bottom: 180px;
+  margin-bottom: 0;
 }
 
 #cardv2 {

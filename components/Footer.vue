@@ -2,7 +2,7 @@
 
   <footer id="footerComp">
     <div class="container">
-      <div class="columns is-vcentered">
+      <div class="columns is-vcentered my-0" style="height: 117px">
         <div id="footerFirstCol" class="column is-2-desktop is-6-tablet pl-0">
           <!--          <a id="footerHome" class="has-text-weight-semibold is-size-3 is-size-5-mobile" href="/">KDramaLike</a>-->
           <a id="footerHome" class="has-text-weight-semibold is-size-3 is-size-5-mobile" href="/">KDramaLike</a>
@@ -80,7 +80,7 @@ export default {
 
 #footerThCol {
   text-align: left;
-  margin-top: 8px
+  /*margin-top: 8px*/
 }
 
 
@@ -112,6 +112,7 @@ export default {
 
 #footerThCol {
   text-align: center;
+  height: 117px;
 }
 
 #footerHome {
@@ -123,8 +124,8 @@ export default {
 
 #footerComp {
   background-color: #404040;
-  border-top: 1px solid #dbdbdb;
-  /*height: 60px;*/
+  /*border-top: 1px solid #dbdbdb;*/
+  height: 117px;
   text-align: center;
   width: 100%;
   bottom: 0;
