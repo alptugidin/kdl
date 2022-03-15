@@ -3,14 +3,18 @@
   <nav>
     <div class="container">
       <div class="columns is-vcentered is-multiline">
-        <div id="colLeft" class="column is-4-desktop is-offset-0-desktop is-6-tablet is-offset-3-tablet ">
-          <figure id="headerFigure">
+
+        <div id="colLeft"
+             class="column is-3-tablet is-offset-0-tablet is-2-desktop is-offset-0-desktop is-4-fullhd is-offset-0-fullhd">
+          <figure id="headerFigure" class="p-1">
             <a href="/" style="text-decoration: none">
               <img id="headerLogo" src="/templates/bannerV3x64.png" alt="">
             </a>
           </figure>
         </div>
-        <div id="colCenter" class="column is-4-desktop is-offset-0-desktop is-6-tablet is-offset-3-tablet">
+        <div class="dummy"></div>
+        <div id="colCenter"
+             class="column is-6-tablet is-offset-0-tablet is-5-desktop is-offset-0-desktop is-4-fullhd is-offset-0-fullhd">
           <search-box/>
         </div>
       </div>
@@ -21,36 +25,23 @@
 
 <script>
 
-export default {
-
-  data() {
-    return {
-      mounted: false
-    };
-  },
-  components: {
-    // SearchBox
-  },
-  methods: {
-    Mounted() {
-      this.mounted = true;
-    }
-  }
-}
+export default {}
 
 </script>
 
 
 <style>
-
 nav {
-  /*height: 83px !important;*/
   background-color: white;
   border-bottom: 1px solid #dbdbdb;
+  /*position: fixed;*/
+  /*left: 0;*/
+  /*right: 0;*/
+  /*top: 0;*/
+  /*z-index: 10;*/
 }
 
 #colLeft {
-  /*padding-bottom:10px;*/
   padding-top: 16px;
 }
 
@@ -77,29 +68,48 @@ nav {
   }
 
   nav {
-    /*height: 15vh;*/
-    height: 130px;
+    height: 120px;
+  }
+
+  body {
+    /*margin-top: 134px;*/
   }
 
 }
 
-@media only screen and (max-width: 1023px) {
+
+@media only screen and (min-width: 769px) and (max-width: 1023px) {
   #headerLogo {
-    width: 180px;
-    margin-left: calc(calc(100% - 180px) / 2);
+    width: 100%;
+    margin-top: 2px;
   }
 
-  #headerFigure {
-    height: unset;
+  body {
+    /*margin-top: 105px;*/
+  }
+}
+
+
+@media only screen and (min-width: 1024px) and (max-width: 1407px) {
+  #headerLogo {
+    width: 100%;
+    margin-top: 6px;
   }
 
-  nav {
-    /*height: 19vh;*/
+  .dummy {
+    width: 12.5%;
   }
+}
 
-  .inp {
-    /*margin-bottom: 10px;*/
+@media screen and (min-width: 1408px) {
+  #headerLogo{
+    width: 50%;
   }
+}
+
+
+body {
+  /*margin-top: 73px;*/
 }
 
 </style>
