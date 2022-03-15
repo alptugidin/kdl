@@ -3,7 +3,8 @@
     <div id="cont" class="container">
 
       <div class="columns">
-        <div id="koreanDramasLikeCol" class="column mt-6 is-4-desktop is-offset-4-desktop is-10-mobile is-offset-1-mobile is-6-tablet is-offset-3-tablet">
+        <div id="koreanDramasLikeCol"
+             class="column mt-6 is-4-desktop is-offset-4-desktop is-10-mobile is-offset-1-mobile is-6-tablet is-offset-3-tablet">
           <div class="columns is-mobile">
             <div class="column is-narrow pr-0">
               <div style="overflow: hidden; border-radius: 12px; box-shadow: 0 7px 7px rgb(32 33 36 / 25%);;">
@@ -21,7 +22,7 @@
             </div>
             <div class="column pr-0">
               <h1 id="koreanDramasLike" class="is-size-4 is-size-6-mobile">Korean Dramas Like<br><span
-                class="has-text-weight-bold">{{ nameSSR }}</span></h1>
+                  class="has-text-weight-bold">{{ nameSSR }}</span></h1>
               <span v-if="hangSSR.length > 0" class="is-size-6 is-size-7-mobile">{{ hangSSR }}<br></span>
               <span>{{ yearSSR }}</span>
             </div>
@@ -40,15 +41,15 @@
       <div id="mainColumns" class="columns mt-5 is-multiline is-mobile is-centered">
         <div class="column is-narrow" v-for="(item, index) in this.data" v-if="index<limit">
           <card
-            :id="`innerDiv`"
-            :aCardID="index"
-            :showModalPROP="showModal"
-            :seriesName="item[1]"
-            :seriesHang="item[6]"
-            :seriesYear="item[2]"
-            :seriesRate="Math.round(item[0]*100)"
-            :seriesId="item[7]"
-            :render-rate-prop="true"
+              :id="`innerDiv`"
+              :aCardID="index"
+              :showModalPROP="showModal"
+              :seriesName="item[1]"
+              :seriesHang="item[6]"
+              :seriesYear="item[2]"
+              :seriesRate="Math.round(item[0]*100)"
+              :seriesId="item[7]"
+              :render-rate-prop="true"
           />
         </div>
         <div class=" is-12 column has-text-centered">
@@ -60,18 +61,18 @@
       </div>
 
       <Modal
-        v-bind:valuePROP="rate"
-        v-bind:modalInfoPROP="nameToModal"
-        v-bind:modalYearPROP="yearToModal"
-        v-bind:modalHangPROP="hangToModal"
-        v-bind:modalSumTextPROP="sumToModal"
-        v-bind:modalSumLinkPROP="sumLinkToModal"
-        v-bind:modalVideoPROP="videoToModal"
-        v-bind:modalImagePROP="idToModal"
-        v-bind:modalSimilarNamePROP="similarNameToModal"
-        :modal-common-tags-prop="commonTagsToModal"
-        :render-rate-prop="true"
-        :r-prop="45"
+          v-bind:valuePROP="rate"
+          v-bind:modalInfoPROP="nameToModal"
+          v-bind:modalYearPROP="yearToModal"
+          v-bind:modalHangPROP="hangToModal"
+          v-bind:modalSumTextPROP="sumToModal"
+          v-bind:modalSumLinkPROP="sumLinkToModal"
+          v-bind:modalVideoPROP="videoToModal"
+          v-bind:modalImagePROP="idToModal"
+          v-bind:modalSimilarNamePROP="similarNameToModal"
+          :modal-common-tags-prop="commonTagsToModal"
+          :render-rate-prop="true"
+          :r-prop="45"
       />
     </div>
 
@@ -131,9 +132,9 @@ export default {
       rawUrl = "http://localhost:3000/api/calc?q=" + urlId // api ye gönderilen number parametresi
       // rawUrl = "https://kdramalike.com/api/calc?q=" + urlId // api ye gönderilen number parametresi
       res = await axios.get(rawUrl, {})
-        .catch((err) => {
-          console.log("axios Error => " + err);
-        }) //sayfa yüklenirken api ye get requesti yapılıyor
+          .catch((err) => {
+            console.log("axios Error => " + err);
+          }) //sayfa yüklenirken api ye get requesti yapılıyor
       data = res.data //apiden gelen veri
 
       name = data[data.length - 1][0].name//name verisi en sondan alınıyor
@@ -287,11 +288,11 @@ export default {
 }
 
 @media only screen and (max-width: 768px) {
-  #cardv2{
+  #cardv2 {
     width: 105px !important;
   }
 
-  #queryImage{
+  #queryImage {
     width: 105px !important;
     height: 140px !important;
   }
@@ -321,8 +322,6 @@ export default {
   border: 1px solid #dbdbdb;
 
 }
-
-
 
 
 </style>

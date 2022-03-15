@@ -1,5 +1,5 @@
 <template>
-  <div @click="closeModalOutside">
+  <div id="top-level-div" @click="closeModalOutside">
     <div class="container">
       <div class="columns is-vcentered is-centered mt-5 ">
         <div class="column is-narrow">
@@ -16,16 +16,16 @@
              class="column is-narrow" style="padding-left: 5px; padding-right: 5px;">
 
           <card
-            :id="`innerDiv`"
-            :showModalPROP="showModal"
-            :aCardID="i-1"
-            :seriesName="newDramas[i-1].name"
-            :seriesHang="newDramas[i-1].title"
-            :seriesYear="newDramas[i-1].year"
-            :seriesRate="Math.round(newDramas[i-1].co * 100)"
-            :seriesId="newDramas[i-1].idx"
-            :rankNumber="i"
-            :render-rank-prop="true"
+              :id="`innerDiv`"
+              :showModalPROP="showModal"
+              :aCardID="i-1"
+              :seriesName="newDramas[i-1].name"
+              :seriesHang="newDramas[i-1].title"
+              :seriesYear="newDramas[i-1].year"
+              :seriesRate="Math.round(newDramas[i-1].co * 100)"
+              :seriesId="newDramas[i-1].idx"
+              :rankNumber="i"
+              :render-rank-prop="true"
           />
 
 
@@ -45,7 +45,7 @@
           <h1 id="mostPopularKoreanDramas" style="text-align: center"
               class="has-text-weight-semibold is-size-3 is-size-5-mobile">
             Most popular Korean Dramas
-            <select @change="ChangeYear" id="yearSelector" class="has-text-dark has-text-weight-semibold" style="background-color: #F2F6FC; border: 1px solid #F2F6FC">
+            <select @change="ChangeYear" id="yearSelector" class="has-text-dark has-text-weight-semibold">
               <option v-for="year in years(2010,2021).reverse()">{{ year }}</option>
             </select>
           </h1>
@@ -56,16 +56,16 @@
              class="column is-narrow" style="padding-left: 5px; padding-right: 5px;">
 
           <card
-            :id="`innerDiv`"
-            :showModalPROP="showModal"
-            :aCardID="i-1"
-            :seriesName="popDramas[i-1].name"
-            :seriesHang="popDramas[i-1].title"
-            :seriesYear="popDramas[i-1].year"
-            :seriesRate="Math.round(popDramas[i-1].co * 100)"
-            :seriesId="popDramas[i-1].idx"
-            :rankNumber="i"
-            :render-rank-prop="true"
+              :id="`innerDiv`"
+              :showModalPROP="showModal"
+              :aCardID="i-1"
+              :seriesName="popDramas[i-1].name"
+              :seriesHang="popDramas[i-1].title"
+              :seriesYear="popDramas[i-1].year"
+              :seriesRate="Math.round(popDramas[i-1].co * 100)"
+              :seriesId="popDramas[i-1].idx"
+              :rankNumber="i"
+              :render-rank-prop="true"
           />
         </div>
 
@@ -78,15 +78,15 @@
       </div>
 
       <modal
-        v-bind:valuePROP=0
-        v-bind:modalInfoPROP="nameToModal"
-        v-bind:modalYearPROP="yearToModal"
-        v-bind:modalHangPROP="hangToModal"
-        v-bind:modalSumTextPROP="sumToModal"
-        v-bind:modalSumLinkPROP="sumLinkToModal"
-        v-bind:modalVideoPROP="videoToModal"
-        v-bind:modalImagePROP="idToModal"
-        v-bind:modalSimilarNamePROP="similarNameToModal"
+          v-bind:valuePROP=0
+          v-bind:modalInfoPROP="nameToModal"
+          v-bind:modalYearPROP="yearToModal"
+          v-bind:modalHangPROP="hangToModal"
+          v-bind:modalSumTextPROP="sumToModal"
+          v-bind:modalSumLinkPROP="sumLinkToModal"
+          v-bind:modalVideoPROP="videoToModal"
+          v-bind:modalImagePROP="idToModal"
+          v-bind:modalSimilarNamePROP="similarNameToModal"
       />
 
 
@@ -160,30 +160,30 @@ export default {
     },
     NewDramas(year) {
       axios.get(`/api/populars?q=${year}`)
-        .catch((err) => {
-          console.log(" call function >>  " + err)
-        })
-        .then((res) => {
-          // this.newDramas = res.data[0].data
-          this.newDramas = res.data
-          //find random series name in newdramas
+          .catch((err) => {
+            console.log(" call function >>  " + err)
+          })
+          .then((res) => {
+            // this.newDramas = res.data[0].data
+            this.newDramas = res.data
+            //find random series name in newdramas
 
-        })
+          })
     },
     Call(year) {
       axios.get(`/api/populars?q=${year}`)
-        .catch((err) => {
-          console.log(" call function >>  " + err)
-        })
-        .then((res) => {
-          // this.popDramas = res.data[0].data
-          this.popDramas = res.data
-          // this.randomSeries = this.popDramas[Math.floor(Math.random() * this.popDramas.length)]
-          // this.randomTag = this.randomSeries.tags[Math.floor(Math.random() * this.randomSeries.tags.length)]
-          // this.randomTag = "random tag"
-          // document.getElementById("inputId").placeholder = "e.g. " + this.randomSeries.name
+          .catch((err) => {
+            console.log(" call function >>  " + err)
+          })
+          .then((res) => {
+            // this.popDramas = res.data[0].data
+            this.popDramas = res.data
+            // this.randomSeries = this.popDramas[Math.floor(Math.random() * this.popDramas.length)]
+            // this.randomTag = this.randomSeries.tags[Math.floor(Math.random() * this.randomSeries.tags.length)]
+            // this.randomTag = "random tag"
+            // document.getElementById("inputId").placeholder = "e.g. " + this.randomSeries.name
 
-        })
+          })
     },
     showModal(e) {
 
@@ -337,42 +337,35 @@ export default {
 }
 
 
-select {
-  /*font-size: 1rem;*/
-  border-radius: 5px;
-  color: #666666;
-  border: 1px solid #d1d1d9;
-}
-
-select:focus {
-  outline: none;
-}
-
 #mostPopularKoreanDramas, #newKoreanDramas {
   font-family: "Ubuntu", serif;
 }
 
-
 select {
-  border-radius: 0;
-  border-top: 1px solid #FAFAFA;
-  border-left: unset;
-  border-right: unset;
-  border-bottom: 1px solid #FAFAFA;
-  background-color: #FAFAFA;
-  padding: 0;
-  transition: .3s all;
-  font-size: 1.3rem;
-  text-decoration: underline rgba(255, 255, 255, 0);
+  /*font-size: 1rem;*/
+  /*border-radius: 5px;*/
+  /*color: #666666;*/
+  /*border: 1px solid #d1d1d9;*/
 }
 
-select:hover {
+#yearSelector:focus {
+  outline: none;
+}
+
+#yearSelector {
+  transition: .3s all;
+  background-color: #F2F6FC;
+  border: 1px solid #F2F6FC;
+  font-size: 1.3rem;
+}
+
+#yearSelector:hover {
   text-decoration: underline;
   text-decoration-color: #4A4A4A;
 }
 
 #carousel2 {
-  margin-bottom: 164px;
+  /*margin-bottom: 164px;*/
 }
 
 @media only screen and (max-width: 768px) {
@@ -391,5 +384,7 @@ select:hover {
 
 }
 
-
+#top-level-div {
+  min-height: calc(100vh - 74px);
+}
 </style>
