@@ -64,7 +64,9 @@
           <li class="pagination-middle-li"><a
               :href="$nuxt.$route.path + '?p=' + currentPageProp">{{ currentPageProp }}</a></li>
           <li class="pagination-middle-li"><a
-              :href="$nuxt.$route.path + '?p=' + (parseInt(currentPageProp) + 1)">{{ parseInt(currentPageProp) + 1 }}</a>
+              :href="$nuxt.$route.path + '?p=' + (parseInt(currentPageProp) + 1)">{{
+              parseInt(currentPageProp) + 1
+            }}</a>
           </li>
           <li class="pagination-middle-li dot"><span>&hellip;</span></li>
           <li class="pagination-middle-li"><a
@@ -76,7 +78,9 @@
           <li class="pagination-middle-li"><a :href="$nuxt.$route.path + '?p=' + 1">1</a></li>
           <li class="pagination-middle-li dot"><span>&hellip;</span></li>
           <li class="pagination-middle-li"><a
-              :href="$nuxt.$route.path + '?p=' + (parseInt(currentPageProp) - 1)">{{ parseInt(currentPageProp) - 1 }}</a>
+              :href="$nuxt.$route.path + '?p=' + (parseInt(currentPageProp) - 1)">{{
+              parseInt(currentPageProp) - 1
+            }}</a>
           </li>
           <li class="pagination-middle-li"><a
               :href="$nuxt.$route.path + '?p=' + currentPageProp">{{ parseInt(currentPageProp) }}</a></li>
@@ -110,9 +114,6 @@ export default {
   data() {
     return {}
   },
-  methods: {
-
-  },
   mounted() {
 
     [...document.getElementsByClassName("pagination-middle-li")].forEach(element => {
@@ -126,6 +127,14 @@ export default {
         }
       }
     })
+
+    if (this.currentPageProp === "1"){
+      document.querySelector(".pagination-main").style.marginLeft = "60px"
+    }else if(this.currentPageProp === this.totalPageProp.toString()){
+      document.querySelector(".pagination-main").style.marginRight = "60px"
+      console.log("yes")
+    }
+
 
 
   }
@@ -244,6 +253,10 @@ export default {
 
 .last-page-style {
   border-right: #1460d9 !important;
+}
+
+.test-class {
+  display: none;
 }
 
 </style>
