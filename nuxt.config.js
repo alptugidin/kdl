@@ -31,7 +31,7 @@ export default {
     // Global CSS: https://go.nuxtjs.dev/config-css
     css: [
         `@/static/styles.css`,
-        `@/node_modules/bulma-modal-fx/dist/css/modal-fx.min.css`
+        `@/node_modules/bulma-modal-fx/dist/css/modal-fx.min.css`,
     ],
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -45,6 +45,7 @@ export default {
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
     buildModules: [
         '@nuxtjs/google-fonts',
+        '@nuxt/postcss8'
     ],
 
 
@@ -63,7 +64,7 @@ export default {
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
     build: {
-        extractCSS: true
+        extractCSS: true,
     },
 
     serverMiddleware: [
