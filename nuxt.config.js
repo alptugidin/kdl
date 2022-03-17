@@ -45,6 +45,8 @@ export default {
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
     buildModules: [
         '@nuxtjs/google-fonts',
+        '@nuxt/postcss8',
+
     ],
 
 
@@ -63,7 +65,13 @@ export default {
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
     build: {
-        extractCSS: true
+        extractCSS: true,
+        postcss: {
+            plugins: {
+                tailwindcss: {},
+                autoprefixer: {},
+            },
+        },
     },
 
     serverMiddleware: [
