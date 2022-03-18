@@ -2,7 +2,7 @@
   <div id="customDiv">
     <headerComp />
     <Nuxt />
-    <footerComp />
+<!--    <footerComp />-->
   </div>
 </template>
 <style>
@@ -11,8 +11,8 @@ body,
 #__nuxt,
 #__layout,
 #customDiv {
-  height: 100% !important;
-  width: 100% !important;
+  /*height: 100% !important;*/
+  /*width: 100% !important;*/
 
 }
 </style>

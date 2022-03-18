@@ -25,7 +25,9 @@
 
 
 <script>
-export default {}
+export default {
+
+}
 </script>
 
 
@@ -39,7 +41,7 @@ body {
   padding-top: 0;
 }
 
-#test-card{
+#test-card {
   width: 183px;
   background-color: pink;
   height: 244px;

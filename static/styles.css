@@ -2,376 +2,378 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+
 html {
     background-color: #F2F6FC !important;
 }
 
-body {
-    /*margin-top: 73px;*/
+body{
+    padding-top: 0;
 }
+/** {*/
+/*    -webkit-tap-highlight-color: transparent;*/
+/*}*/
+
+/*#mainColumns {*/
+/*    gap: 25px;*/
+/*}*/
+
+/*#navBar {*/
+/*    height: 81px;*/
+/*    text-align: center;*/
+/*    background-color: #1460d9;*/
+/*}*/
+
+
+/*#searchText {*/
+/*    font-family: "Ubuntu", serif;*/
+/*}*/
+
+/*#divInFooter {*/
+/*    top: 10%;*/
+/*}*/
+
+
+/*!*_seriesName*!*/
+/*#koreanDramasLike, #nameSSR {*/
+/*    font-family: "Ubuntu", serif;*/
+/*    !*line-height: 30px;*!*/
+/*}*/
+
+/*#searchTextDiv {*/
+/*    margin-top: 10% !important;*/
+/*}*/
+
+
+/*!*****************************************************************************************************************************************!*/
+
+
+/*!*Card*!*/
+
+/*#card {*/
+/*    !*border-radius: 15px;*!*/
+/*    width: 183px !important;*/
+/*    transition: 0.2s;*/
+/*}*/
+
+/*#card:hover {*/
+/*    transform: scale(1.04);*/
+/*}*/
+
+/*.card-content {*/
+/*    padding: 3px;*/
+/*}*/
+
+/*#cpidMini {*/
+/*    position: absolute;*/
+/*    z-index: 2;*/
+/*    width: 100%;*/
+/*    !*margin-left: 63%;*!*/
+/*    !*margin-top: -6%;*!*/
+/*}*/
+
+/*#cpidMini svg {*/
+/*    position: absolute;*/
+/*    top: 8px;*/
+/*    right: 8px;*/
+/*}*/
+
+
+/*#backGround {*/
+/*    width: 53px;*/
+/*    height: 53px;*/
+/*    border-radius: 50%;*/
+/*    background-color: black;*/
+/*    opacity: 0.7;*/
+/*    z-index: 2;*/
+/*    position: absolute;*/
+/*    top: 12px;*/
+/*    right: 11px;*/
+/*    !*margin-left: 65%;*!*/
+/*    !*margin-top: 7%;*!*/
+/*}*/
+
+
+/*@media only screen and (max-width: 768px) {*/
+/*    #backGround {*/
+/*        width: 43px;*/
+/*        height: 43px;*/
+/*        position: absolute;*/
+/*        right: 9px;*/
+/*        top: 9px;*/
+/*    }*/
+/*}*/
+
+
+/*#similarMini {*/
+/*    font-size: 13px;*/
+/*    position: absolute;*/
+/*    z-index: 3;*/
+/*    color: #ffc107;*/
+/*    right: 18px;*/
+/*    top: 36px;*/
+/*}*/
+
+/*@media only screen and (max-width: 768px) {*/
+/*    #similarMini {*/
+/*        right: 15px;*/
+/*        top: 29px;*/
+/*        font-size: 10px;*/
+/*    }*/
+/*}*/
+
+/*#value {*/
+/*    position: absolute;*/
+/*    z-index: 2;*/
+/*    font-size: 20px;*/
+/*    color: #ffc107;*/
+/*    right: 18px;*/
+/*    top: 13px;*/
+/*}*/
+
+/*@media only screen and (max-width: 768px) {*/
+/*    #value {*/
+/*        font-size: 14px;*/
+/*    }*/
+/*}*/
+
+/*!*****************************************************************************************************************************************!*/
+
+/*!*Modal*!*/
+/*#modalHead {*/
+/*    background-color: #f5f5f5;*/
+/*    border-bottom: 1px solid #dbdbdb;*/
+/*    border-top-left-radius: 6px;*/
+/*    border-top-right-radius: 6px;*/
+/*}*/
+
+/*#modalFoot {*/
+/*    background-color: white;*/
+/*    border-bottom-left-radius: 6px;*/
+/*    border-bottom-right-radius: 6px;*/
+/*}*/
+
+/*#modalImg {*/
+/*    width: 120px;*/
+/*    height: 169px;*/
+/*}*/
+
+/*.modal-card {*/
+/*    !*top: 15% !important;*!*/
+/*    width: 45%;*/
+/*}*/
+
+/*#rateDiv {*/
+/*    width: 102px !important;*/
+/*    !*100 100 için ==> margin-left: calc(50% - 50px) !important;*!*/
+/*    !*mobile için ==> margin-left: calc(43% - 50px) !important;*!*/
+/*    margin-left: calc(44% - 50px) !important;*/
+/*}*/
+
+/*#rateCol {*/
+/*    display: block;*/
+/*}*/
+
+/*#sumText {*/
+/*    font-size: 0.9rem;*/
+/*}*/
 
-* {
-    -webkit-tap-highlight-color: transparent;
-}
-
-#mainColumns {
-    gap: 25px;
-}
-
-#navBar {
-    height: 81px;
-    text-align: center;
-    background-color: #1460d9;
-}
-
-
-#searchText {
-    font-family: "Ubuntu", serif;
-}
-
-#divInFooter {
-    top: 10%;
-}
-
-
-/*_seriesName*/
-#koreanDramasLike, #nameSSR {
-    font-family: "Ubuntu", serif;
-    /*line-height: 30px;*/
-}
-
-#searchTextDiv {
-    margin-top: 10% !important;
-}
-
-
-/*****************************************************************************************************************************************/
-
-
-/*Card*/
-
-#card {
-    /*border-radius: 15px;*/
-    width: 183px !important;
-    transition: 0.2s;
-}
-
-#card:hover {
-    transform: scale(1.04);
-}
-
-.card-content {
-    padding: 3px;
-}
-
-#cpidMini {
-    position: absolute;
-    z-index: 2;
-    width: 100%;
-    /*margin-left: 63%;*/
-    /*margin-top: -6%;*/
-}
-
-#cpidMini svg {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-}
-
-
-#backGround {
-    width: 53px;
-    height: 53px;
-    border-radius: 50%;
-    background-color: black;
-    opacity: 0.7;
-    z-index: 2;
-    position: absolute;
-    top: 12px;
-    right: 11px;
-    /*margin-left: 65%;*/
-    /*margin-top: 7%;*/
-}
-
-
-@media only screen and (max-width: 768px) {
-    #backGround {
-        width: 43px;
-        height: 43px;
-        position: absolute;
-        right: 9px;
-        top: 9px;
-    }
-}
-
-
-#similarMini {
-    font-size: 13px;
-    position: absolute;
-    z-index: 3;
-    color: #ffc107;
-    right: 18px;
-    top: 36px;
-}
-
-@media only screen and (max-width: 768px) {
-    #similarMini {
-        right: 15px;
-        top: 29px;
-        font-size: 10px;
-    }
-}
-
-#value {
-    position: absolute;
-    z-index: 2;
-    font-size: 20px;
-    color: #ffc107;
-    right: 18px;
-    top: 13px;
-}
-
-@media only screen and (max-width: 768px) {
-    #value {
-        font-size: 14px;
-    }
-}
-
-/*****************************************************************************************************************************************/
-
-/*Modal*/
-#modalHead {
-    background-color: #f5f5f5;
-    border-bottom: 1px solid #dbdbdb;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-}
-
-#modalFoot {
-    background-color: white;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
-}
-
-#modalImg {
-    width: 120px;
-    height: 169px;
-}
-
-.modal-card {
-    /*top: 15% !important;*/
-    width: 45%;
-}
-
-#rateDiv {
-    width: 102px !important;
-    /*100 100 için ==> margin-left: calc(50% - 50px) !important;*/
-    /*mobile için ==> margin-left: calc(43% - 50px) !important;*/
-    margin-left: calc(44% - 50px) !important;
-}
-
-#rateCol {
-    display: block;
-}
-
-#sumText {
-    font-size: 0.9rem;
-}
+/*#closeButton {*/
+/*    display: none;*/
+/*}*/
 
-#closeButton {
-    display: none;
-}
+/*#cpid {*/
+/*    font-weight: bold !important;*/
+/*}*/
+
+
+/*form {*/
+/*    !*margin-top: 1.5rem;*!*/
+/*}*/
 
-#cpid {
-    font-weight: bold !important;
-}
-
-
-form {
-    /*margin-top: 1.5rem;*/
-}
+/*#moreCustom {*/
 
-#moreCustom {
+/*    position: absolute;*/
+/*    width: 13px;*/
+/*    margin-left: -50px;*/
+/*}*/
+
 
-    position: absolute;
-    width: 13px;
-    margin-left: -50px;
-}
-
-
-/*****************************************************************************************************************************************/
+/*!*****************************************************************************************************************************************!*/
 
-@media only screen and (max-width: 768px) {
+/*@media only screen and (max-width: 768px) {*/
 
 
-    #mainColumns {
-        gap: 0 !important;
-    }
+/*    #mainColumns {*/
+/*        gap: 0 !important;*/
+/*    }*/
 
-    form {
-        margin-top: 0;
-    }
+/*    form {*/
+/*        margin-top: 0;*/
+/*    }*/
 
-    #searchTextDiv {
-        margin-top: 5% !important;
-    }
+/*    #searchTextDiv {*/
+/*        margin-top: 5% !important;*/
+/*    }*/
 
-    .modal-card {
-        width: auto;
-        /*top: 3% !important;*/
-    }
+/*    .modal-card {*/
+/*        width: auto;*/
+/*        !*top: 3% !important;*!*/
+/*    }*/
 
-    .columns {
-        margin-left: 0;
-        margin-right: 0;
-    }
+/*    .columns {*/
+/*        margin-left: 0;*/
+/*        margin-right: 0;*/
+/*    }*/
 
-    #imageCol {
-        display: none;
-    }
+/*    #imageCol {*/
+/*        display: none;*/
+/*    }*/
 
-    .modal-close {
-        display: none;
-    }
+/*    .modal-close {*/
+/*        display: none;*/
+/*    }*/
 
-    #closeButton {
-        display: block;
-    }
+/*    #closeButton {*/
+/*        display: block;*/
+/*    }*/
 
-    #rateDiv {
-        margin-left: calc(60% - 48px) !important;
-    }
+/*    #rateDiv {*/
+/*        margin-left: calc(60% - 48px) !important;*/
+/*    }*/
 
-    #closeButtonCol {
-        margin-left: 38% !important;
-    }
+/*    #closeButtonCol {*/
+/*        margin-left: 38% !important;*/
+/*    }*/
 
-    #modalHead {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-    }
+/*    #modalHead {*/
+/*        padding-left: 0 !important;*/
+/*        padding-right: 0 !important;*/
+/*    }*/
 
-    .modal-card-body {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-    }
+/*    .modal-card-body {*/
+/*        padding-left: 0 !important;*/
+/*        padding-right: 0 !important;*/
+/*    }*/
 
-    #modalFoot {
-        background-color: #f5f5f5;
-        border-top: 1px solid #dbdbdb;
-    }
+/*    #modalFoot {*/
+/*        background-color: #f5f5f5;*/
+/*        border-top: 1px solid #dbdbdb;*/
+/*    }*/
 
-    #card {
-        width: 160px !important;
-    }
+/*    #card {*/
+/*        width: 160px !important;*/
+/*    }*/
 
 
-    #cardv2, #infoSkeleton {
-        /*width: 160px !important;*/
-        width: 105px !important;
-    }
-
-
-}
+/*    #cardv2, #infoSkeleton {*/
+/*        !*width: 160px !important;*!*/
+/*        width: 105px !important;*/
+/*    }*/
 
-
-/***************************************************************************************************************************************************************/
-
-
-/*Cardv2*/
-.imageTextArea {
-    position: absolute;
-    z-index: 3;
-    height: 50%;
-    width: 100%;
-    bottom: 0;
-    background: linear-gradient(180deg, #FFFFFF00 0%, #00000087 50%, #000000 100%);
-
-
-}
-
-#cardv2 {
-    width: 182px;
-    overflow: hidden;
-    border-radius: 9px;
-    display: none;
-    /*outline: 1px solid #dbdbdb;*/
-    border: 1px solid #dbdbdb;
-
-}
-
-#cardv2:hover .card-image {
-
-    transform: scale(1.1);
-}
-
-
-.cardInfo {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    line-height: 20px;
-}
-
-
-.card-image {
-    transition: transform .4s;
-    border-radius: 10px;
-}
-
-#cardYear {
-    color: #ffc107;
-}
-
-
-#fakeCard {
-    height: 244px;
-    width: 183px;
-    background-color: #DDDDDD;
-    border-radius: 10px;
-    line-height: 15px;
-    position: relative;
-}
-
-@media only screen and (max-width: 768px) {
-    #fakeCard {
-        width: 105px;
-        height: 137px;
-    }
-
-
-}
-
-
-.b-skeleton > .b-skeleton-item.is-rounded {
-    /*border-radius: 3px !important;*/
-    background: -webkit-gradient(linear, left top, right top, color-stop(25%, #dbdbdb), color-stop(50%, rgba(219, 219, 219, 0.5)), color-stop(75%, #dbdbdb));
-    background: linear-gradient(
-            90deg, #fafafa 25%, rgba(219, 219, 219, 0.5) 50%, #fafafa 75%);
-    background-size: 400% 100%;
-    height: 13px;
-}
-
-
-#infoSkeleton {
-    position: absolute;
-    width: 183px;
-    bottom: 0.2rem;
-}
-
-#circleSkeleton {
-    position: absolute;
-    right: 7px;
-    top: 7px
-}
-
-@media only screen and (max-width: 768px) {
-    #circleSkeleton .b-skeleton .b-skeleton-item.is-rounded {
-        width: 40px !important;
-        height: 40px !important;
-    }
-}
-
-/************************************************************************************************************************************************************/
+
+/*}*/
+
+
+/*!***************************************************************************************************************************************************************!*/
+
+
+/*!*Cardv2*!*/
+/*.imageTextArea {*/
+/*    position: absolute;*/
+/*    z-index: 3;*/
+/*    height: 50%;*/
+/*    width: 100%;*/
+/*    bottom: 0;*/
+/*    background: linear-gradient(180deg, #FFFFFF00 0%, #00000087 50%, #000000 100%);*/
+
+
+/*}*/
+
+/*#cardv2 {*/
+/*    width: 182px;*/
+/*    overflow: hidden;*/
+/*    border-radius: 9px;*/
+/*    display: none;*/
+/*    !*outline: 1px solid #dbdbdb;*!*/
+/*    border: 1px solid #dbdbdb;*/
+
+/*}*/
+
+/*#cardv2:hover .card-image {*/
+
+/*    transform: scale(1.1);*/
+/*}*/
+
+
+/*.cardInfo {*/
+/*    position: absolute;*/
+/*    bottom: 0;*/
+/*    right: 0;*/
+/*    left: 0;*/
+/*    line-height: 20px;*/
+/*}*/
+
+
+/*.card-image {*/
+/*    transition: transform .4s;*/
+/*    border-radius: 10px;*/
+/*}*/
+
+/*#cardYear {*/
+/*    color: #ffc107;*/
+/*}*/
+
+
+/*#fakeCard {*/
+/*    height: 244px;*/
+/*    width: 183px;*/
+/*    background-color: #DDDDDD;*/
+/*    border-radius: 10px;*/
+/*    line-height: 15px;*/
+/*    position: relative;*/
+/*}*/
+
+/*@media only screen and (max-width: 768px) {*/
+/*    #fakeCard {*/
+/*        width: 105px;*/
+/*        height: 137px;*/
+/*    }*/
+
+
+/*}*/
+
+
+/*.b-skeleton > .b-skeleton-item.is-rounded {*/
+/*    !*border-radius: 3px !important;*!*/
+/*    background: -webkit-gradient(linear, left top, right top, color-stop(25%, #dbdbdb), color-stop(50%, rgba(219, 219, 219, 0.5)), color-stop(75%, #dbdbdb));*/
+/*    background: linear-gradient(*/
+/*            90deg, #fafafa 25%, rgba(219, 219, 219, 0.5) 50%, #fafafa 75%);*/
+/*    background-size: 400% 100%;*/
+/*    height: 13px;*/
+/*}*/
+
+
+/*#infoSkeleton {*/
+/*    position: absolute;*/
+/*    width: 183px;*/
+/*    bottom: 0.2rem;*/
+/*}*/
+
+/*#circleSkeleton {*/
+/*    position: absolute;*/
+/*    right: 7px;*/
+/*    top: 7px*/
+/*}*/
+
+/*@media only screen and (max-width: 768px) {*/
+/*    #circleSkeleton .b-skeleton .b-skeleton-item.is-rounded {*/
+/*        width: 40px !important;*/
+/*        height: 40px !important;*/
+/*    }*/
+/*}*/
+
+/*!************************************************************************************************************************************************************!*/
 

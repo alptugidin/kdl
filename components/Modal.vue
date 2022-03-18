@@ -126,9 +126,6 @@ export default {
     "renderRateProp",
     "rProp"
   ],
-  components: {
-    circleProgress: () => process.client ? import("vuejs-progress-bar") : null
-  },
   methods: {
     CloseModal() {
       this.modalVideoPROP = null
