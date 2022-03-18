@@ -2,7 +2,7 @@
   <div id="customDiv">
     <headerComp />
     <Nuxt />
-<!--    <footerComp />-->
+    <footerComp />
   </div>
 </template>
 <style>
