@@ -1,217 +1,81 @@
 <template>
   <div>
-
-    <div id="fakeCard" v-if="!isReady">
-      <div id="circleSkeleton">
-        <b-skeleton :animated="true" circle :height="skeletonHeigth" :width="skeletonWidth"></b-skeleton>
-      </div>
-      <div id="infoSkeleton">
-        <b-skeleton :animated="true" position="is-centered" id="nameSkeleton" width="70%"></b-skeleton>
-        <b-skeleton :animated="true" position="is-centered" id="hangSkeleton" width="50%"></b-skeleton>
-        <b-skeleton :animated="true" position="is-centered" id="yearSkeleton" width="50%"></b-skeleton>
+    <div v-show="state" class="w-[180px] h-[240px] bg-[#dbdbdb] rounded-xl relative">
+      <div class="animate-pulse">
+        <div class="w-[54px] h-[54px] bg-[#fafafa] absolute top-2 right-2 rounded-full"></div>
+        <div class="w-full h-[72px] rounded-b-xl absolute bottom-0 grid grid-rows-3 place-items-center">
+          <div class="w-3/4 h-[16px] bg-[#FAFAFA] rounded-[5px]"></div>
+          <div class="w-2/4 h-[16px] bg-[#FAFAFA] rounded-[5px]"></div>
+          <div class="w-1/3 h-[16px] bg-[#FAFAFA] rounded-[5px]"></div>
+        </div>
       </div>
     </div>
-
-    <div id="cardv2" class="card" :style="{display:displayBind}">
-      <a v-bind:id="aCardID" @click="showModalPROP" style="text-decoration: none;">
-        <svg v-if="renderRateProp" id="svgProgress" height="60" width="60" viewBox="0 0 100 100">
-          <circle
-              cx="50"
-              cy="50"
-              :r="this.r"
-              stroke="white"
-              stroke-width="6"
-              fill-opacity="0.7"
-              :stroke-dasharray="2*Math.PI*this.r"
-              :stroke-dashoffset="0"
-              transform="rotate(-90 50 50)"/>
-          <circle
-              cx="50"
-              cy="50"
-              :r="this.r"
-              stroke="#C71B2B"
-              fill="transparent"
-              stroke-width="6"
-              :stroke-dasharray="2*Math.PI*this.r"
-              :stroke-dashoffset="2*Math.PI*this.r - (2*Math.PI*this.r*(seriesRate/100))"
-              transform="rotate(-90 50 50)"/>
-          <text text-anchor="middle" x="50%" y="45%" fill="#ffc107" font-size="30px">{{ seriesRate }}%</text>
-          <text text-anchor="middle" x="50%" y="70%" fill="#ffc107" font-size="23px">Similar</text>
-        </svg>
-
-        <div id="rankCircleDiv" v-if="renderRankProp">
-          <img src="/templates/rankCircle.svg" width="45" height="45" alt="">
-          <span v-if="rankNumber < 10" class="rankCircleSpan is-size-5 is-size-6-mobile">#{{ rankNumber }}</span>
-          <span v-else class="rankCircleSpan2 is-size-5 is-size-6-mobile">#{{ rankNumber }}</span>
-        </div>
-        <div class="card-image">
-          <figure class="image is-3by4">
-            <picture>
-              <source v-bind:srcset="`/img/` + seriesId + `.webp`" type="image/webp">
-              <source v-bind:srcset="`/img/` + seriesId + `.jpg`" type="image/jpg">
-              <img v-bind:src="`/img/` + seriesId + `.jpg`" alt="" @load="ImageLoadStatus"/>
-            </picture>
-          </figure>
-        </div>
-        <div class="imageTextArea has-text-centered">
-          <div class="cardInfo">
-            <p id="cardName" class="has-text-weight-semibold has-text-light is-size-7-mobile">{{ seriesName }}</p>
-            <p id="cardHang" class="has-text-weight-normal has-text-light is-size-7 is-size-7-mobile">{{
-                seriesHang
-              }}</p>
-            <p id="cardYear" class="has-text-weight-semibold is-size-7-mobile">{{ seriesYear }}</p>
-          </div>
-        </div>
-      </a>
+    <div v-show="!state"
+         class="custom-card w-[180px] h-[240px] outline outline-[1px] outline-[#dbdbdb] rounded-xl relative overflow-hidden">
+      <div class=" absolute right-2 top-2 visible text-center z-10">
+        <img src="/templates/rankCircle.svg" alt="rankCircleSvg">
+        <span class="text-[#ffc107] absolute right-0 left-0 top-[10px] text-2xl">#1</span>
+      </div>
+      <svg id="svgProgress" height="60" width="60" viewBox="0 0 100 100" class="absolute right-2 top-2 hidden">
+        <circle
+            cx="50"
+            cy="50"
+            r="45"
+            stroke="white"
+            stroke-width="6"
+            fill-opacity="0.7"
+            :stroke-dasharray="2*Math.PI*45"
+            :stroke-dashoffset="0"
+            transform="rotate(-90 50 50)"/>
+        <circle
+            cx="50"
+            cy="50"
+            r="45"
+            stroke="#C71B2B"
+            fill="transparent"
+            stroke-width="6"
+            :stroke-dasharray="2*Math.PI*40"
+            :stroke-dashoffset="2*Math.PI*40 - (2*Math.PI*45*(seriesRate/100))"
+            transform="rotate(-90 50 50)"/>
+        <text text-anchor="middle" x="50%" y="45%" fill="#ffc107" font-size="30px">{{ seriesRate }}%</text>
+        <text text-anchor="middle" x="50%" y="70%" fill="#ffc107" font-size="23px">Similar</text>
+      </svg>
+      <img src="/img/153.webp" class="card-image object-fill w-full h-full rounded-xl" alt="">
+      <div class="absolute bottom-0 z-10 text-center text-[red] w-full">
+        <p class="font-semibold text-[#f5f5f5]">Sample Korean Drama</p>
+        <p class="text-[#f5f5f5]">스물다섯 스물하나</p>
+        <p class="font-semibold text-[#ffc107]">2021</p>
+      </div>
+      <div class="bg-gradient-to-t from-[black] w-full h-1/2 absolute bottom-0 rounded-b-xl"></div>
     </div>
+    <!--    <button @click="TEST">Click</button>-->
   </div>
-
-
 </template>
+
 
 <script>
 export default {
-  name: "CardV2",
-  props: [
-    "seriesName",
-    "seriesHang",
-    "seriesYear",
-    "seriesRate",
-    "seriesId",
-    "showModalPROP",
-    "aCardID",
-    "renderCircle",
-    "rankNumber",
-    "renderAllCircle",
-    "renderRateProp",
-    "renderRankProp"
-  ],
-
-  methods: {
-
-
-    ImageLoadStatus() {
-
-      this.isReady = true
-      this.displayBind = "block"
-    }
-
-
-  },
-
-
+  props: ["renderRateProp", "renderRankProp"],
   data() {
     return {
-      isReady: false,
-      r: 45,
-      rate: null,
-      skeletonWidth: "60px",
-      skeletonHeigth: "60px",
-      isCircleProgressMounted: true,//false
-      isImageMounted: false,
-      renderRate: false,
-      renderRank: false,
-      displayBind: "none ", //none
-
+      seriesRate: 50,
+      state: false
     }
   },
-
-
+  methods: {
+    TEST() {
+      this.state = !this.state
+    }
+  }
 }
 </script>
 
 <style>
-
-#cardv2 {
-  width: 182px;
-  overflow: hidden;
-  border-radius: 8px;
-  display: none;
-  /*outline: 1px solid #dbdbdb;*/
+.card-image {
+  transition: transform .4s;
 }
 
-
-.card {
-  box-shadow: unset;
+.custom-card:hover .card-image {
+  transform: scale(1.1);
 }
-
-
-#rankCircleDiv {
-  position: absolute;
-  z-index: 5;
-  top: 5px;
-  right: 5px;
-  /*border: 1px solid cyan;*/
-  width: 45px;
-  height: 45px;
-}
-
-
-.rankCircleSpan {
-  position: absolute;
-  left: 11px;
-  margin-top: 7px;
-  color: #ffc107;
-}
-
-.rankCircleSpan2 {
-  position: absolute;
-  left: 6px;
-  margin-top: 7px;
-  color: #ffc107;
-}
-
-#cardHang {
-  display: block;
-}
-
-#svgProgress {
-  position: absolute;
-  z-index: 5;
-  right: 8px;
-  top: 8px;
-
-}
-
-@media only screen and (max-width: 768px) {
-
-  #svgProgress {
-    width: 40px;
-    height: 40px;
-    right: 4px;
-    top: 4px;
-  }
-
-
-  #cardHang {
-    display: none;
-  }
-
-  .cardInfo {
-    line-height: 1rem;
-  }
-
-  #rankCircleDiv {
-    width: 35px;
-    /*height: 40px;*/
-
-  }
-
-  .rankCircleSpan {
-    left: 9px;
-    top: -2px;
-  }
-
-  .rankCircleSpan2 {
-    left: 4px;
-  }
-}
-
-
-/* */
-
 </style>
-
-
-
-
