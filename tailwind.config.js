@@ -15,6 +15,7 @@ module.exports = {
             'm': {'max': '767px'},
             't': {'min': '768px', 'max': '1023px'},
             'd': {'min': '1024px'},
+            // 't': {'min': '768px', 'max': '1023px'},
 
             'sm': '640px',
             'md': '768px',
