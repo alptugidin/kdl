@@ -2,26 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
- 'md': '768px',
- 'sm': '640px',
- 'lg': '1024px',
- 'xl': '1280px',
- '2xl': '1536px',
-*/
-
-
 html {
     background-color: #F2F6FC !important;
 }
 
-body{
-    /*padding-top: 0;*/
+
+.carousel{
+    @apply 2xl:w-[calc(188px_*_8)] xl:w-[calc(188px_*_6)] lg:w-[calc(188px_*_5)] md:w-[calc(111px_*_6)] sm:w-[calc(111px_*_4)] w-full
 }
 
-
-
-.carousel1{
-
-    @apply 2xl:w-[calc(188px_*_8)] xl:w-[calc(188px_*_7)] lg:w-[calc(188px_*_5)] sm:w-[calc(188px_*_3)] md:w-[calc(188px_*_4)] w-[calc(188px_*_2)]
+.index-div{
+    @apply md:min-h-[calc(100vh_-_74px)] min-h-[calc(100vh_-_90px)]
 }
