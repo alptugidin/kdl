@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="absolute bottom-0 w-full bg-[#404040]">
+    <nav class="relative w-full bg-[#404040]">
       <div class="container p-1 mx-auto grid d:grid-cols-4 t:grid-cols-3 grid-cols-1">
         <div class="items-center d:mb-0 t:mb-0 mb-8">
           <div class="d:text-left t:text-left text-center">
