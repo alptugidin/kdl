@@ -10,12 +10,12 @@
         <option value="tag">Search by Tag</option>
       </select>
       <div id="ghost"
-           class="absolute top-[30px] w-full h-[6px] bg-[#EFEFEF] z-10 border-b border-[#DBDBDB] hidden"></div>
+           class="absolute top-[30px] w-full h-[6px] bg-[#EFEFEF] z-30 border-b border-[#DBDBDB] hidden"></div>
       <div class="bg-[#DBDBDB] absolute w-[1px] h-[30px] top-[3px] right-[122px] z-[11]"></div>
-      <div id="series-dropdown" class="bg-white absolute w-full rounded-b-xl block">
+      <div id="series-dropdown" class="bg-white absolute w-full rounded-b-xl block z-20">
         <ul id="series-dropdown-ul"></ul>
       </div>
-      <div id="tags-dropdown" class="bg-white absolute w-full h-[360px] rounded-b-xl hidden">
+      <div id="tags-dropdown" class="bg-white absolute w-full h-[360px] rounded-b-xl hidden z-20">
         <div class="grid grid-cols-2">
           <div id="tag-result-left" class="w-full h-[360px] rounded-bl-xl border-r border-[#DBDBDB] overflow-x-auto">
             <ul @click="addTag" id="tag-result-left-ul"></ul>

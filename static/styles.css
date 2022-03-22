@@ -3,14 +3,29 @@
 @tailwind utilities;
 
 html {
-    background-color: #F2F6FC !important;
+    @apply bg-[#f2f6fc]
+}
+
+.ubuntu-font {
+    font-family: "Ubuntu", serif;
 }
 
 
-.carousel{
-    @apply 2xl:w-[calc(188px_*_8)] xl:w-[calc(188px_*_6)] lg:w-[calc(188px_*_5)] md:w-[calc(111px_*_6)] sm:w-[calc(111px_*_4)] w-full
+.carousel {
+    @apply
+    2xl:w-[calc(188px_*_8)] xl:w-[calc(188px_*_6)] lg:w-[calc(188px_*_5)] md:w-[calc(111px_*_6)] sm:w-[calc(111px_*_4)] w-full
+    scroll-smooth
 }
 
-.index-div{
+.minh {
+    @apply lg:h-[261px] h-[170px]
+}
+
+.index-div {
     @apply md:min-h-[calc(100vh_-_74px)] min-h-[calc(100vh_-_90px)]
 }
+
+#c1, #c2, #c3, #c4 {
+    @apply lg:block hidden
+}
+
