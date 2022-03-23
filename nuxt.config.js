@@ -91,16 +91,11 @@ export default {
         }
     },
 
-    // privateRuntimeConfig: {
-    //     // dbLocation: process.env.NODE_ENV === "development" ? process.env.DEV_DB : process.env.PROD_DB
-    //     // dbLocation: process.env.DEV_DB
-    // }
-
-    //
-    // server:{
-    //   host : '192.168.1.24'
-    // }
-    //
+    publicRuntimeConfig: {
+        // api: process.env.CURRENT_API,
+        // test: process.env.NUXT_ENV_TEST
+        // api: "https://kdramalike.com/api/"
+    },
 
 
 }
