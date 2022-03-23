@@ -25,7 +25,7 @@
           />
 
           <div id="carousel1"
-               class="container mx-auto carousel minh bg-[white] rounded-xl outline outline-[1px] outline-[#dbdbdb] relative flex flex-nowrap lg:overflow-hidden overflow-auto">
+               class="container mx-auto carousel minh bg-[white] lg:rounded-xl rounded-[5px] outline outline-[1px] outline-[#dbdbdb] relative flex flex-nowrap lg:overflow-hidden overflow-auto">
             <card
                 class="p-1"
                 v-for="(series,index) in latestSeries"
@@ -70,7 +70,7 @@
           />
 
           <div id="carousel2"
-               class="container mx-auto carousel minh bg-[white] rounded-xl outline outline-[1px] outline-[#dbdbdb] relative flex flex-nowrap  lg:overflow-hidden overflow-auto">
+               class="container mx-auto carousel minh bg-[white] lg:rounded-xl rounded-[5px] outline outline-[1px] outline-[#dbdbdb] relative flex flex-nowrap  lg:overflow-hidden overflow-auto">
             <card
                 class="p-1"
                 v-for="(series, index) in popularSeries"
