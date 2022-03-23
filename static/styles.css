@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+            'sm': '640px',
+            'md': '768px',
+            'lg': '1024px',
+            'xl': '1280px',
+            '2xl': '1536px',
+*/
+
+
 html {
     @apply bg-[#f2f6fc]
 }
@@ -13,7 +22,12 @@ html {
 
 .carousel {
     @apply
-    2xl:w-[calc(188px_*_8)] xl:w-[calc(188px_*_6)] lg:w-[calc(188px_*_5)] md:w-[calc(111px_*_6)] sm:w-[calc(111px_*_4)] w-full
+    2xl:w-[calc(188px_*_8)]
+    xl:w-[calc(188px_*_6)]
+    lg:w-[calc(188px_*_5)]
+    md:w-[calc(111px_*_6)]
+    sm:w-[calc(111px_*_4)]
+    w-full
     scroll-smooth
 }
 
@@ -29,3 +43,29 @@ html {
     @apply lg:block hidden
 }
 
+.card-image {
+    transition: transform .4s;
+}
+
+
+.custom-pagination {
+    @apply
+    font-semibold
+    hover:bg-[#1460d9]
+    first:hover:rounded-l-full
+    last:hover:rounded-r-full
+    first:rounded-l-full
+    last:rounded-r-full
+    cursor-pointer
+    hover:text-[white]
+    transition
+    ease-in-out
+}
+
+.current-page{
+    @apply
+    bg-[#1460d9]
+    pointer-events-none
+    text-[white]
+    shadow-lg
+}
