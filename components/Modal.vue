@@ -60,15 +60,27 @@
           </div>
         </div>
       </div>
-      <div class="custom-modal-body grid md:grid-cols-2 grid-cols-1">
-        <div class="text-sm md:min-h-[250px] overflow-auto">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci corporis dolore, earum enim est hic
-          incidunt ipsa laborum magni, mollitia numquam provident quidem quod ratione voluptas. Explicabo facere itaque
-          laboriosam tempore. A aliquid aperiam cumque cupiditate debitis dolores eligendi error esse hic illum ipsa
-          laudantium molestiae molestias nemo non odio officiis placeat quasi quidem quis reiciendis sequi soluta, ut
-          vel voluptas voluptates voluptatibus. Accusamus animi atque, distinctio excepturi in labore nemo odit
-          officiis, porro praesentium sapiente sint sunt. Architecto asperiores, blanditiis culpa dicta, distinctio est
-          fugit ipsa ipsum molestiae nulla porro quibusdam quod sed suscipit temporibus tenetur, unde vel voluptates!
+
+      <div class="custom-modal-body grid md:grid-cols-2 grid-cols-1  overflow-auto">
+        <div class="text-sm md:min-h-[250px]">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores, odio, voluptatibus? Assumenda blanditiis
+          consequatur consequuntur delectus, deleniti distinctio ea eveniet ex fugit hic in non numquam quae quam quia,
+          quidem rem, vel voluptates? Consequatur consequuntur cum debitis dicta dolore excepturi expedita fuga ipsum
+          iure magni minus, neque nostrum omnis pariatur placeat quaerat quis quo repellendus repudiandae suscipit
+          tempore vel voluptas voluptates. Adipisci at blanditiis corporis deserunt eius facilis ipsam iste mollitia
+          neque nobis obcaecati, officiis quidem reiciendis saepe totam! Eveniet molestiae nemo provident quam repellat,
+          similique suscipit tenetur totam voluptate? Asperiores dolorem dolores earum eum magni maxime modi molestiae
+          nisi non rerum? Animi beatae commodi consequuntur corporis cum cupiditate deleniti dolores doloribus dolorum,
+          eaque eligendi et eveniet ipsum, iste minima nam nemo nihil nobis nulla odio perferendis placeat quam quasi
+          qui quia quidem repellendus saepe sed, similique sit suscipit tempora totam ullam vel veniam voluptatem
+          voluptates. Aliquam aspernatur dolorem, facere incidunt ipsam ipsum magni obcaecati rerum sit sunt?
+          Accusantium ad adipisci amet asperiores assumenda at atque aut consequatur consequuntur culpa dignissimos
+          dolore error ex ipsa itaque laboriosam magni, maxime minima molestias nesciunt nisi nostrum officiis omnis
+          perferendis perspiciatis provident quidem quo quos reiciendis reprehenderit repudiandae sapiente sit, tempora
+          tempore temporibus velit vero. Aliquam, architecto cupiditate dolorem, ea eligendi expedita harum, impedit
+          modi obcaecati quae voluptates voluptatum? Architecto commodi consectetur cupiditate iusto magnam neque omnis
+          quis tenetur. Deleniti error nemo voluptatibus. Aliquam at facere labore laborum molestias perspiciatis
+          ratione rem, saepe suscipit voluptatem. Deleniti nam nemo nobis placeat! Animi, distinctio enim?
         </div>
         <div class="min-h-[250px]">
           <iframe src="https://www.youtube.com/embed/Udjfqst67_k" class="w-full h-full md:rounded-br-xl"/>
@@ -88,7 +100,8 @@ export default {
     return {
       rateProp: 50
     }
-  }
+  },
+
 }
 </script>
 
