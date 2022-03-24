@@ -86,6 +86,7 @@
         </div>
       </div>
     </div>
+    <modal2/>
   </div>
 </template>
 
