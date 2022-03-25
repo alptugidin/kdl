@@ -27,6 +27,7 @@
           <div id="carousel1"
                class="container mx-auto carousel minh bg-[white] lg:rounded-xl rounded-[5px] outline outline-[1px] outline-[#dbdbdb] relative flex flex-nowrap lg:overflow-hidden overflow-auto">
             <card
+                @click.native="showModal"
                 class="p-1"
                 v-for="(series,index) in latestSeries"
                 :render-rank="true"
@@ -37,6 +38,7 @@
                 :rate-prop="series.rate"
                 :rank-prop="index+1"
                 :key="index"
+                :number-prop="index"
             />
           </div>
         </div>
@@ -72,6 +74,7 @@
           <div id="carousel2"
                class="container mx-auto carousel minh bg-[white] lg:rounded-xl rounded-[5px] outline outline-[1px] outline-[#dbdbdb] relative flex flex-nowrap  lg:overflow-hidden overflow-auto">
             <card
+                @click.native="showModal"
                 class="p-1"
                 v-for="(series, index) in popularSeries"
                 :render-rank="true"
@@ -81,12 +84,21 @@
                 :hang-prop="series.title"
                 :rank-prop="index+1"
                 :key="index"
+                :number-prop="index"
             />
           </div>
         </div>
       </div>
     </div>
-    <modal2/>
+    <modal
+        :series-name-prop="nameToModal"
+        :series-year-prop="yearToModal"
+        :series-hang-prop="hangToModal"
+        :summary-prop="sumToModal"
+        :summary-link-prop="sumLinkToModal"
+        :video-prop="videoToModal"
+        :id-prop="idToModal"
+    />
   </div>
 </template>
 
@@ -111,7 +123,15 @@ export default {
       current_width: 0,
       current_width2: 0,
       c1max: 0,
-      c2max: 0
+      c2max: 0,
+      nameToModal: "",
+      yearToModal: "",
+      hangToModal: "",
+      sumToModal: "",
+      sumLinkToModal: "",
+      videoToModal: "",
+      idToModal: "",
+      similarNameToModal: ""
     }
   },
   methods: {
@@ -130,6 +150,7 @@ export default {
             year !== "2022" ? document.getElementById("carousel2").scroll({left: 0, behavior: "smooth"}) : null
           })
     },
+
     chevron(e) {
       const chevronClass = e.currentTarget.attributes[0].value
       const currentWidth = document.querySelector("#carousel1").offsetWidth
@@ -150,23 +171,43 @@ export default {
           this.c1scroll = carousel1.scrollLeft
         })
       } else if (chevronClass === "c3") {
-        carousel2.scrollLeft += currentWidth
+        carousel2.scrollLeft -= currentWidth2
         carousel2.addEventListener("scroll", () => {
           this.c2scroll = carousel2.scrollLeft
         })
       } else if (chevronClass === "c4") {
-        carousel2.scrollLeft -= currentWidth
+        carousel2.scrollLeft += currentWidth2
         carousel2.addEventListener("scroll", () => {
           this.c2scroll = carousel2.scrollLeft
         })
       }
+    },
 
+    showModal(e) {
+      const i = e.currentTarget.id
+      if (e.currentTarget.parentNode.id === "carousel1") {
+        this.nameToModal = this.latestSeries[i].name
+        this.yearToModal = this.latestSeries[i].year
+        this.hangToModal = this.latestSeries[i].title
+        this.sumToModal = this.latestSeries[i].summary
+        this.sumLinkToModal = this.latestSeries[i].summaryLink
+        this.videoToModal = this.latestSeries[i].video
+        this.idToModal = this.latestSeries[i].idx
+        document.getElementById("custom-modal").style.display = "block"
+      }else {
+        this.nameToModal = this.popularSeries[i].name
+        this.yearToModal = this.popularSeries[i].year
+        this.hangToModal = this.popularSeries[i].title
+        this.sumToModal = this.popularSeries[i].summary
+        this.sumLinkToModal = this.popularSeries[i].summaryLink
+        this.videoToModal = this.popularSeries[i].video
+        this.idToModal = this.popularSeries[i].idx
+        document.getElementById("custom-modal").style.display = "block"
+      }
 
     },
 
-
   },
-
   beforeMount() {
     this.apiCall(2022)
     this.apiCall(2021)
@@ -186,9 +227,10 @@ export default {
 
     resizeObserver.observe(document.getElementById("carousel1"))
 
-  },
-
+  }
 
 }
+
+
 </script>
 
