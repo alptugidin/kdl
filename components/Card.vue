@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <div v-show="!isImageLoaded" class="lg:w-[180px] lg:h-[253px] w-[103px] h-[145px] bg-[#dbdbdb] lg:rounded-xl rounded-[5px] relative">
+  <div :id="numberProp">
+    <div v-show="!isImageLoaded"
+         class="lg:w-[180px] lg:h-[253px] w-[103px] h-[145px] bg-[#dbdbdb] lg:rounded-xl rounded-[5px] relative">
       <div class="animate-pulse">
         <div class="lg:w-[60px] lg:h-[60px] w-[45px] h-[45px] bg-[#fafafa] absolute top-1 right-1 rounded-full"></div>
         <div class="w-full h-[60px] rounded-b-xl absolute bottom-0 grid grid-rows-3 place-items-center">
@@ -48,7 +49,8 @@
       </div>
 
       <img @load="imageLoadStatus" :src="'/img/' + idProp + '.webp'"
-           class="card-image object-fill w-full lg:rounded-xl rounded-[5px] lg:w-[180px] lg:h-[253px] w-[103px] h-[145px]" alt="">
+           class="card-image object-fill w-full lg:rounded-xl rounded-[5px] lg:w-[180px] lg:h-[253px] w-[103px] h-[145px]"
+           alt="">
       <div class="absolute bottom-0 z-10 text-center text-[red] w-full lg:text-sm text-[0.75rem]">
         <p class="font-semibold text-[#f5f5f5]">{{ nameProp }}</p>
         <p class="text-[#f5f5f5] lg:block hidden">{{ hangProp }}</p>
@@ -71,6 +73,7 @@ export default {
     "hangProp",
     "rateProp",
     "rankProp",
+    "numberProp"
   ],
   data() {
     return {
@@ -81,7 +84,7 @@ export default {
   methods: {
     imageLoadStatus() {
       this.isImageLoaded = true
-    }
+    },
   }
 }
 </script>
