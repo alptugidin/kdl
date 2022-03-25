@@ -19,6 +19,59 @@ html {
     font-family: "Ubuntu", serif;
 }
 
+.tag {
+    display: inline-block;
+    border-radius: 5px;
+    border: 1px solid #dbdbdb;
+    position: relative;
+    padding: 1px 16px 1px 1px;
+}
+
+.tag2 {
+    @apply
+    inline-block
+    rounded-[5px]
+    border border-[#dbdbdb]
+    relative
+
+}
+
+.t1 {
+    font-size: .75rem;
+    background-color: #ebfffc;
+    color: #00947e;
+}
+
+.t2 {
+    font-size: .75rem;
+    background-color: #eff1fa;
+    color: #3850b7;
+}
+
+.t3 {
+    font-size: .75rem;
+    background-color: #eff5fb;
+    color: #296fa8;
+}
+
+.t4 {
+    font-size: .75rem;
+    background-color: #effaf5;
+    color: #257953;
+}
+
+.t5 {
+    font-size: .75rem;
+    background-color: #fffaeb;
+    color: #946c00;
+}
+
+.t6 {
+    font-size: .75rem;
+    background-color: #feecf0;
+    color: #cc0f35;
+}
+
 
 .carousel {
     @apply
@@ -72,14 +125,15 @@ html {
 
 .custom-modal {
     @apply
-    fixed
-    z-20
-    top-20
+    overflow-auto
+    relative
     bg-[white]
+    h-auto max-h-full
     border border-[#dbdbdb]
     rounded-xl
     xl:w-[800px] md:w-[750px] sm:w-[630px] w-11/12
     xl:left-[calc(calc(100%_-_800px)/2)] md:left-[calc(calc(100%_-_750px)/2)] sm:left-[calc(calc(100%_-_630px)/2)] left-[4.1667%]
+
 }
 
 .custom-modal-head {
@@ -97,3 +151,4 @@ html {
     text-[#4a4a4a]
     h-full
 }
+
