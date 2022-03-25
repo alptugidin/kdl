@@ -215,50 +215,10 @@ input:focus ~ #search-in-input:hover {
   padding: 5px;
 }
 
-.tag {
-  display: inline-block;
-  border-radius: 5px;
-  border: 1px solid #dbdbdb;
-  position: relative;
-  padding: 1px 16px 1px 1px;
-}
 
 
-.t1 {
-  font-size: .75rem;
-  background-color: #ebfffc;
-  color: #00947e;
-}
 
-.t2 {
-  font-size: .75rem;
-  background-color: #eff1fa;
-  color: #3850b7;
-}
 
-.t3 {
-  font-size: .75rem;
-  background-color: #eff5fb;
-  color: #296fa8;
-}
-
-.t4 {
-  font-size: .75rem;
-  background-color: #effaf5;
-  color: #257953;
-}
-
-.t5 {
-  font-size: .75rem;
-  background-color: #fffaeb;
-  color: #946c00;
-}
-
-.t6 {
-  font-size: .75rem;
-  background-color: #feecf0;
-  color: #cc0f35;
-}
 
 .tag-cancel {
   position: absolute;
