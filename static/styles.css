@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-            'sm': '640px',
-            'md': '768px',
-            'lg': '1024px',
-            'xl': '1280px',
-            '2xl': '1536px',
-*/
-
 
 html {
     @apply bg-[#f2f6fc]
@@ -27,13 +19,12 @@ html {
     padding: 1px 16px 1px 1px;
 }
 
+
 .tag2 {
     @apply
-    inline-block
     rounded-[5px]
     border border-[#dbdbdb]
-    relative
-
+    px-1
 }
 
 .t1 {
@@ -115,12 +106,59 @@ html {
     ease-in-out
 }
 
+.pagination-parent, .pagination-prev, .pagination-next {
+    @apply
+    bg-[#EFEFEF]
+    border border-[#DBDBDB]
+    rounded-full
+    w-fit
+    leading-9
+    text-center
+    flex
+}
+
+.pagination-prev, .pagination-next {
+    @apply
+    hover:bg-[#1460d9]
+    cursor-pointer
+    transition
+    ease-in-out
+}
+
+.pagination-prev:hover img, .pagination-next:hover img {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(16deg) brightness(109%) contrast(101%);
+}
+
+.pagination-child {
+    @apply
+    inline-block
+    w-[36px]
+    h-[36px]
+    hover:bg-[#1460d9]
+    hover:text-[white]
+    font-semibold
+    first:rounded-l-full
+    last:rounded-r-full
+    cursor-pointer
+    transition
+    ease-in-out
+}
+
+.dot {
+    @apply
+    inline-block
+    w-[36px]
+    h-[36px]
+}
+
+
 .current-page {
     @apply
     bg-[#1460d9]
     pointer-events-none
     text-[white]
-    shadow-lg
+    w-[36px]
+    inline-block
 }
 
 .custom-modal {
@@ -151,4 +189,5 @@ html {
     text-[#4a4a4a]
     h-full
 }
+
 
