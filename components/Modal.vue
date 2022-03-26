@@ -15,26 +15,16 @@
               <p class="md:text-2xl text-xl font-semibold ubuntu-font ">{{ seriesNameProp }}</p>
               <p class="text-sm">{{ seriesHangProp }}</p>
               <p class="text-lg font-semibold">{{ seriesYearProp }}</p>
-              <div v-if="renderCommonProp">
-                <span>Common tags:</span>
+              <p v-if="renderCommonProp" id="common-tags" class="text-sm">Common tags:
+                <span v-html="coloredTags(commonTagsProp)"></span>
+              </p>
 
-                <div class="tag2 t1">
-                  <span class="p-1">Romance</span>
-                </div>
-                <div class="tag2 t2">
-                  <span class="p-1">Family</span>
-                </div>
-                <div class="tag2 t3">
-                  <span class="p-1">Drama</span>
-                </div>
-                <div class="tag2 t4">
-                  <span class="p-1">Older Woman Younger Man</span>
-                </div>
-                <div class="tag2 t5">
-                  <span class="p-1">Romance</span>
-                </div>
-
-              </div>
+              <!--              <div v-if="renderCommonProp">-->
+              <!--                <div id="common-tags">-->
+              <!--                  <span class="inline-block">Common tags:</span>-->
+              <!--                  <div v-html="coloredTags(this.commonTagsProp  )"></div>-->
+              <!--                </div>-->
+              <!--              </div>-->
             </div>
           </div>
           <div v-if="renderSvgProp" class="md:basis-2/6 basis-3/6 text-center">
@@ -97,6 +87,11 @@
 <script>
 export default {
   name: "Modal2",
+  data() {
+    return {
+      colors: ["t1", "t2", "t3", "t4", "t5", "t6"]
+    }
+  },
   props: [
     "seriesNameProp",
     "seriesHangProp",
@@ -108,7 +103,8 @@ export default {
     "renderCommonProp",
     "renderSvgProp",
     "videoProp",
-    "idProp"
+    "idProp",
+    "commonTagsProp"
   ],
 
   methods: {
@@ -117,7 +113,18 @@ export default {
         document.querySelector("#custom-modal").style.display = "none"
         this.videoProp = "";
       }
-    }
+    },
+
+    coloredTags(param) {
+      let coloredTagsArray = []
+      param.forEach(tag => {
+        let randomColor = this.colors[Math.floor(Math.random() * this.colors.length)]
+        const coloredTag = `<span class="tag2 ${randomColor}">${tag}</span>`
+        coloredTagsArray.push(coloredTag)
+      })
+      return coloredTagsArray.join(" ")
+
+    },
   }
 }
 </script>
