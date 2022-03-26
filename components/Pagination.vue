@@ -1,270 +1,113 @@
 <template>
   <div>
-    <div id="pagination1" class="columns is-mobile is-centered pagination-main" v-if="parseInt(totalPageProp) < 7">
 
-      <div v-if="parseInt(currentPageProp) > 1" class="column is-narrow">
-        <div class="prev-page">
-          <a :href="$nuxt.$route.path + '?p=' + (parseInt(currentPageProp) - 1)" href="#" style="display: block;">
-            <img class="prev-page-svg" src="/templates/prev-page.svg" alt="prev-page-svg">
-          </a>
+    <!--  If total page number < 7  -->
+    <div id="pagination-1" v-if="totalPageProp < 7" class="py-20 flex justify-center">
+
+      <div v-if="currentPageProp > 1" class="pagination-prev">
+        <a :href="$nuxt.$route.path + '?p=' + (parseInt(currentPageProp) - 1 )" class="block">
+          <img src="/templates/prev-page.svg" alt="prev-page-svg" class="">
+        </a>
+      </div>
+
+      <div class="pagination-parent mx-5">
+        <div v-for="i in parseInt(totalPageProp)" class="pagination-child">
+          <a :href="$nuxt.$route.path + '?p=' + i" class="block">{{ i }}</a>
         </div>
       </div>
 
-      <div class="column is-narrow px-0 pagination-main">
-        <ul class="paginaton-middle">
-          <li class="pagination-middle-li" v-for="i in parseInt(totalPageProp)">
-            <a :href="$nuxt.$route.path + '?p=' + i">
-              {{ i }}
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <div v-if="parseInt(currentPageProp) < parseInt(totalPageProp)" class="column is-narrow">
-        <div class="next-page">
-          <a :href="$nuxt.$route.path + '?p='+   (parseInt(currentPageProp) + 1)" style="display: block">
-            <img class="next-page-svg" src="/templates/next-page.svg" alt="svg">
-          </a>
-        </div>
+      <div v-if="currentPageProp < totalPageProp" class="pagination-next">
+        <a :href="$nuxt.$route.path + '?p=' + (parseInt(currentPageProp) + 1)" class="block">
+          <img src="/templates/next-page.svg" alt="next-page-svg">
+        </a>
       </div>
 
     </div>
 
-    <div id="pagination2" class="columns is-mobile is-centered my-0" v-else>
+    <!--  If total page number > 7  -->
+    <div id="pagination-2" class="py-20 flex justify-center" v-else>
 
-      <div v-if="parseInt(currentPageProp ) > 1" class="column is-narrow">
-        <div class="prev-page">
-          <a :href="$nuxt.$route.path + '?p=' + (parseInt(currentPageProp) - 1)" style="display: block">
-            <img class="prev-page-svg" src="/templates/prev-page.svg" alt="prev-page-svg">
-          </a>
+      <div v-if="currentPageProp > 1" class="pagination-prev">
+        <a :href="$nuxt.$route.path + '?p=' + (parseInt(currentPageProp) - 1 )" class="block">
+          <img src="/templates/prev-page.svg" alt="prev-page-svg" class="">
+        </a>
+      </div>
+
+      <!--   If current page < 5   -->
+      <div v-if="currentPageProp < 5" class="pagination-parent mx-5">
+        <div v-for="i in 5" v-if=" i < parseInt((currentPageProp) + 2) && i < parseInt(totalPageProp)"
+             class="pagination-child">
+          <a :href="$nuxt.$route.path + '?p=' + i" class="block">{{ i }}</a>
+        </div>
+        <div class="dot">&hellip;</div>
+        <div class="pagination-child">
+          <a :href="$nuxt.$route.path + '?p=' + totalPageProp" class="block">{{ totalPageProp }}</a>
         </div>
       </div>
 
-
-      <div class="column is-narrow px-0 pagination-main">
-        <ul class="pagination-middle" v-if="parseInt(currentPageProp) < 5">
-          <li v-for="i in 5" v-if=" i < (parseInt(currentPageProp) + 2) && i < parseInt(totalPageProp)"
-              class="pagination-middle-li">
-            <a :href="$nuxt.$route.path + '?p=' + i">
-              {{ i }}
-            </a>
-          </li>
-          <li class="pagination-middle-li dot"><span>&hellip;</span></li>
-          <li class="pagination-middle-li"><a
-              :href="$nuxt.$route.path + '?p=' + totalPageProp">{{ totalPageProp }}</a></li>
-        </ul>
-
-        <ul class="pagination-middle"
-            v-else-if="parseInt(currentPageProp) >= 5 && parseInt(currentPageProp) < (parseInt(totalPageProp) - 3) ">
-          <li class="pagination-middle-li"><a :href="$nuxt.$route.path + '?p=' + 1">1</a></li>
-          <li class="pagination-middle-li dot"><span>&hellip;</span></li>
-          <li class="pagination-middle-li"><a
-              :href="$nuxt.$route.path + '?p=' + (parseInt(currentPageProp) -1)">{{ parseInt(currentPageProp) - 1 }}</a>
-          </li>
-          <li class="pagination-middle-li"><a
-              :href="$nuxt.$route.path + '?p=' + currentPageProp">{{ currentPageProp }}</a></li>
-          <li class="pagination-middle-li"><a
-              :href="$nuxt.$route.path + '?p=' + (parseInt(currentPageProp) + 1)">{{
-              parseInt(currentPageProp) + 1
-            }}</a>
-          </li>
-          <li class="pagination-middle-li dot"><span>&hellip;</span></li>
-          <li class="pagination-middle-li"><a
-              :href="$nuxt.$route.path + '?p=' + totalPageProp">{{ totalPageProp }}</a></li>
-        </ul>
-
-
-        <ul class="pagination-middle" v-else>
-          <li class="pagination-middle-li"><a :href="$nuxt.$route.path + '?p=' + 1">1</a></li>
-          <li class="pagination-middle-li dot"><span>&hellip;</span></li>
-          <li class="pagination-middle-li"><a
-              :href="$nuxt.$route.path + '?p=' + (parseInt(currentPageProp) - 1)">{{
-              parseInt(currentPageProp) - 1
-            }}</a>
-          </li>
-          <li class="pagination-middle-li"><a
-              :href="$nuxt.$route.path + '?p=' + currentPageProp">{{ parseInt(currentPageProp) }}</a></li>
-          <li class="pagination-middle-li" v-for="i in 5"
-              v-if="(parseInt(currentPageProp)+i) <= totalPageProp">
-            <a :href="$nuxt.$route.path + '?p=' + (parseInt(currentPageProp) + i)">{{
-                parseInt(currentPageProp) + i
-              }}</a></li>
-        </ul>
-
+      <div v-else-if="currentPageProp >= 5 && currentPageProp < (totalPageProp - 3)" class="pagination-parent mx-5">
+        <div class="pagination-child"><a :href="$nuxt.$route.path + '?p=' + 1" class="block">1</a></div>
+        <div class="dot">&hellip;</div>
+        <div class="pagination-child">
+          <a :href="$nuxt.$route.path + '?p=' + (currentPageProp - 1)" class="block">{{ currentPageProp - 1 }}</a>
+        </div>
+        <div class="pagination-child">
+          <a :href="$nuxt.$route.path + '?p=' + currentPageProp" class="block">{{ currentPageProp }}</a>
+        </div>
+        <div class="pagination-child">
+          <a :href="$nuxt.$route.path + '?p=' + (parseInt(currentPageProp) + 1)"
+             class="block">{{ parseInt(currentPageProp) + 1 }}</a>
+        </div>
+        <div class="dot">&hellip;</div>
+        <div class="pagination-child"><a :href="$nuxt.$route.path + '?p=' + totalPageProp "
+                                         class="block">{{ totalPageProp }}</a></div>
       </div>
 
-      <div v-if="parseInt(currentPageProp) < parseInt(totalPageProp)" class="column is-narrow">
-        <div class="next-page">
-          <a :href="$nuxt.$route.path + '?p=' + (parseInt(currentPageProp)+1)" style="display: block">
-            <img class="next-page-svg" src="/templates/next-page.svg" alt="svg">
-          </a>
+      <div v-else class="pagination-parent mx-5">
+        <div class="pagination-child"><a :href="$nuxt.$route.path + '?p=' + 1" class="block">1</a></div>
+        <div class="dot">&hellip;</div>
+        <div class="pagination-child">
+          <a :href="$nuxt.$route.path + '?p=' + (currentPageProp - 1)" class="block">{{ currentPageProp - 1 }}</a>
+        </div>
+        <div class="pagination-child">
+          <a :href="$nuxt.$route.path + '?p=' + currentPageProp" class="block">{{ currentPageProp }}</a>
+        </div>
+        <div class="pagination-child" v-for="i in 5" v-if="(parseInt(currentPageProp) + i) <= parseInt(totalPageProp)">
+          <a :href="$nuxt.$route.path + '?p=' + (parseInt(currentPageProp) + i)"
+             class="block">{{ parseInt(currentPageProp) + i }}</a>
         </div>
       </div>
+
+      <div v-if="currentPageProp < totalPageProp" class="pagination-next">
+        <a :href="$nuxt.$route.path + '?p=' + (parseInt(currentPageProp) + 1 )" class="block">
+          <img src="/templates/next-page.svg" alt="next-page-svg">
+        </a>
+      </div>
+
 
     </div>
 
   </div>
-
-
 </template>
+
 
 <script>
 export default {
-  props: ["currentPageProp", "totalPageProp", "tagsProp"],
-  data() {
-    return {}
-  },
-  mounted() {
+  props: [
+    "currentPageProp",
+    "totalPageProp",
+    "tagsProp"
+  ],
 
-    [...document.getElementsByClassName("pagination-middle-li")].forEach(element => {
-      if (element.innerText === this.currentPageProp) {
-        element.classList.add("is-current")
-        if (element.innerText === "1") {
-          element.classList.add("first-page-style")
-        }
-        if (element.innerText === this.totalPageProp.toString()) {
-          element.classList.add("last-page-style")
-        }
+  mounted() {
+    const pages = document.querySelectorAll(".pagination-child")
+    pages.forEach(e => {
+      if (e.textContent === this.currentPageProp) {
+        e.classList.add("current-page")
+      } else {
+        e.classList.remove("current-page")
       }
     })
-
-
-    if (this.totalPageProp.toString() !== "1"){
-
-      if (this.currentPageProp === "1"){
-        document.querySelector(".pagination-main").style.marginLeft = "60px"
-        console.log("if")
-      }else if(this.currentPageProp === this.totalPageProp.toString()){
-        document.querySelector(".pagination-main").style.marginRight = "60px"
-        console.log("else")
-      }
-    }
-
-
-
-
   }
-
-
 }
 </script>
-
-<style>
-
-
-.is-current {
-  background-color: #1460d9 !important;
-  border-top: 1px solid #1460d9 !important;
-  border-bottom: 1px solid #1460d9 !important;
-  pointer-events: none;
-}
-
-
-.is-current a {
-  font-weight: bold;
-  color: white !important;
-}
-
-
-.pagination-middle-li:first-child {
-  border-top-left-radius: 999px;
-  border-bottom-left-radius: 999px;
-  border-left: 1px solid #dbdbdb;
-}
-
-.pagination-middle-li:last-child {
-  border-top-right-radius: 999px;
-  border-bottom-right-radius: 999px;
-  border-right: 1px solid #dbdbdb;
-}
-
-.pagination-middle-li {
-  background-color: #EFEFEF;
-  border-top: 1px solid #dbdbdb;
-  border-bottom: 1px solid #dbdbdb;
-  float: left;
-  width: 36px;
-  height: 36px;
-  text-align: center;
-  line-height: 34px;
-  transition: .1s;
-}
-
-.pagination-middle-li:hover:not(.dot) {
-  background-color: #dbdbdb;
-  cursor: pointer;
-}
-
-
-.pagination-middle-li:first-child:hover {
-  border-top-left-radius: 999px;
-  border-bottom-left-radius: 999px;
-  border-left: 1px solid #dbdbdb;
-}
-
-.pagination-middle-li:last-child:hover {
-  border-top-right-radius: 999px;
-  border-bottom-right-radius: 999px;
-  border-right: 1px solid #dbdbdb;
-}
-
-.pagination-middle-li a {
-  color: #4A4A4A;
-  font-size: 15px;
-  font-weight: 500;
-  display: block;
-}
-
-.pagination-middle-li:hover a {
-  cursor: unset;
-}
-
-.prev-page, .next-page {
-  width: 36px;
-  height: 36px;
-  background-color: #EFEFEF;
-  border-radius: 999px;
-  border: 1px solid #dbdbdb;
-}
-
-
-.prev-page-svg, .next-page-svg {
-  width: 26px;
-  margin-left: 5px;
-  margin-top: 5px;
-}
-
-
-.prev-page:hover, .next-page:hover {
-  background-color: #1460d9;
-  border: 1px solid #1460d9;
-}
-
-.prev-page:hover a img, .next-page:hover a img {
-  filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(16deg) brightness(109%) contrast(101%);
-}
-
-.dot {
-  cursor: unset;
-}
-
-#pagination1, #pagination2 {
-  padding-top: 60px;
-  padding-bottom: 60px;
-  margin-bottom: 0;
-  margin-top: 0;
-}
-
-.first-page-style {
-  border-left: #1460d9 !important;
-}
-
-.last-page-style {
-  border-right: #1460d9 !important;
-}
-
-.test-class {
-  display: none;
-}
-
-</style>
