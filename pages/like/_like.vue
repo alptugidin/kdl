@@ -7,7 +7,8 @@
           <div class="grid grid-cols-3">
             <div>
               <div class="overflow-hidden rounded-xl w-fit">
-                <img :src="'/img/' + likeSSR + '.webp'" width="120" alt="query-image"
+                <img @click="showModal" id="query-card"
+                     :src="'/img/' + likeSSR + '.webp'" width="120" alt="query-image"
                      class="lg:rounded-xl rounded-[5px] border border-[#dbdbdb] hover:scale-[1.1] cursor-pointer card-image">
               </div>
             </div>
@@ -24,6 +25,7 @@
       </div>
       <div class="flex flex-wrap justify-center lg:gap-14 gap-8 mt-10">
         <card
+            @click.native="showModal"
             v-for="(series,index) in takenData.slice(firstPos,lastPos)"
             :render-rate="true"
             :id-prop="series[7]"
@@ -33,13 +35,16 @@
             :rate-prop="Math.round(series[0]*100)"
             :rank-prop="index+1"
             :key="index"
+            :number-prop="index + numberToCard"
         />
 
       </div>
       <div class="flex flex-row justify-center py-28">
         <div class="bg-[#EFEFEF] border border-[#DBDBDB] rounded-full w-[108px]">
           <div class="flex flex-row text-center leading-9">
-            <div @click="pagination" v-for="i in 3" :class="parseInt(i) === 1 ? bindPagClass : defPagClass"><span>{{ i }}</span>
+            <div @click="pagination" v-for="i in 3" :class="parseInt(i) === 1 ? bindPagClass : defPagClass"><span>{{
+                i
+              }}</span>
             </div>
           </div>
         </div>
@@ -48,6 +53,20 @@
 
     </div>
 
+    <modal
+        :series-name-prop="nameToModal"
+        :series-year-prop="yearToModal"
+        :series-hang-prop="hangToModal"
+        :summary-prop="sumToModal"
+        :summary-link-prop="sumLinkToModal"
+        :video-prop="videoToModal"
+        :id-prop="idToModal"
+        :similar-name-prop="similarNameToModal"
+        :rate-prop="Math.round(rateToModal*100)"
+        :render-common-prop="renderCommonTags"
+        :common-tags-prop="commonTagsToModal"
+        :render-svg-prop="renderSvg"
+    />
 
   </div>
 </template>
@@ -58,12 +77,39 @@ import axios from "axios";
 
 export default {
   layout: "custom",
+  head() {
+    return {
+      title: `Korean dramas like ${this.nameSSR} - KDramaLike`,
+      meta: [
+        {
+          name: "description",
+          hid: "description",
+          content: `Korean dramas like ${this.nameSSR}; ` + this.nameMeta.join(", ")
+        }
+      ]
+    }
+  },
+
   data() {
     return {
       firstPos: 0,
       lastPos: 30,
       defPagClass: "basis-1/3 h-[36px] custom-pagination",
-      bindPagClass: "basis-1/3 h-[36px] custom-pagination current-page"
+      bindPagClass: "basis-1/3 h-[36px] custom-pagination current-page",
+      nameToModal: "",
+      yearToModal: "",
+      hangToModal: "",
+      sumToModal: "",
+      sumLinkToModal: "",
+      videoToModal: "",
+      idToModal: "",
+      similarNameToModal: "",
+      commonTagsToModal: [],
+      rateToModal: 0,
+      currentPage: 1,
+      numberToCard: 0,
+      renderSvg: true,
+      renderCommonTags: true
     }
   },
   async asyncData({route}) {
@@ -85,7 +131,7 @@ export default {
       const nameSSR = name
       const hangSSR = takenData[takenData.length - 1][0].title
       const yearSSR = takenData[takenData.length - 1][0].year
-      const nameMeta = [takenData[0][1], takenData[1][1], takenData[2][1], takenData[3][1], takenData[4][1]]
+      const nameMeta = [takenData[1][1], takenData[2][1], takenData[3][1], takenData[4][1], takenData[5][1]]
       const queryDataArray = [...takenData[takenData.length - 1]][0]
       takenData.shift()
       takenData.pop()
@@ -122,17 +168,54 @@ export default {
         }
       })
       if (num === "1") {
+        this.currentPage = 1
         this.firstPos = 0
         this.lastPos = 30
+        this.numberToCard = 0
       } else if (num === "2") {
+        this.currentPage = 2
         this.firstPos = 30
         this.lastPos = 60
+        this.numberToCard = 30
       } else {
+        this.currentPage = 3
         this.firstPos = 60
         this.lastPos = 90
+        this.numberToCard = 60
       }
 
       window.scroll({top: 0, behavior: "smooth"})
+
+    },
+
+    showModal(e) {
+
+      if (e.target.id === "query-card") {
+        this.nameToModal = this.queryDataArray.name
+        this.yearToModal = this.queryDataArray.year
+        this.hangToModal = this.queryDataArray.title
+        this.sumToModal = this.queryDataArray.summary
+        this.sumLinkToModal = this.queryDataArray.summary_link
+        this.videoToModal = this.queryDataArray.video
+        this.idToModal = this.queryDataArray.idx
+        this.renderSvg = false
+        this.renderCommonTags = false
+        document.querySelector("#custom-modal").style.display = "block"
+      } else {
+        this.rateToModal = this.takenData[e.currentTarget.id][0]
+        this.nameToModal = this.takenData[e.currentTarget.id][1]
+        this.yearToModal = this.takenData[e.currentTarget.id][2]
+        this.hangToModal = this.takenData[e.currentTarget.id][6]
+        this.sumToModal = this.takenData[e.currentTarget.id][3]
+        this.sumLinkToModal = this.takenData[e.currentTarget.id][4]
+        this.videoToModal = this.takenData[e.currentTarget.id][5]
+        this.idToModal = this.takenData[e.currentTarget.id][7]
+        this.commonTagsToModal = this.takenData[e.currentTarget.id][8]
+        this.renderSvg = true
+        this.renderCommonTags = true
+        document.querySelector("#custom-modal").style.display = "block"
+      }
+
 
     }
   }
