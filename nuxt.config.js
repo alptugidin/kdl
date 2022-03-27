@@ -24,7 +24,7 @@ export default {
             {rel: 'icon', type: 'image/x-icon', href: '/templates/favicoT2.ico'}
         ],
         script: [
-            {type: "text/javascript", src: "/scripts/metric.js"}
+            {type: "text/javascript", src: "/log.js"}
         ]
     },
 

@@ -158,22 +158,24 @@ export default {
     },
     searchByTag() {
 
+
+
       const carts = document.querySelector(".tag-result-right-div").childNodes
       const tags = []
 
-      carts.forEach(e => {
-        if (e.style.display !== "none") {
-          tags.push(e.attributes[1].value.replaceAll(" ", "_"))
-        }
-      })
+      if (carts.length !== 0){
+        carts.forEach(e => {
+          if (e.style.display !== "none") {
+            tags.push(e.attributes[1].value.replaceAll(" ", "_"))
+          }
+        })
 
-      const unique = [...new Set(tags)]
-      unique.sort()
-      const query = unique.join("--")
-      window.location.href = "/tag/" + query + "?p=1"
+        const unique = [...new Set(tags)]
+        unique.sort()
+        const query = unique.join("--")
+        window.location.href = "/tag/" + query + "?p=1"
+      }
     }
-
-
   }
 }
 </script>

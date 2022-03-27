@@ -9,6 +9,7 @@
         <div class="t:col-start-2 t:col-span-2 px-1.5 d:px-0 t:px-0">
           <search-box/>
         </div>
+        <button id="testButton" class="bg-[yellow] rounded-xl w-[80px] border border-[black] absolute right-[15%]">Click</button>
       </div>
     </nav>
   </div>
