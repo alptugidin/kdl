@@ -10,15 +10,15 @@
           <div class="d:text-left t:text-left text-center">
             <a href="/#"><span class="text-[#ffc107] font-bold">/</span> <span
                 class="text-[white] hover:underline decoration-[#ffc107] decoration-2">About</span></a>
-            <a href="/#"><span class="text-[#ffc107] font-bold">/</span> <span
+            <a href="/privacy"><span class="text-[#ffc107] font-bold">/</span> <span
                 class="text-[white] hover:underline decoration-[#ffc107] decoration-2">Privacy</span></a>
-            <a href="/#"><span class="text-[#ffc107] font-bold">/</span> <span
+            <a href="/terms"><span class="text-[#ffc107] font-bold">/</span> <span
                 class="text-[white] hover:underline decoration-[#ffc107] decoration-2">Terms</span></a>
           </div>
         </div>
         <div class="d:col-start-4 d:col-end-4 t:col-start-3 t:col-end-3">
           <div class="grid grid-cols-1 items-center">
-            <div class="text-center d:px-0 t:px-0 px-20">
+            <div class="text-center lg:px-5 md:px-1 px-20">
               <span class="text-[17px] text-[#dbdbdb]">Most Popular Korean Dramas</span><br>
               <div v-for="i in years(2010,2021).reverse()" class="inline-block">
                 <a :href="'/populars/Most-popular-Korean-Dramas-'+i">
@@ -29,7 +29,7 @@
               </div>
               <br>
 
-              <a href="Latest-Korean-Dramas"><span
+              <a href="/Latest-Korean-Dramas"><span
                   class="text-[white] hover:underline decoration-[#ffc107] decoration-2">Latest Korean Dramas</span></a>
             </div>
           </div>

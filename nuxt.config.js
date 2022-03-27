@@ -80,7 +80,8 @@ export default {
         "~/api/populars",
         "~/api/series",
         "~/api/calc",
-        "~/api/tagCalc"
+        "~/api/tagCalc",
+
     ],
 
 

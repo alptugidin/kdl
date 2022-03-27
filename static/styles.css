@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    -webkit-tap-highlight-color: transparent;
+}
 
 html {
     @apply bg-[#f2f6fc]
@@ -12,55 +15,36 @@ html {
 }
 
 .tag {
-    display: inline-block;
-    border-radius: 5px;
-    border: 1px solid #dbdbdb;
-    position: relative;
-    padding: 1px 16px 1px 1px;
+    @apply inline-block rounded-[5px] border border-[#dbdbdb] relative pt-[1px] pr-[16px] pb-[1px] pl-[1px]
 }
 
 
 .tag2 {
-    @apply
-    rounded-[5px]
-    border border-[#dbdbdb]
-    px-1
+    @apply rounded-[5px] border border-[#dbdbdb] px-1
 }
 
 .t1 {
-    font-size: .75rem;
-    background-color: #ebfffc;
-    color: #00947e;
+    @apply text-xs bg-[#ebfffc] text-[#00947e]
 }
 
 .t2 {
-    font-size: .75rem;
-    background-color: #eff1fa;
-    color: #3850b7;
+    @apply text-xs bg-[#eff1fa] text-[#3850b7]
 }
 
 .t3 {
-    font-size: .75rem;
-    background-color: #eff5fb;
-    color: #296fa8;
+    @apply text-xs bg-[#EFF5FB] text-[#296fa8]
 }
 
 .t4 {
-    font-size: .75rem;
-    background-color: #effaf5;
-    color: #257953;
+    @apply text-xs bg-[#effaf5] text-[#257953]
 }
 
 .t5 {
-    font-size: .75rem;
-    background-color: #fffaeb;
-    color: #946c00;
+    @apply text-xs bg-[#fffaeb] text-[#946c00]
 }
 
 .t6 {
-    font-size: .75rem;
-    background-color: #feecf0;
-    color: #cc0f35;
+    @apply text-xs bg-[#feecf0] text-[#cc0f35]
 }
 
 
@@ -190,4 +174,72 @@ html {
     h-full
 }
 
+
+/*searchbox*/
+
+
+input:focus, #series-dropdown, #tags-dropdown {
+    box-shadow: 0 1px 6px rgb(32 33 36 / 30%);
+}
+
+input:focus ~ #search-in-input:hover {
+    border-bottom: 1px solid #dbdbdb;
+}
+
+.custom-shadow {
+    box-shadow: 0 1px 6px rgb(32 33 36 / 30%);
+}
+
+.custom-dropdown-item {
+    @apply
+    block
+    text-[#4a4a4a]
+}
+
+#search-in-input{
+    @apply
+    hover:z-50
+}
+
+
+.li-class {
+    /*line-height: 36px;*/
+    /*padding-right: 3px;*/
+    /*font-size: 14px;*/
+    @apply
+    md:leading-9
+    leading-7
+    pr-[3px]
+    text-sm
+    hover:bg-[#efefef]
+}
+
+/*.li-class:hover {*/
+/*    background-color: #efefef;*/
+/*}*/
+
+#series-dropdown-ul li:last-child {
+    /*border-bottom-left-radius: 12px;*/
+    /*border-bottom-right-radius: 12px;*/
+    @apply
+    rounded-bl-xl
+    rounded-br-xl
+}
+
+#tag-result-right-div {
+    /*padding: 5px;*/
+    @apply
+    p-[5px]
+}
+
+
+.tag-cancel {
+    /*position: absolute;*/
+    /*top: 2px;*/
+    /*right: 1px;*/
+    @apply
+    absolute
+    top-[2px]
+    right-[1px]
+}
 

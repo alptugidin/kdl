@@ -14,8 +14,10 @@
             </div>
             <div class="col-span-2">
               <div class="ubuntu-font md:pl-0 pl-1">
-                <p class="text-2xl">Korean Dramas like</p>
-                <p class="text-2xl font-bold">{{ nameSSR }}</p>
+                <h1 class="inline-block">
+                  <span class="text-2xl">Korean Dramas like</span><br>
+                  <span class="text-2xl font-bold">{{ nameSSR }}</span><br>
+                </h1>
                 <p class="text-sm">{{ hangSSR }}</p>
                 <p class="text-sm">{{ yearSSR }}</p>
               </div>
@@ -42,9 +44,8 @@
       <div class="flex flex-row justify-center py-28">
         <div class="bg-[#EFEFEF] border border-[#DBDBDB] rounded-full w-[108px]">
           <div class="flex flex-row text-center leading-9">
-            <div @click="pagination" v-for="i in 3" :class="parseInt(i) === 1 ? bindPagClass : defPagClass"><span>{{
-                i
-              }}</span>
+            <div @click="pagination" v-for="i in 3" :class="parseInt(i) === 1 ? bindPagClass : defPagClass">
+              <span>{{ i }}</span>
             </div>
           </div>
         </div>
@@ -210,6 +211,7 @@ export default {
         this.sumLinkToModal = this.takenData[e.currentTarget.id][4]
         this.videoToModal = this.takenData[e.currentTarget.id][5]
         this.idToModal = this.takenData[e.currentTarget.id][7]
+        this.similarNameToModal = this.nameSSR
         this.commonTagsToModal = this.takenData[e.currentTarget.id][8]
         this.renderSvg = true
         this.renderCommonTags = true

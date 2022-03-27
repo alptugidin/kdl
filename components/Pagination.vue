@@ -100,14 +100,8 @@ export default {
   ],
 
   mounted() {
-    const pages = document.querySelectorAll(".pagination-child")
-    pages.forEach(e => {
-      if (e.textContent === this.currentPageProp) {
-        e.classList.add("current-page")
-      } else {
-        e.classList.remove("current-page")
-      }
-    })
+    const found = [...document.querySelectorAll(".pagination-child")].find(e => e.textContent === this.currentPageProp)
+    found.classList.add("current-page")
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container mx-auto">
+    <div class="container mx-auto min-h-[calc(100vh_-_74px)]">
       <div class="text-center py-10">
         <h1 class="md:text-2xl text-xl text-[#4A4A4A] ubuntu-font">Korean Dramas about <span
             class="font-semibold">{{ tagsSSR }}</span></h1>
@@ -18,6 +18,7 @@
             :key="index"
             :number-prop="index"
         />
+
       </div>
       <pagination
           :current-page-prop="this.page"
@@ -26,13 +27,13 @@
       />
     </div>
     <modal
-    :series-name-prop="nameToModal"
-    :series-year-prop="yearToModal"
-    :series-hang-prop="hangToModal"
-    :summary-prop="sumToModal"
-    :summary-link-prop="sumLinkToModal"
-    :id-prop="idToModal"
-    :video-prop="videoToModal"
+        :series-name-prop="nameToModal"
+        :series-year-prop="yearToModal"
+        :series-hang-prop="hangToModal"
+        :summary-prop="sumToModal"
+        :summary-link-prop="sumLinkToModal"
+        :id-prop="idToModal"
+        :video-prop="videoToModal"
     />
   </div>
 </template>
@@ -42,7 +43,20 @@ import axios from "axios";
 
 export default {
   layout: "custom",
+  head() {
+    return {
+      title: `Koren dramas about ${this.tagsSSR} - KDramaLike`,
+      meta: [
+        {
+          name: "description",
+          hid: "description",
+          content: `Koren dramas about ${this.tagsSSR}`
+        }
+      ]
+    }
+  },
   async asyncData(ctx) {
+    let throwError = false
     let tags = ctx.params.tag
     let page = ctx.query.p
     let tagsSSR = ctx.params.tag.split("--").map(e => e.replaceAll("_", " ")).join(", ")
@@ -51,13 +65,18 @@ export default {
     let takenData = res.data
     let pageCount = Math.ceil((takenData.at(-1) / 60))
     takenData.pop()
+    takenData.length === 0 ? throwError = true : null
     return {
       tagsSSR,
       pageCount,
       takenData,
       page,
-      tags
+      tags,
+      throwError
     }
+  },
+  beforeMount() {
+    this.throwError ? window.location.href = "/404" : null
   },
   data() {
     return {

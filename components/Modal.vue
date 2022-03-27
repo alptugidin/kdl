@@ -2,7 +2,7 @@
   <div id="custom-modal" class="hidden" @click="closeModalOutside">
     <div id="modal-background" class="fixed left-0 top-0 bottom-0 bg-[black] opacity-70  w-full h-full z-20">
     </div>
-    <div id="alp" class="fixed md:top-20 top-0 bottom-0 right-0 left-0 z-20">
+    <div id="alp" class="fixed md:top-20 top-4 bottom-0 right-0 left-0 z-20">
       <div class="custom-modal">
         <div class="flex p-2 bg-[#EFEFEF] rounded-t-xl border-b border-[#dbdbdb]">
           <div class="md:basis-1/6 basis-0 md:pr-3 pr-0">
@@ -19,12 +19,6 @@
                 <span v-html="coloredTags(commonTagsProp)"></span>
               </p>
 
-              <!--              <div v-if="renderCommonProp">-->
-              <!--                <div id="common-tags">-->
-              <!--                  <span class="inline-block">Common tags:</span>-->
-              <!--                  <div v-html="coloredTags(this.commonTagsProp  )"></div>-->
-              <!--                </div>-->
-              <!--              </div>-->
             </div>
           </div>
           <div v-if="renderSvgProp" class="md:basis-2/6 basis-3/6 text-center">
@@ -60,10 +54,15 @@
         </div>
 
         <div class="flex md:flex-row flex-col p-2">
-          <div class="md:basis-1/2 basis-full text-sm">
-            <div class="">
+          <div class="md:basis-1/2 basis-full text-sm overflow-hidden">
+            <div v-if="summaryProp">
+            <span v-if="summaryProp.length > 550">
+            {{ summaryProp.substring(0, 550) }}... <a :href="summaryLinkProp" class="font-semibold hover:underline">Read More</a>
+            </span>
+              <span v-else>
               {{ summaryProp }}
               <a :href="summaryLinkProp" class="font-semibold hover:underline">Read More</a>
+            </span>
             </div>
 
           </div>
@@ -71,7 +70,7 @@
             <iframe :src="videoProp" class="w-full aspect-video"/>
           </div>
           <div class="mt-2 md:hidden block">
-            <button class="bg-[#C7042C] p-1 rounded-[5px]  text-[white] px-4 ml-[calc(calc(100%_-_70px)/2)]">
+            <button @click="closeModalOutside" class="bg-[#C7042C] p-1 rounded-[5px]  text-[white] px-4 ml-[calc(calc(100%_-_70px)/2)]">
               Close
             </button>
           </div>
@@ -89,7 +88,7 @@ export default {
   name: "Modal2",
   data() {
     return {
-      colors: ["t1", "t2", "t3", "t4", "t5", "t6"]
+      colors: ["t1", "t2", "t3", "t4", "t5", "t6"],
     }
   },
   props: [
@@ -109,7 +108,7 @@ export default {
 
   methods: {
     closeModalOutside(e) {
-      if (e.target.id === "modal-background" || e.target.id === "alp") {
+      if (e.target.id === "modal-background" || e.target.id === "alp" || e.currentTarget.textContent.trim() === "Close") {
         document.querySelector("#custom-modal").style.display = "none"
         this.videoProp = "";
       }
@@ -119,7 +118,7 @@ export default {
       let coloredTagsArray = []
       param.forEach(tag => {
         let randomColor = this.colors[Math.floor(Math.random() * this.colors.length)]
-        const coloredTag = `<span class="tag2 ${randomColor}">${tag}</span>`
+        const coloredTag = `<span class="tag2 ${randomColor} whitespace-nowrap">${tag}</span>`
         coloredTagsArray.push(coloredTag)
       })
       return coloredTagsArray.join(" ")
@@ -128,7 +127,6 @@ export default {
   }
 }
 </script>
-
-<style scoped>
+<style>
 
 </style>

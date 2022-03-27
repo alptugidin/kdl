@@ -15,12 +15,12 @@
       <div id="series-dropdown" class="bg-white absolute w-full rounded-b-xl block z-20">
         <ul id="series-dropdown-ul"></ul>
       </div>
-      <div id="tags-dropdown" class="bg-white absolute w-full h-[360px] rounded-b-xl hidden z-20">
+      <div id="tags-dropdown" class="bg-white absolute w-full md:h-[360px] h-[280px] rounded-b-xl hidden z-20">
         <div class="grid grid-cols-2">
-          <div id="tag-result-left" class="w-full h-[360px] rounded-bl-xl border-r border-[#DBDBDB] overflow-x-auto">
+          <div id="tag-result-left" class="w-full md:h-[360px] h-[280px] rounded-bl-xl border-r border-[#DBDBDB] overflow-x-auto">
             <ul @click="addTag" id="tag-result-left-ul"></ul>
           </div>
-          <div id="tag-result-right" class="w-full h-[360px] rounded-br-xl overflow-x-auto">
+          <div id="tag-result-right" class="w-full md:h-[360px] h-[280px] rounded-br-xl overflow-x-auto">
             <div @click="removeTag" class="tag-result-right-div p-1"></div>
           </div>
           <a href="#" @click="searchByTag"
@@ -162,7 +162,9 @@ export default {
       const tags = []
 
       carts.forEach(e => {
-        tags.push(e.attributes[1].value.replaceAll(" ", "_"))
+        if (e.style.display !== "none") {
+          tags.push(e.attributes[1].value.replaceAll(" ", "_"))
+        }
       })
 
       const unique = [...new Set(tags)]
@@ -177,54 +179,6 @@ export default {
 </script>
 
 <style>
-
-input:focus, #series-dropdown, #tags-dropdown {
-  box-shadow: 0 1px 6px rgb(32 33 36 / 30%);
-}
-
-input:focus ~ #search-in-input:hover {
-  border-bottom: 1px solid #dbdbdb;
-}
-
-.custom-shadow {
-  box-shadow: 0 1px 6px rgb(32 33 36 / 30%);
-}
-
-.custom-dropdown-item {
-  display: block;
-  color: #4A4A4A;
-}
-
-
-.li-class {
-  line-height: 36px;
-  padding-right: 3px;
-  font-size: 14px;
-}
-
-.li-class:hover {
-  background-color: #efefef;
-}
-
-#series-dropdown-ul li:last-child {
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-}
-
-#tag-result-right-div {
-  padding: 5px;
-}
-
-
-
-
-
-
-.tag-cancel {
-  position: absolute;
-  top: 2px;
-  right: 1px;
-}
 
 
 </style>

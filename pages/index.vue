@@ -46,7 +46,7 @@
 
       <div class="pt-10">
         <div class="text-center">
-          <span class="ubuntu-font md:text-3xl text-xl font-semibold text-[#4A4A4A]">Most Popular Korean Dramas</span>
+          <h1 class="ubuntu-font md:text-3xl text-xl font-semibold text-[#4A4A4A] inline-block">Most Popular Korean Dramas</h1>
           <select @change="apiCall($event.target.value)"
                   class="year-selector outline-0 text-xl bg-[#F2F6FC] font-semibold text-[#4A4A4A] cursor-pointer hover:underline">
             <option v-for="year in years(2010,2021).reverse()" :value=year>{{ year }}</option>
