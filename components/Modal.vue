@@ -1,220 +1,132 @@
 <template>
-  <div id="modal1" class="modal">
-    <div class="modal-background"></div>
-    <div class="modal-card">
-      <section id="modalHead" class="py-3 px-3">
-        <div class="columns is-mobile ">
-          <div id="imageCol" class="column is-narrow">
-            <div class="card-image">
-              <figure class="image">
-                <!--                <img id="modalImg" v-bind:src="modalImagePROP"/>-->
-                <picture>
-                  <source v-bind:srcset="`/img/` + modalImagePROP + `.webp`" type="image/webp">
-                  <source v-bind:srcset="`/img/` + modalImagePROP + `.jpg`" type="image/jpg">
-                  <img id="modalImg" v-bind:src="`/img/` + modalImagePROP + `.jpg`" alt=""/>
-                </picture>
-              </figure>
+  <div id="custom-modal" class="hidden" @click="closeModalOutside">
+    <div id="modal-background" class="fixed left-0 top-0 bottom-0 bg-[black] opacity-70  w-full h-full z-20">
+    </div>
+    <div id="alp" class="fixed md:top-20 top-4 bottom-0 right-0 left-0 z-20">
+      <div class="custom-modal">
+        <div class="flex p-2 bg-[#EFEFEF] rounded-t-xl border-b border-[#dbdbdb]">
+          <div class="md:basis-1/6 basis-0 md:pr-3 pr-0">
+            <div>
+              <img :src="'/img/' + idProp +'.webp'" alt="" class="rounded-xl">
             </div>
           </div>
-          <div id="infoCol" class="column" :style="{textAlign:this.textAlign}">
-            <p
-                id="modalInfo"
-                class="has-text-weight-semibold is-size-4 is-size-5-mobile"
-            >{{ modalInfoPROP }}</p>
-            <p id="modalHang">{{ modalHangPROP }}</p>
-            <p id="modalYear" class="is-size-5">{{ modalYearPROP }}</p>
-            <p id="commonTagP" v-if="renderCommonTags">Common tags: <span
-                v-html="ColoredTags(modalCommonTagsProp)"></span></p>
-          </div>
-          <div id="rateCol" class="column" :style="{display:rateColDisplayState}">
-            <div class="columns mb-0">
-              <div class="column is-7 is-offset-4" >
+          <div class="basis-3/6 md:px-2 px-1">
+            <div class="text-[#4a4a4a]">
+              <p class="md:text-2xl text-xl font-semibold ubuntu-font ">{{ seriesNameProp }}</p>
+              <p class="text-sm">{{ seriesHangProp }}</p>
+              <p class="text-lg font-semibold">{{ seriesYearProp }}</p>
+              <p v-if="renderCommonProp" id="common-tags" class="text-sm">Common tags:
+                <span v-html="coloredTags(commonTagsProp)"></span>
+              </p>
 
-                <svg v-if="renderRateProp" id="svgProgressModal" height="90" width="90" viewBox="0 0 100 100">
-                  <circle
-                      cx="50"
-                      cy="50"
-                      :r="rProp"
-                      stroke="#dbdbdb"
-                      stroke-width="6"
-                      fill-opacity="0.7"
-                      :stroke-dasharray="2*Math.PI*rProp"
-                      :stroke-dashoffset="0"
-                      transform="rotate(-90 50 50)"/>
-                  <circle
-                      cx="50"
-                      cy="50"
-                      :r="rProp"
-                      stroke="#C71B2B"
-                      fill="transparent"
-                      stroke-width="6"
-                      :stroke-dasharray="2*Math.PI*rProp"
-                      :stroke-dashoffset="2*Math.PI*rProp - (2*Math.PI*rProp*(valuePROP/100))"
-                      transform="rotate(-90 50 50)"/>
-                  <text text-anchor="middle" x="50%" y="60%" fill="#ffc107" font-size="30px">{{ valuePROP }}%</text>
-                </svg>
-
-
-              </div>
-            </div>
-            <!--            <div class="columns has-text-centered" style="margin-top: -20px">-->
-            <div class="columns has-text-centered">
-              <div id="rateCol2" class="column is-9 is-offset-3 py-0 px-0">
-                <p>Similar to</p>
-                <p
-                    id="similarName"
-                    class="has-text-weight-semibold is-size-6-mobile"
-                >{{ modalSimilarNamePROP }}</p>
-              </div>
             </div>
           </div>
+          <div v-if="renderSvgProp" class="md:basis-2/6 basis-3/6 text-center">
+            <svg id="svgProgress" height="0" width="0" viewBox="0 0 100 100"
+                 class="md:w-[80px] md:h-[80px] w-[50px] h-[50px] md:ml-[calc(calc(100%_-_80px)/2)] ml-[calc(calc(100%_-_50px)/2)]">
+              <circle
+                  cx="50"
+                  cy="50"
+                  r="45"
+                  stroke="#dbdbdb"
+                  stroke-width="6"
+                  fill-opacity="0.7"
+                  :stroke-dasharray="2*Math.PI*45"
+                  :stroke-dashoffset="0"
+                  transform="rotate(-90 50 50)"/>
+              <circle
+                  cx="50"
+                  cy="50"
+                  r="45"
+                  stroke="#C71B2B"
+                  fill="transparent"
+                  stroke-width="6"
+                  :stroke-dasharray="2*Math.PI*40"
+                  :stroke-dashoffset="2*Math.PI*40 - (2*Math.PI*45*(rateProp/100))"
+                  transform="rotate(-90 50 50)"/>
+              <text text-anchor="middle" x="50%" y="60%" fill="#ffc107" font-size="30px">{{ rateProp }}%</text>
+            </svg>
+            <div class="text-[#4a4a4a]">
+              <span>Similar to</span><br>
+              <span class="font-semibold">{{ similarNameProp }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex md:flex-row flex-col p-2">
+          <div class="md:basis-1/2 basis-full text-sm overflow-hidden">
+            <div v-if="summaryProp">
+            <span v-if="summaryProp.length > 550">
+            {{ summaryProp.substring(0, 550) }}... <a :href="summaryLinkProp" class="font-semibold hover:underline">Read More</a>
+            </span>
+              <span v-else>
+              {{ summaryProp }}
+              <a :href="summaryLinkProp" class="font-semibold hover:underline">Read More</a>
+            </span>
+            </div>
+
+          </div>
+          <div class="md:basis-1/2 basis-full">
+            <iframe :src="videoProp" class="w-full aspect-video"/>
+          </div>
+          <div class="mt-2 md:hidden block">
+            <button @click="closeModalOutside" class="bg-[#C7042C] p-1 rounded-[5px]  text-[white] px-4 ml-[calc(calc(100%_-_70px)/2)]">
+              Close
+            </button>
+          </div>
+        </div>
 
 
-        </div>
-      </section>
-      <section class="modal-card-body px-3 pt-3">
-        <div class="columns">
-          <div id="modSumCol" class="column pr-0">
-            <p id="sumText">
-              {{ modalSumTextPROP }}
-              <a id="readMore" v-bind:href="modalSumLinkPROP" target="_blank" rel="noopener noreferrer">Read More</a>
-            </p>
-          </div>
-          <div class="column">
-            <figure class="image is-16by9">
-              <iframe
-                  id="frame"
-                  class="has-ratio"
-                  width="640"
-                  height="360"
-                  v-bind:src="modalVideoPROP"
-                  frameborder="0"
-                  allowfullscreen
-              ></iframe>
-            </figure>
-          </div>
-        </div>
-      </section>
-      <div id="modalFoot">
-        <div class="columns is-mobile is-centered">
-          <div id="closeButtonCol" class="column is-narrow my-2" style="margin-left: 0 !important;">
-            <button id="closeButton" class="button is-danger is-small" @click="CloseModal">Close</button>
-          </div>
-        </div>
       </div>
-      <button class="modal-close is-large" aria-label="close" @click="CloseModal"></button>
+
     </div>
   </div>
 </template>
 
-
 <script>
 export default {
-  name: "Modal",
-
-  props: [
-    "modalImagePROP",
-    "modalInfoPROP",
-    "modalYearPROP",
-    "modalHangPROP",
-    "valuePROP",
-    "modalVideoPROP",
-    "modalSumLinkPROP",
-    "modalSumTextPROP",
-    "modalSimilarNamePROP",
-    "modalCommonTagsProp",
-    "renderRateProp",
-    "rProp"
-  ],
-  components: {
-    circleProgress: () => process.client ? import("vuejs-progress-bar") : null
+  name: "Modal2",
+  data() {
+    return {
+      colors: ["t1", "t2", "t3", "t4", "t5", "t6"],
+    }
   },
+  props: [
+    "seriesNameProp",
+    "seriesHangProp",
+    "seriesYearProp",
+    "summaryProp",
+    "summaryLinkProp",
+    "similarNameProp",
+    "rateProp",
+    "renderCommonProp",
+    "renderSvgProp",
+    "videoProp",
+    "idProp",
+    "commonTagsProp"
+  ],
+
   methods: {
-    CloseModal() {
-      this.modalVideoPROP = null
-      document.getElementById("modal1").classList.remove("is-active")
-      document.getElementsByTagName("HTML")[0].classList.remove("is-clipped")
+    closeModalOutside(e) {
+      if (e.target.id === "modal-background" || e.target.id === "alp" || e.currentTarget.textContent.trim() === "Close") {
+        document.querySelector("#custom-modal").style.display = "none"
+        this.videoProp = "";
+      }
     },
 
-    ColoredTags(param) {
+    coloredTags(param) {
       let coloredTagsArray = []
-
       param.forEach(tag => {
-        let randomColor = this.randomColor[Math.floor(Math.random() * this.randomColor.length)]
-        const coloredTag = `<span class="tag is-light ${randomColor}">${tag}</span>`
+        let randomColor = this.colors[Math.floor(Math.random() * this.colors.length)]
+        const coloredTag = `<span class="tag2 ${randomColor} whitespace-nowrap">${tag}</span>`
         coloredTagsArray.push(coloredTag)
       })
       return coloredTagsArray.join(" ")
-    }
-  },
 
-  //mobil için progress ayarları
-  mounted() {
-
-    const path = window.location.pathname.split("/")[1]
-    path !== "like" ? this.rateColDisplayState = "none" : null
-    // path !== "like" ? this.textAlign = "center" : null
-    path === "like" ? this.renderCommonTags = true : null
-
-  },
-
-  data() {
-    return {
-      isMobile: () => (window.innerWidth <= 768),
-      rateColDisplayState: "block",
-      textAlign: "left",
-      renderCommonTags: false,
-      value: 50,
-      randomColor: ["is-primary", "is-link", "is-info", "is-success", "is-warning", "is-danger"],
-    }
+    },
   }
-
 }
 </script>
-
-
 <style>
-
-.tag {
-  border: 1px solid #dbdbdb;
-  height: unset !important;
-}
-
-#commonTagP {
-  display: block;
-}
-
-#svgProgressModal {
-  margin-left: calc(calc(100% - 90px)/2);
-}
-
-@media only screen and (max-width: 768px) {
-  .modal-card {
-    width: 95%;
-  }
-
-  #svgProgressModal{
-    width: 60px;
-    height: 60px;
-  }
-
-  #svgProgressModal {
-    margin-left: calc(calc(100% - 60px)/2);
-  }
-  #modSumCol {
-    padding-right: 0.75rem !important;
-  }
-
-
-  #infoCol {
-    /*text-align: center;*/
-  }
-}
-
-@media only screen and (max-width: 1023px) {
-  .modal-card {
-    width: 95%;
-  }
-}
 
 </style>

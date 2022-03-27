@@ -1,141 +1,30 @@
 <template>
-  <nav id="custom-header" :class="!flag ? 'custom-header': 'custom-header minimised' ">
-    <div class="container">
-      <div class="columns is-vcentered is-multiline">
-        <div id="colLeft"
-             class="column is-3-tablet is-offset-0-tablet is-2-desktop is-offset-0-desktop is-4-fullhd is-offset-0-fullhd">
-          <figure id="headerFigure" class="p-1">
-            <a href="/" style="text-decoration: none">
-              <img id="headerLogo" src="/templates/bannerV3x64.png" alt="">
-            </a>
-          </figure>
+  <div>
+    <nav class="bg-white border-b border-[#DBDBDB] w-full">
+      <div
+          class="container d:h-[74px] t:h-[74px] h-[90px] mx-auto grid d:grid-cols-3 t:grid-cols-4 grid-cols-1 items-center">
+        <div class="d:w-auto t:w-3/4 w-1/4 d:ml-0 t:ml-0 ml-[37.5%] grid grid-col-1 items-center">
+          <a href="/" class="inline-block"><img src="/templates/bannerV3x64.png" alt="" class=""></a>
         </div>
-        <div class="dummy"></div>
-        <div id="colCenter"
-             class="column is-6-tablet is-offset-0-tablet is-5-desktop is-offset-0-desktop is-4-fullhd is-offset-0-fullhd">
+        <div class="t:col-start-2 t:col-span-2 px-1.5 d:px-0 t:px-0">
           <search-box/>
         </div>
+        <button id="testButton" class="bg-[yellow] rounded-xl w-[80px] border border-[black] absolute right-[15%]">Click</button>
       </div>
-    </div>
-  </nav>
-
+    </nav>
+  </div>
 </template>
 
+
 <script>
-
-export default {
-  data() {
-    return {
-      flag: false,
-    }
-  },
-  methods:{
-
-  },
-  mounted() {
-    const customHeight = parseInt(window.getComputedStyle(document.getElementById("custom-header")).getPropertyValue("height").substring(0,2))
-    window.onscroll = () => {
-      this.flag = window.scrollY > customHeight;
-    }
-
-  }
-
-}
-
+export default {}
 </script>
 
 
 <style>
-.custom-header {
+
+.bg-white {
   background-color: white;
-  border-bottom: 1px solid #dbdbdb;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: 10;
-  height: 73px;
-}
-
-.minimised {
-  position: fixed;
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(13px);
-  -webkit-backdrop-filter: blur(13px);
-  border: 1px solid rgba(219, 219, 219, 0.1);
-}
-
-body {
-  padding-top: 73px;
-
-}
-
-
-#colLeft {
-  padding-top: 16px;
-}
-
-#headerFigure {
-  height: 68px;
-}
-
-@media only screen and (max-width: 768px) {
-  #headerLogo {
-    width: 150px;
-    margin-left: calc(calc(100% - 150px) / 2);
-  }
-
-  #headerFigure {
-    height: unset;
-  }
-
-  #colLeft {
-    padding-bottom: 0;
-  }
-
-  #colCenter {
-    padding-top: 5px;
-  }
-
-  nav {
-    height: 120px;
-  }
-
-  body {
-    /*margin-top: 134px;*/
-  }
-
-}
-
-
-@media only screen and (min-width: 769px) and (max-width: 1023px) {
-  #headerLogo {
-    width: 100%;
-    margin-top: 2px;
-  }
-
-  body {
-    /*margin-top: 105px;*/
-  }
-}
-
-
-@media only screen and (min-width: 1024px) and (max-width: 1407px) {
-  #headerLogo {
-    width: 100%;
-    margin-top: 6px;
-  }
-
-  .dummy {
-    width: 12.5%;
-  }
-}
-
-@media screen and (min-width: 1408px) {
-  #headerLogo {
-    width: 50%;
-  }
 }
 
 

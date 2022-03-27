@@ -24,14 +24,14 @@ export default {
             {rel: 'icon', type: 'image/x-icon', href: '/templates/favicoT2.ico'}
         ],
         script: [
-            {type: "text/javascript", src: "/scripts/metric.js"}
+            {type: "text/javascript", src: "/log.js"}
         ]
     },
 
     // Global CSS: https://go.nuxtjs.dev/config-css
     css: [
         `@/static/styles.css`,
-        `@/node_modules/bulma-modal-fx/dist/css/modal-fx.min.css`,
+        `@/node_modules/bulma-modal-fx/dist/css/modal-fx.min.css`
     ],
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -45,7 +45,8 @@ export default {
     // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
     buildModules: [
         '@nuxtjs/google-fonts',
-        '@nuxt/postcss8'
+        '@nuxt/postcss8',
+
     ],
 
 
@@ -58,13 +59,19 @@ export default {
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [
         // https://go.nuxtjs.dev/buefy
-        ['nuxt-buefy', {materialDesignIcons: false}],
+        // ['nuxt-buefy', {materialDesignIcons: false}],
     ],
 
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
     build: {
         extractCSS: true,
+        postcss: {
+            plugins: {
+                tailwindcss: {},
+                autoprefixer: {},
+            },
+        },
     },
 
     serverMiddleware: [
@@ -73,7 +80,8 @@ export default {
         "~/api/populars",
         "~/api/series",
         "~/api/calc",
-        "~/api/tagCalc"
+        "~/api/tagCalc",
+
     ],
 
 
@@ -84,16 +92,11 @@ export default {
         }
     },
 
-    // privateRuntimeConfig: {
-    //     // dbLocation: process.env.NODE_ENV === "development" ? process.env.DEV_DB : process.env.PROD_DB
-    //     // dbLocation: process.env.DEV_DB
-    // }
-
-    //
-    // server:{
-    //   host : '192.168.1.24'
-    // }
-    //
+    publicRuntimeConfig: {
+        // api: process.env.CURRENT_API,
+        // test: process.env.NUXT_ENV_TEST
+        // api: "https://kdramalike.com/api/"
+    },
 
 
 }

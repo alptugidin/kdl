@@ -4,4 +4,6 @@
 /static/templates/
 /.idea/
 /.env
-/static/assets/
+/kdl-pem.pem
+/kdramalike-keypair.ppk
+/kdramalike-private-keypair.ppk

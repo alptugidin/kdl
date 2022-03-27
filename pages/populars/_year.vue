@@ -1,53 +1,34 @@
 <template>
-  <div @click="closeModalOutside">
-<!--    <div v-if="takenData === undefined" @load="Redirect404">error</div>-->
-    <div class="container">
-
-      <div class="columns my-0 is-centered">
-        <div class="column my-6 is-narrow">
-          <div class="column is-narrow" style="text-align: center">
-            <h1 id="koreanDramaAbout" class="is-size-4 is-size-5-mobile has-text-dark ">Most popular Korean Dramas in {{ yearSSR }}</h1>
-          </div>
-        </div>
+  <div>
+    <div class="container mx-auto pb-20">
+      <div class="text-center py-10">
+        <h1 class="md:text-2xl text-xl text-[#4A4A4A] ubuntu-font font-normal">Most popular Korean Dramas in <span
+            class="font-semibold">{{ yearSSR }}</span></h1>
       </div>
 
-      <div id="mainColumns" class="columns is-multiline is-centered is-mobile">
-
-
-        <div class="column is-narrow" v-for="i in takenData.length">
-
-          <card
-            :render-ghost="false"
-            :renderaAllCircle="false"
-            :renderCircle="false"
-            :id="`innerDiv`"
-            :aCardID="i"
-            :showModalPROP="showModal"
-            :seriesName="takenData[i-1].name"
-            :seriesHang="takenData[i-1].title"
-            :seriesYear="takenData[i-1].year"
-            :seriesRate="Math.round(100)"
-            :seriesId="takenData[i-1].idx"
-          />
-        </div>
+      <div class="flex flex-wrap justify-center lg:gap-14 gap-8">
+        <card
+            @click.native="showModal"
+            v-for="(series,index) in takenData"
+            :id-prop="series.idx"
+            :name-prop="series.name"
+            :year-prop="series.year"
+            :hang-prop="series.title"
+            :rank-prop="index+1"
+            :key="index"
+            :number-prop="index"
+        />
       </div>
-
-
-      <modal
-        v-bind:RenderCircleIfModalPROP="false"
-        v-bind:valuePROP=0
-        v-bind:modalInfoPROP="nameToModal"
-        v-bind:modalYearPROP="yearToModal"
-        v-bind:modalHangPROP="hangToModal"
-        v-bind:modalSumTextPROP="sumToModal"
-        v-bind:modalSumLinkPROP="sumLinkToModal"
-        v-bind:modalVideoPROP="videoToModal"
-        v-bind:modalImagePROP="idToModal"
-        v-bind:modalSimilarNamePROP="similarNameToModal"
-      />
-
-
     </div>
+    <modal
+        :series-name-prop="nameToModal"
+        :series-year-prop="yearToModal"
+        :series-hang-prop="hangToModal"
+        :summary-prop="sumToModal"
+        :summary-link-prop="sumLinkToModal"
+        :id-prop="idToModal"
+        :video-prop="videoToModal"
+    />
   </div>
 </template>
 
@@ -91,20 +72,20 @@ export default {
   async asyncData(ctx) {
     //Most-popular-Korean-Dramas-
 
-    ctx.params.year.substring(0, ctx.params.year.length-4) !== "Most-popular-Korean-Dramas-" ? ctx.redirect("/404"):null
+    // ctx.params.year.substring(0, ctx.params.year.length - 4) !== "Most-popular-Korean-Dramas-" ? ctx.redirect("/404") : null
     const yearSSR = ctx.params.year.split("-").at(-1)
-    const rawData = await axios.get(`http://localhost:3000/api/populars?q=${yearSSR}`)
-    // const rawData = await axios.get(`https://kdramalike.com/api/populars?q=${yearSSR}`)
-    .catch(err => {
-      console.log("ERROR IN _YEAR :: " + err)
-    })
+    const rawData = await axios.get(`${process.env.NUXT_ENV_CURRENT_API}populars?q=${yearSSR}`)
+        .catch(err => {
+          console.log("ERROR IN _YEAR :: " + err)
+        })
 
     let takenData
     try {
       // takenData = rawData.data[0].data
       takenData = rawData.data
-    }catch (e){
-      ctx.redirect("/404")
+    } catch (e) {
+      // ctx.redirect("/404")
+      console.log("_year" + e)
     }
 
     return {
@@ -114,44 +95,20 @@ export default {
 
   },
 
-  methods:{
-    Redirect404(){
-      console.log("aeaşsiasşdl")
-    },
-    showModal(e){
-      this.renderCircleIfModal = false
-      let i = e.currentTarget.id
-      let id = this.takenData[i-1].idx
-      let name = this.takenData[i-1].name
-      let year = this.takenData[i-1].year
-      let hang = this.takenData[i-1].title
-      let sum = this.takenData[i-1].summary
-      let sumLink = this.takenData[i-1].summaryLink
-      let video = this.takenData[i-1].video
-      let rate = this.takenData[i-1].co
+  methods: {
+    showModal(e) {
+      const i = e.currentTarget.id
+      this.nameToModal = this.takenData[i].name
+      this.yearToModal = this.takenData[i].year
+      this.hangToModal = this.takenData[i].title
+      this.sumToModal = this.takenData[i].summary
+      this.sumLinkToModal = this.takenData[i].summaryLink
+      this.idToModal = this.takenData[i].idx
+      this.videoToModal = this.takenData[i].video
 
-      this.rate = Math.round(rate * 100)
-      this.nameToModal = name
-      this.yearToModal = year
-      this.hangToModal = hang
-      this.sumToModal = sum
-      this.sumLinkToModal = sumLink
-      this.videoToModal = video
-      // this.idToModal = `/img-webp/${id}.webp`
-      this.idToModal = id
-      this.similarNameToModal = this.nameSSR
-      document.getElementById("modal1").classList.toggle("is-active")
-      document.getElementsByTagName("HTML")[0].classList.toggle("is-clipped")
-      document.getElementById("rateCol").style.display = "none"
+      document.getElementById("custom-modal").style.display = "block"
     },
 
-    closeModalOutside(event) {
-      if (event.target.className === "modal-background") {
-        this.videoToModal = ""
-        document.getElementById("modal1").classList.remove("is-active")
-        document.getElementsByTagName("HTML")[0].classList.remove("is-clipped")
-      }
-    },
 
   }
 
@@ -162,11 +119,11 @@ export default {
 
 <style>
 
-#footerComp{
+#footerComp {
   position: relative !important;
 }
 
-#mainColumns{
+#mainColumns {
   padding-bottom: 180px;
   margin-bottom: 0;
 }

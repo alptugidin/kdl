@@ -88,7 +88,7 @@ mongoose.connect(process.env.CURRENT_DB)
 
                                 pocketRaw.sort((a, b) => b[0] - a[0]); //benzeşme oranına göre sıralanır
                                 // pocketRaw.shift(); //ilk eleman seçilen dizi ile aynı olduğundan arrayden çıkarılır
-                                let pocket = pocketRaw.slice(0, 103); //yeni array oluşulup ilk 96 eleman içine eklenir
+                                let pocket = pocketRaw.slice(0, 91); //yeni array oluşulup ilk 96 eleman içine eklenir
                                 pocket.push(selectedData); //interpolation içine kullanılacak veri dizinin sonuna eklenir,
 
                                 res.send(pocket); //interpolation içinde kullanılan veri gönderilir
