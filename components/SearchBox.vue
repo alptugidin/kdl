@@ -2,22 +2,23 @@
   <div>
     <form id="form-element" class="relative">
       <input id="custom-input" @input="search" :placeholder="placeholder" autocomplete="off"
-             class="bg-[#EFEFEF] h-[36px] w-full outline-0 rounded-xl focus:rounded-t-xl pl-9 text-sm">
+             :class="'bg-[#EFEFEF] h-[36px] w-full outline-0 rounded-xl focus:rounded-t-xl pl-9 text-sm' + (flagProp ? ' input-shadow' : '')">
       <img src="/templates/searchCustom.svg" alt="svg" class="absolute w-[20px] top-2 left-2">
       <select id="search-in-input" @change="changeSearchType"
-              class="absolute right-0 w-auto h-[36px] rounded-r-xl border-b border-[#EFEFEF] bg-[#EFEFEF] hover:bg-[#DBDBDB] text-sm outline-0 z-[11]">
+              class="absolute right-0 w-[122px] top-0 h-[36px] rounded-r-xl border-b border-[#EFEFEF] bg-[#EFEFEF] hover:bg-[#DBDBDB] text-sm outline-0 z-[11]">
         <option value="name">Search by Name</option>
         <option value="tag">Search by Tag</option>
       </select>
       <div id="ghost"
            class="absolute top-[30px] w-full h-[6px] bg-[#EFEFEF] z-30 border-b border-[#DBDBDB] hidden"></div>
-      <div class="bg-[#DBDBDB] absolute w-[1px] h-[30px] top-[3px] right-[122px] z-[11]"></div>
+      <div class="bg-[#DBDBDB] absolute w-[1px] h-[30px] top-[3px] right-[121px] z-[11]"></div>
       <div id="series-dropdown" class="bg-white absolute w-full rounded-b-xl block z-20">
         <ul id="series-dropdown-ul"></ul>
       </div>
       <div id="tags-dropdown" class="bg-white absolute w-full md:h-[360px] h-[280px] rounded-b-xl hidden z-20">
         <div class="grid grid-cols-2">
-          <div id="tag-result-left" class="w-full md:h-[360px] h-[280px] rounded-bl-xl border-r border-[#DBDBDB] overflow-x-auto">
+          <div id="tag-result-left"
+               class="w-full md:h-[360px] h-[280px] rounded-bl-xl border-r border-[#DBDBDB] overflow-x-auto">
             <ul @click="addTag" id="tag-result-left-ul"></ul>
           </div>
           <div id="tag-result-right" class="w-full md:h-[360px] h-[280px] rounded-br-xl overflow-x-auto">
@@ -36,11 +37,13 @@
 import axios from "axios";
 
 export default {
+  props: ["flagProp"],
   data() {
     return {
       placeholder: "Korean Dramas like...",
       searchType: "name",
-      colors: ["t1", "t2", "t3", "t4", "t5", "t6"]
+      colors: ["t1", "t2", "t3", "t4", "t5", "t6"],
+      flag: false
     }
   },
 
@@ -50,6 +53,7 @@ export default {
         this.seriesDropdownCSS(0)
       }
     })
+
 
   },
 
@@ -159,11 +163,10 @@ export default {
     searchByTag() {
 
 
-
       const carts = document.querySelector(".tag-result-right-div").childNodes
       const tags = []
 
-      if (carts.length !== 0){
+      if (carts.length !== 0) {
         carts.forEach(e => {
           if (e.style.display !== "none") {
             tags.push(e.attributes[1].value.replaceAll(" ", "_"))
