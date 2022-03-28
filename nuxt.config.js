@@ -24,14 +24,13 @@ export default {
             {rel: 'icon', type: 'image/x-icon', href: '/templates/favicoT2.ico'}
         ],
         script: [
-            {type: "text/javascript", src: "/log.js"}
+            // {type: "text/javascript", src: "/log.js"}
         ]
     },
 
     // Global CSS: https://go.nuxtjs.dev/config-css
     css: [
         `@/static/styles.css`,
-        `@/node_modules/bulma-modal-fx/dist/css/modal-fx.min.css`
     ],
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -58,8 +57,6 @@ export default {
 
     // Modules: https://go.nuxtjs.dev/config-modules
     modules: [
-        // https://go.nuxtjs.dev/buefy
-        // ['nuxt-buefy', {materialDesignIcons: false}],
     ],
 
 
@@ -84,19 +81,6 @@ export default {
 
     ],
 
-
-    hooks: {
-        'vue-renderer:ssr:context'(context) {
-            const routePath = JSON.stringify(context.nuxt.routePath);
-            context.nuxt = {serverRendered: true, routePath};
-        }
-    },
-
-    publicRuntimeConfig: {
-        // api: process.env.CURRENT_API,
-        // test: process.env.NUXT_ENV_TEST
-        // api: "https://kdramalike.com/api/"
-    },
 
 
 }
