@@ -3,175 +3,175 @@
 @tailwind utilities;
 
 * {
-  -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent;
 }
 
 html {
-  @apply bg-[#f2f6fc]
+    @apply bg-[#f2f6fc]
 }
 
 .ubuntu-font {
-  font-family: "Ubuntu", serif;
+    font-family: "Ubuntu", serif;
 }
 
 .tag {
-  @apply inline-block rounded-[5px] border border-[#dbdbdb] relative pt-[1px] pr-[16px] pb-[1px] pl-[1px]
+    @apply inline-block rounded-[5px] border border-[#dbdbdb] relative pt-[1px] pr-[16px] pb-[1px] pl-[1px]
 }
 
 
 .tag2 {
-  @apply rounded-[5px] border border-[#dbdbdb] px-1
+    @apply rounded-[5px] border border-[#dbdbdb] px-1
 }
 
 .t1 {
-  @apply text-xs bg-[#ebfffc] text-[#00947e]
+    @apply text-xs bg-[#ebfffc] text-[#00947e]
 }
 
 .t2 {
-  @apply text-xs bg-[#eff1fa] text-[#3850b7]
+    @apply text-xs bg-[#eff1fa] text-[#3850b7]
 }
 
 .t3 {
-  @apply text-xs bg-[#EFF5FB] text-[#296fa8]
+    @apply text-xs bg-[#EFF5FB] text-[#296fa8]
 }
 
 .t4 {
-  @apply text-xs bg-[#effaf5] text-[#257953]
+    @apply text-xs bg-[#effaf5] text-[#257953]
 }
 
 .t5 {
-  @apply text-xs bg-[#fffaeb] text-[#946c00]
+    @apply text-xs bg-[#fffaeb] text-[#946c00]
 }
 
 .t6 {
-  @apply text-xs bg-[#feecf0] text-[#cc0f35]
+    @apply text-xs bg-[#feecf0] text-[#cc0f35]
 }
 
 
 .carousel {
-  @apply
-  2xl:w-[calc(188px_*_8)]
-  xl:w-[calc(188px_*_6)]
-  lg:w-[calc(188px_*_5)]
-  md:w-[calc(111px_*_6)]
-  sm:w-[calc(111px_*_4)]
-  w-full
-  scroll-smooth
+    @apply
+    2xl:w-[calc(188px_*_8)]
+    xl:w-[calc(188px_*_6)]
+    lg:w-[calc(188px_*_5)]
+    md:w-[calc(111px_*_6)]
+    sm:w-[calc(111px_*_4)]
+    w-full
+    scroll-smooth
 }
 
 .minh {
-  @apply lg:h-[261px] h-[170px]
+    @apply lg:h-[261px] h-[170px]
 }
 
 .index-div {
-  @apply md:min-h-[calc(100vh_-_74px)] min-h-[calc(100vh_-_90px)]
+    @apply md:min-h-[calc(100vh_-_74px)] min-h-[calc(100vh_-_90px)]
 }
 
 #c1, #c2, #c3, #c4 {
-  @apply lg:block hidden
+    @apply lg:block hidden
 }
 
 .card-image {
-  transition: transform .4s;
+    transition: transform .4s;
 }
 
 
 .custom-pagination {
-  @apply
-  font-semibold
-  hover:bg-[#1460d9]
-  first:hover:rounded-l-full
-  last:hover:rounded-r-full
-  first:rounded-l-full
-  last:rounded-r-full
-  cursor-pointer
-  hover:text-[white]
-  transition
-  ease-in-out
+    @apply
+    font-semibold
+    hover:bg-[#1460d9]
+    first:hover:rounded-l-full
+    last:hover:rounded-r-full
+    first:rounded-l-full
+    last:rounded-r-full
+    cursor-pointer
+    hover:text-[white]
+    transition
+    ease-in-out
 }
 
 .pagination-parent, .pagination-prev, .pagination-next {
-  @apply
-  bg-[#EFEFEF]
-  border border-[#DBDBDB]
-  rounded-full
-  w-fit
-  leading-9
-  text-center
-  flex
+    @apply
+    bg-[#EFEFEF]
+    border border-[#DBDBDB]
+    rounded-full
+    w-fit
+    leading-9
+    text-center
+    flex
 }
 
 .pagination-prev, .pagination-next {
-  @apply
-  hover:bg-[#1460d9]
-  cursor-pointer
-  transition
-  ease-in-out
+    @apply
+    hover:bg-[#1460d9]
+    cursor-pointer
+    transition
+    ease-in-out
 }
 
 .pagination-prev:hover img, .pagination-next:hover img {
-  filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(16deg) brightness(109%) contrast(101%);
+    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(16deg) brightness(109%) contrast(101%);
 }
 
 .pagination-child {
-  @apply
-  inline-block
-  w-[36px]
-  h-[36px]
-  hover:bg-[#1460d9]
-  hover:text-[white]
-  font-semibold
-  first:rounded-l-full
-  last:rounded-r-full
-  cursor-pointer
-  transition
-  ease-in-out
+    @apply
+    inline-block
+    w-[36px]
+    h-[36px]
+    hover:bg-[#1460d9]
+    hover:text-[white]
+    font-semibold
+    first:rounded-l-full
+    last:rounded-r-full
+    cursor-pointer
+    transition
+    ease-in-out
 }
 
 .dot {
-  @apply
-  inline-block
-  w-[36px]
-  h-[36px]
+    @apply
+    inline-block
+    w-[36px]
+    h-[36px]
 }
 
 
 .current-page {
-  @apply
-  bg-[#1460d9]
-  pointer-events-none
-  text-[white]
-  w-[36px]
-  inline-block
+    @apply
+    bg-[#1460d9]
+    pointer-events-none
+    text-[white]
+    w-[36px]
+    inline-block
 }
 
 .custom-modal {
-  @apply
-  overflow-auto
-  relative
-  bg-[white]
-  h-auto max-h-full
-  border border-[#dbdbdb]
-  rounded-xl
-  xl:w-[800px] md:w-[750px] sm:w-[630px] w-11/12
-  xl:left-[calc(calc(100%_-_800px)/2)] md:left-[calc(calc(100%_-_750px)/2)] sm:left-[calc(calc(100%_-_630px)/2)] left-[4.1667%]
+    @apply
+    overflow-auto
+    relative
+    bg-[white]
+    h-auto max-h-full
+    border border-[#dbdbdb]
+    rounded-xl
+    xl:w-[800px] md:w-[750px] sm:w-[630px] w-11/12
+    xl:left-[calc(calc(100%_-_800px)/2)] md:left-[calc(calc(100%_-_750px)/2)] sm:left-[calc(calc(100%_-_630px)/2)] left-[4.1667%]
 
 }
 
 .custom-modal-head {
-  @apply
-  bg-[#fafafa]
-  rounded-t-xl
-  p-1.5
-  border-b border-[#dbdbdb]
-  relative
+    @apply
+    bg-[#fafafa]
+    rounded-t-xl
+    p-1.5
+    border-b border-[#dbdbdb]
+    relative
 }
 
 .custom-modal-body {
-  @apply
-  p-1.5
-  text-[#4a4a4a]
-  h-full
+    @apply
+    p-1.5
+    text-[#4a4a4a]
+    h-full
 }
 
 
@@ -179,67 +179,65 @@ html {
 
 
 input:focus, #series-dropdown, #tags-dropdown {
-  box-shadow: 0 1px 6px rgb(32 33 36 / 30%);
+    box-shadow: 0 1px 6px rgb(32 33 36 / 30%);
 }
 
 input:focus ~ #search-in-input:hover {
-  border-bottom: 1px solid #dbdbdb;
+    border-bottom: 1px solid #dbdbdb;
 }
 
 .custom-shadow {
-  box-shadow: 0 1px 6px rgb(32 33 36 / 30%);
+    box-shadow: 0 1px 6px rgb(32 33 36 / 30%);
 }
 
 .custom-dropdown-item {
-  @apply
-  block
-  text-[#4a4a4a]
+    @apply block text-[#4a4a4a]
 }
 
-#search-in-input{
-  @apply
-  hover:z-50
+#search-in-input {
+    @apply hover:z-50
 }
 
 
 .li-class {
-  /*line-height: 36px;*/
-  /*padding-right: 3px;*/
-  /*font-size: 14px;*/
-  @apply
-  md:leading-9
-  leading-7
-  pr-[3px]
-  text-sm
-  hover:bg-[#efefef]
+    @apply md:leading-9 leading-7 pr-[3px] text-sm hover:bg-[#efefef]
 }
 
-/*.li-class:hover {*/
-/*    background-color: #efefef;*/
-/*}*/
 
 #series-dropdown-ul li:last-child {
-  /*border-bottom-left-radius: 12px;*/
-  /*border-bottom-right-radius: 12px;*/
-  @apply
-  rounded-bl-xl
-  rounded-br-xl
+    @apply rounded-bl-xl rounded-br-xl
 }
 
 #tag-result-right-div {
-  /*padding: 5px;*/
-  @apply
-  p-[5px]
+    @apply p-[5px]
 }
 
 
 .tag-cancel {
-  /*position: absolute;*/
-  /*top: 2px;*/
-  /*right: 1px;*/
-  @apply
-  absolute
-  top-[2px]
-  right-[1px]
+    @apply absolute top-[2px]  right-[1px]
 }
 
+.minimised {
+    @apply fixed top-0 z-50
+}
+
+.not-minimised {
+    @apply absolute top-0
+}
+
+.icy{
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.38);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(13px);
+    -webkit-backdrop-filter: blur(13px);
+    border-bottom: unset;
+}
+
+.input-shadow{
+    box-shadow: 0 1px 6px rgb(32 33 36 / 30%);
+}
+
+body {
+    @apply pt-[75px]
+}
