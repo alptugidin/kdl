@@ -1,8 +1,9 @@
 window.onload = () => {
-    const button = document.querySelector("#testButton")
+    const button = document.querySelector("#logButton")
 
     const searchHistory = []
     const selectHistory = []
+    const cardClickHistory = []
 
     document.querySelector("#custom-input").addEventListener("input", e => {
         searchHistory.push(document.querySelector("#custom-input").value)
@@ -12,18 +13,28 @@ window.onload = () => {
         selectHistory.push(e.target.textContent.trim())
     })
 
-    const cards = [document.getElementsByClassName("custom-card")]
-    console.log(cards[0])
 
-    // cards.forEach(card => {
-    //     card.addEventListener("click", e => {
-    //         console.log(e)
-    //     })
-    // })
+
+    const cards = [...document.getElementsByClassName("custom-card")]
+    cards.forEach(card => {
+        card.addEventListener("click", e => {
+            cardClickHistory.push(e.currentTarget.textContent.trim())
+        })
+    })
+
+
+
+
+
+
+
+
+
 
     button.addEventListener("click", e => {
         console.log(searchHistory)
         console.log(selectHistory)
+        console.log(cardClickHistory)
     })
 
 
