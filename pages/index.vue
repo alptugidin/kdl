@@ -194,6 +194,7 @@ export default {
         this.videoToModal = this.latestSeries[i].video
         this.idToModal = this.latestSeries[i].idx
         document.getElementById("custom-modal").style.display = "block"
+        document.body.classList.add("clipped")
       }else {
         this.nameToModal = this.popularSeries[i].name
         this.yearToModal = this.popularSeries[i].year
@@ -203,6 +204,7 @@ export default {
         this.videoToModal = this.popularSeries[i].video
         this.idToModal = this.popularSeries[i].idx
         document.getElementById("custom-modal").style.display = "block"
+        document.body.classList.add("clipped")
       }
 
     },

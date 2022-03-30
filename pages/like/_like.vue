@@ -202,6 +202,7 @@ export default {
         this.renderSvg = false
         this.renderCommonTags = false
         document.querySelector("#custom-modal").style.display = "block"
+        document.body.classList.add("clipped")
       } else {
         this.rateToModal = this.takenData[e.currentTarget.id][0]
         this.nameToModal = this.takenData[e.currentTarget.id][1]
@@ -216,6 +217,7 @@ export default {
         this.renderSvg = true
         this.renderCommonTags = true
         document.querySelector("#custom-modal").style.display = "block"
+        document.body.classList.add("clipped")
       }
 
 

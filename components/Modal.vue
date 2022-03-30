@@ -110,6 +110,7 @@ export default {
     closeModalOutside(e) {
       if (e.target.id === "modal-background" || e.target.id === "alp" || e.currentTarget.textContent.trim() === "Close") {
         document.querySelector("#custom-modal").style.display = "none"
+        document.body.classList.remove("clipped")
         this.videoProp = "";
       }
     },

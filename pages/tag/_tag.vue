@@ -100,7 +100,7 @@ export default {
       this.sumLinkToModal = this.takenData[i].summaryLink
       this.idToModal = this.takenData[i].idx
       this.videoToModal = this.takenData[i].video
-
+      document.body.classList.add("clipped")
       document.getElementById("custom-modal").style.display = "block"
 
     }
