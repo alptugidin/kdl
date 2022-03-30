@@ -218,14 +218,14 @@ input:focus ~ #search-in-input:hover {
 }
 
 .minimised {
-    @apply fixed top-0 z-50
+    @apply fixed top-0 z-20
 }
 
 .not-minimised {
     @apply absolute top-0
 }
 
-.icy{
+.icy {
     /* From https://css.glass */
     background: rgba(255, 255, 255, 0.38);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -234,10 +234,15 @@ input:focus ~ #search-in-input:hover {
     border-bottom: unset;
 }
 
-.input-shadow{
+.input-shadow {
     box-shadow: 0 1px 6px rgb(32 33 36 / 30%);
 }
 
 body {
     @apply pt-[75px]
+}
+
+
+.clipped {
+    @apply overflow-hidden
 }
