@@ -25,12 +25,6 @@ window.onload = () => {
 
 
 
-
-
-
-
-
-
     button.addEventListener("click", e => {
         console.log(searchHistory)
         console.log(selectHistory)
@@ -39,5 +33,3 @@ window.onload = () => {
 
 
 }
-
-

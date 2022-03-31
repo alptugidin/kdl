@@ -24,7 +24,7 @@ export default {
             {rel: 'icon', type: 'image/x-icon', href: '/templates/favicoT2.ico'}
         ],
         script: [
-            {type: "text/javascript", src: "/log.js"}
+            // {type: "text/javascript", src: "/log.js"}
         ]
     },
 
@@ -35,7 +35,6 @@ export default {
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: [
-        // {src: `@/node_modules/bulma-modal-fx/dist/js/modal-fx.min.js`, mode: `client`}
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components
