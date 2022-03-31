@@ -5,36 +5,36 @@ window.onload = () => {
     const selectHistory = []
     const cardClickHistory = []
 
+
+    const metric = {
+        loc: null,
+        history: {
+            search: [],
+            select: [],
+            card: []
+        }
+    }
+
+
     document.querySelector("#custom-input").addEventListener("input", e => {
-        searchHistory.push(document.querySelector("#custom-input").value)
+        metric.history.search.push(document.querySelector("#custom-input").value)
     })
 
     document.querySelector("#series-dropdown-ul").addEventListener("click", e => {
-        selectHistory.push(e.target.textContent.trim())
+        metric.history.select.push(e.target.textContent.trim())
     })
-
 
 
     const cards = [...document.getElementsByClassName("custom-card")]
     cards.forEach(card => {
         card.addEventListener("click", e => {
-            cardClickHistory.push(e.currentTarget.textContent.trim())
+            metric.history.card.push(e.currentTarget.textContent.trim())
         })
     })
 
 
-
-
-
-
-
-
-
-
     button.addEventListener("click", e => {
-        console.log(searchHistory)
-        console.log(selectHistory)
-        console.log(cardClickHistory)
+        sessionStorage.setItem("0000", JSON.stringify(metric))
     })
 
 
