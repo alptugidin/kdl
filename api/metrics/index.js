@@ -1,15 +1,17 @@
+const fs = require("fs")
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser")
 
-// app.post("/", (req, res) => {
-//   console.log(req.query);
-//   res.send("data from metrics.js");
-// });
-
-
-
+app.use(bodyParser.text())
+app.use((req, res) => {
+    res.sendStatus(204)
+    // fs.appendFile("./log.txt", req.body + "\n", e => {
+    //     console.log("hata " + e)
+    // })
+});
 
 
 module.exports = {
-  path: "/api/metrics", handler: app,
+    path: "/api/metrics", handler: app,
 };

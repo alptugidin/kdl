@@ -24,7 +24,7 @@ export default {
             {rel: 'icon', type: 'image/x-icon', href: '/templates/favicoT2.ico'}
         ],
         script: [
-            {type: "text/javascript", src: "/log.js"}
+            // {type: "text/javascript", src: "/log.js", body: true}
         ]
     },
 
@@ -56,8 +56,7 @@ export default {
     },
 
     // Modules: https://go.nuxtjs.dev/config-modules
-    modules: [
-    ],
+    modules: [],
 
 
     // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -80,7 +79,6 @@ export default {
         "~/api/tagCalc",
 
     ],
-
 
 
 }

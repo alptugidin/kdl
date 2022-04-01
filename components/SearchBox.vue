@@ -134,6 +134,7 @@ export default {
       const pointedHTML = `<span id="span1">${firstPart}</span><span id="span2" class="font-bold">${pointedWord}</span><span id="span3">${lastPart}</span>`
       if (type === "name") {
         const href = "/like/" + url + "--" + id
+        // const href = "#"
         return `<li class="li-class"><a href=${href} class="custom-dropdown-item"><span style="margin-left: 36px">${pointedHTML} (${year})</span></a></li>`
       } else if (type === "tag") {
         const href = "#"
