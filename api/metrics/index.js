@@ -6,7 +6,9 @@ const bodyParser = require("body-parser")
 app.use(bodyParser.text())
 app.use((req, res) => {
     res.sendStatus(204)
-    fs.appendFile("./log.txt", req.body + "\n", e => e)
+    const date = new Date().toLocaleDateString()
+
+    fs.appendFile(`./logs/${date}.txt`, req.body + "\n", e => e)
 });
 
 

@@ -9,7 +9,6 @@
         <div :class="'t:col-start-2 t:col-span-2 px-1.5 d:px-0 t:px-0' + (flag ? ' mb-[5px] md:mb-[0]' : '')" >
           <search-box :flag-prop="flag"/>
         </div>
-        <button id="logButton" class="w-[80px] bg-[#EFEFEF] border border-[#dbdbdb] cursor-pointer rounded-lg absolute right-[20%]">click</button>
       </div>
     </nav>
   </div>
