@@ -41,10 +41,6 @@ export default {
   methods: {
     log() {
 
-      document.getElementById("logButton").addEventListener("click", () => {
-        console.log(this.metric)
-      })
-
       const path = $nuxt.$route.name
       this.metric.lang = navigator.language
 
@@ -96,7 +92,7 @@ export default {
 
 
       window.addEventListener("beforeunload", () => {
-        navigator.sendBeacon("/api/metrics", JSON.stringify(this.metric))
+        navigator.language !== "tr-TR" ? navigator.sendBeacon("/api/metrics", JSON.stringify(this.metric)) : null
       })
 
     }
