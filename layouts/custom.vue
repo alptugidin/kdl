@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       metric: {
-        time: new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString(),
+        time: new Date().toUTCString(),
         loc: null,
         ip: null,
         lang: null,
@@ -43,7 +43,6 @@ export default {
 
       const path = $nuxt.$route.name
       this.metric.lang = navigator.language
-
       this.metric.path = $nuxt.$route.fullPath
 
       fetch('https://www.cloudflare.com/cdn-cgi/trace')
