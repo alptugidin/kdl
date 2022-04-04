@@ -1,6 +1,7 @@
 <template>
   <div id="customDiv">
     <headerComp/>
+    <watchlist/>
     <Nuxt/>
     <footerComp/>
   </div>
@@ -35,7 +36,7 @@ export default {
   },
 
   mounted() {
-    this.log()
+    // this.log()
   },
 
   methods: {
