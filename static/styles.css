@@ -246,3 +246,30 @@ body {
 .clipped {
     @apply overflow-hidden
 }
+
+/*Watchlist*/
+
+.wl-open {
+    @apply mb-[0]
+}
+
+.watchlist-head {
+    @apply transition-all
+}
+
+.wl-hd-open {
+    @apply left-0 w-[300px]
+}
+
+.fc-open {
+    @apply w-2/12
+}
+
+.sc-open {
+    @apply w-10/12 text-left
+}
+
+#wl-span{
+    @apply delay-150
+}
+
