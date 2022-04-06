@@ -4,6 +4,15 @@
     </div>
     <div id="alp" class="fixed md:top-20 top-4 bottom-0 right-0 left-0 z-20">
       <div class="custom-modal">
+        <div @click="addWatchlist"
+             class="flex cursor-pointer rounded-tr-xl pr-0.5 h-[26px] bg-[white] hover:bg-[#dbdbdb] border border-b-[#dbdbdb] border-l-[#dbdbdb] border-r-0 border-t-0 absolute right-0 top-0 text-sm leading-[26px]">
+          <div class="inline-block h-[26px] ">
+            <img src="/templates/add.svg" alt="" class=" mt-[2px]">
+          </div>
+          <div>
+            <span class="text-[#C7042C]">Watchlist</span>
+          </div>
+        </div>
         <div class="flex p-2 bg-[#EFEFEF] rounded-t-xl border-b border-[#dbdbdb]">
           <div class="md:basis-1/6 basis-0 md:pr-3 pr-0">
             <div>
@@ -50,6 +59,7 @@
               <span>Similar to</span><br>
               <span class="font-semibold">{{ similarNameProp }}</span>
             </div>
+
           </div>
         </div>
 
@@ -70,7 +80,8 @@
             <iframe :src="videoProp" class="w-full aspect-video"/>
           </div>
           <div class="mt-2 md:hidden block">
-            <button @click="closeModalOutside" class="bg-[#C7042C] p-1 rounded-[5px]  text-[white] px-4 ml-[calc(calc(100%_-_70px)/2)]">
+            <button @click="closeModalOutside"
+                    class="bg-[#C7042C] p-1 rounded-[5px]  text-[white] px-4 ml-[calc(calc(100%_-_70px)/2)]">
               Close
             </button>
           </div>
@@ -89,6 +100,7 @@ export default {
   data() {
     return {
       colors: ["t1", "t2", "t3", "t4", "t5", "t6"],
+      wl: []
     }
   },
   props: [
@@ -125,6 +137,33 @@ export default {
       return coloredTagsArray.join(" ")
 
     },
+    addWatchlist() {
+      if (localStorage.hasOwnProperty("f")) {
+        const currentStorage = JSON.parse(localStorage.getItem("f"))
+        if (!currentStorage.includes(this.idProp)) {
+          currentStorage.push(this.idProp)
+          localStorage.setItem("f", JSON.stringify(currentStorage))
+          console.log("current len " + currentStorage.length)
+          document.getElementById("wl-ul").innerHTML += this.wlTemplate(this.seriesNameProp, this.seriesYearProp)
+          // this.$store.commit("addWl", this.idProp)
+        }
+      } else {
+        const currentStorage = [this.idProp]
+        // this.$store.commit("addWl", this.idProp)
+        localStorage.setItem("f", JSON.stringify(currentStorage))
+      }
+    },
+
+    wlTemplate(name, year) {
+      return `<li class="h-[36px] w-full border border-b-[#dbdbdb] border-t-0 border-x-0 relative">
+            <div class="pl-2 pr-[24px] leading-[36px]">
+              <p class="truncate ...">${name} (${year})</p>
+            </div>
+            <div>
+              <img src="/templates/delete.svg" alt="" class="absolute right-1 bottom-[8px] cursor-pointer">
+            </div>
+          </li>`
+    }
   }
 }
 </script>
