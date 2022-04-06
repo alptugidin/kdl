@@ -141,16 +141,22 @@ export default {
       if (localStorage.hasOwnProperty("f")) {
         const currentStorage = JSON.parse(localStorage.getItem("f"))
         if (!currentStorage.includes(this.idProp)) {
-          currentStorage.push(this.idProp)
-          localStorage.setItem("f", JSON.stringify(currentStorage))
-          console.log("current len " + currentStorage.length)
+          const serie = this.seriesNameProp + " " + this.seriesYearProp
+          currentStorage.push(serie)
+          const setArr = [...new Set(currentStorage)]
+          localStorage.setItem("f", JSON.stringify(setArr))
+          this.$store.commit("update", setArr.length)
           document.getElementById("wl-ul").innerHTML += this.wlTemplate(this.seriesNameProp, this.seriesYearProp)
-          // this.$store.commit("addWl", this.idProp)
+
         }
       } else {
-        const currentStorage = [this.idProp]
-        // this.$store.commit("addWl", this.idProp)
-        localStorage.setItem("f", JSON.stringify(currentStorage))
+        const currentStorage = []
+        const serie = this.seriesNameProp + " " + this.seriesYearProp
+        currentStorage.push(serie)
+        const setArr = [...new Set(currentStorage)]
+        localStorage.setItem("f", JSON.stringify(setArr))
+        this.$store.commit("update", setArr.length)
+        document.getElementById("wl-ul").innerHTML += this.wlTemplate(this.seriesNameProp, this.seriesYearProp)
       }
     },
 
