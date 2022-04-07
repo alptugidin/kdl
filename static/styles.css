@@ -253,3 +253,10 @@ body {
     @apply mb-0 w-[300px]
 }
 
+.in-wl{
+    @apply bg-[#C7042C] text-[white]
+}
+
+.out-wl{
+    @apply bg-[white] text-[#C7042C]
+}
