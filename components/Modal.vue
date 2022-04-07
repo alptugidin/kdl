@@ -5,12 +5,14 @@
     <div id="alp" class="fixed md:top-20 top-4 bottom-0 right-0 left-0 z-20">
       <div class="custom-modal">
         <div @click="addWatchlist"
-             class="flex cursor-pointer rounded-tr-xl pr-0.5 h-[26px] bg-[white] hover:bg-[#dbdbdb] border border-b-[#dbdbdb] border-l-[#dbdbdb] border-r-0 border-t-0 absolute right-0 top-0 text-sm leading-[26px]">
-          <div class="inline-block h-[26px] ">
-            <img src="/templates/add.svg" alt="" class=" mt-[2px]">
+             id="modal-watchlist"
+             :class="'flex ' + (checkWl() ? ' in-wl' : ' out-wl') +' cursor-pointer rounded-tr-xl pr-0.5 h-[26px] hover:bg-[#dbdbdb] border border-b-[#dbdbdb] border-l-[#dbdbdb] border-r-0 border-t-0 absolute right-0 top-0 text-sm leading-[26px]'">
+          <div class="inline-block h-[26px]">
+            <img v-if="checkWl()" src="/templates/remove.svg" alt="" class=" mt-[2px]">
+            <img v-else src="/templates/add.svg" alt="" class=" mt-[2px]">
           </div>
           <div>
-            <span class="text-[#C7042C]">Watchlist</span>
+            <span class="">Watchlist</span>
           </div>
         </div>
         <div class="flex p-2 bg-[#EFEFEF] rounded-t-xl border-b border-[#dbdbdb]">
@@ -100,9 +102,10 @@ export default {
   data() {
     return {
       colors: ["t1", "t2", "t3", "t4", "t5", "t6"],
-      wl: []
+      checkVal: `${this.seriesNameProp} (${this.seriesYearProp})`
     }
   },
+
   props: [
     "seriesNameProp",
     "seriesHangProp",
@@ -138,38 +141,38 @@ export default {
 
     },
     addWatchlist() {
-      if (localStorage.hasOwnProperty("f")) {
-        const currentStorage = JSON.parse(localStorage.getItem("f"))
-        if (!currentStorage.includes(this.idProp)) {
-          const serie = this.seriesNameProp + " " + this.seriesYearProp
-          currentStorage.push(serie)
-          const setArr = [...new Set(currentStorage)]
-          localStorage.setItem("f", JSON.stringify(setArr))
-          this.$store.commit("update", setArr.length)
-          document.getElementById("wl-ul").innerHTML += this.wlTemplate(this.seriesNameProp, this.seriesYearProp)
+      const name = `${this.seriesNameProp} (${this.seriesYearProp})`
 
-        }
+      if (!localStorage.hasOwnProperty("f")) {
+        const arr = []
+        arr.push(name)
+        localStorage.setItem("f", JSON.stringify(arr))
       } else {
-        const currentStorage = []
-        const serie = this.seriesNameProp + " " + this.seriesYearProp
-        currentStorage.push(serie)
-        const setArr = [...new Set(currentStorage)]
-        localStorage.setItem("f", JSON.stringify(setArr))
-        this.$store.commit("update", setArr.length)
-        document.getElementById("wl-ul").innerHTML += this.wlTemplate(this.seriesNameProp, this.seriesYearProp)
+        const currentStorage = JSON.parse(localStorage.getItem("f"))
+        currentStorage.push(name)
+        localStorage.setItem("f", JSON.stringify(currentStorage))
       }
-    },
 
-    wlTemplate(name, year) {
+      this.$store.commit("updateWatchlist")
+    },
+    wlTemplate(serie) {
       return `<li class="h-[36px] w-full border border-b-[#dbdbdb] border-t-0 border-x-0 relative">
             <div class="pl-2 pr-[24px] leading-[36px]">
-              <p class="truncate ...">${name} (${year})</p>
+              <p class="truncate ...">${serie}</p>
             </div>
-            <div>
+            <div id="remove">
               <img src="/templates/delete.svg" alt="" class="absolute right-1 bottom-[8px] cursor-pointer">
             </div>
           </li>`
+    },
+
+    checkWl() {
+      const checkVal = `${this.seriesNameProp} (${this.seriesYearProp})`
+      this.$store.commit("checkWatchlist", checkVal)
+      return this.$store.state.inWatchlist;
     }
+
+
   }
 }
 </script>
