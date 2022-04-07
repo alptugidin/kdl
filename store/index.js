@@ -1,12 +1,24 @@
 export const state = () => ({
-    watchlist: []
+    watchList: [],
+    inWatchlist: false
 })
 
 export const mutations = {
-    add(state, value) {
-        state.watchlist.push(value)
+
+    updateWatchlist(state) {
+        if (localStorage.hasOwnProperty("f")) {
+            state.watchList = JSON.parse(localStorage.getItem("f"))
+        }
     },
-    remove(state, value){
-        state.watchlist = state.watchlist.filter(e => e === value)
+
+    checkWatchlist(state, value) {
+        state.inWatchlist = state.watchList.includes(value);
+    }
+}
+
+export const getters = {
+
+    getWatchlistSize(state) {
+        return state.watchList.length
     }
 }
