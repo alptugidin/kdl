@@ -9,11 +9,24 @@
         </div>
         <div class="wl-right w-1/2 text-center">
           <span id="wl-text"
-                class="font-semibold ubuntu-font text-[#C71B2B] text-[20px]">{{size}}</span>
+                class="font-semibold ubuntu-font text-[#C71B2B] text-[20px] hidden">Watchlist</span>
+          <span id="wl-text2"
+                class="font-semibold ubuntu-font text-[#C71B2B] text-[20px]">{{
+              this.$store.getters.getWatchlistSize
+            }}</span>
         </div>
       </div>
       <div class="wl-body pt-[36px] overflow-auto max-h-[360px]">
         <ul id="wl-ul">
+          <li v-for="serie in this.$store.state.watchList"
+              class="h-[36px] w-full border border-b-[#dbdbdb] border-t-0 border-x-0 relative">
+            <div class="pl-2 pr-[24px] leading-[36px]">
+              <p class="truncate ...">{{ serie }}</p>
+            </div>
+            <div id="remove">
+              <img src="/templates/delete.svg" alt="" class="absolute right-1 bottom-[8px] cursor-pointer">
+            </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -24,36 +37,49 @@ export default {
   data() {
     return {
       wl: {},
-      size: 0
+      storage: [],
+      wlOpen: false
     }
   },
-  mounted() {
-    this.size = this.$store.state.watchlist.length
-    if (localStorage.hasOwnProperty("f")){
-      const storage = JSON.parse(localStorage.getItem("f"))
-      this.$store.commit("add", storage)
+  beforeMount() {
+
+    if (localStorage.hasOwnProperty("f")) {
+      this.$store.commit("updateWatchlist")
     }
+
+
   },
   methods: {
     showList() {
-      document.getElementById("wl-text").classList.toggle("hidden")
-      document.getElementById("wl-ul").classList.toggle("hidden")
+
       setTimeout(() => {
-        document.getElementById("wl-text").classList.toggle("hidden")
         document.getElementById("wl-ul").classList.toggle("hidden")
+        document.querySelector(".wl-right").classList.toggle("hidden")
       }, 150)
+      document.getElementById("wl-text").classList.toggle("hidden")
+      document.getElementById("wl-text2").classList.toggle("hidden")
+      document.getElementById("wl-ul").classList.toggle("hidden")
       document.querySelector(".wl").classList.toggle("wl-up")
       document.querySelector(".wl-head").classList.toggle("bg-[#efefef]")
       document.querySelector(".wl-left").classList.toggle("w-2/12")
       document.querySelector(".wl-left-image").classList.toggle("ml-[calc(calc(100%_-_16px)/2)]")
+      document.querySelector(".wl-right").classList.toggle("hidden")
       document.querySelector(".wl-right").classList.toggle("w-10/12")
       document.querySelector(".wl-right").classList.toggle("text-center")
-      if (document.getElementById("wl-text").innerText !== "Watchlist") {
-        document.getElementById("wl-text").innerText = "Watchlist"
-      } else {
-        document.getElementById("wl-text").innerText = this.$store.state.watchlist.length
-      }
+
     },
+
+    wlTemplate(serie) {
+      return `<li class="h-[36px] w-full border border-b-[#dbdbdb] border-t-0 border-x-0 relative">
+            <div class="pl-2 pr-[24px] leading-[36px]">
+              <p class="truncate ...">${serie}</p>
+            </div>
+            <div id="remove">
+              <img src="/templates/delete.svg" alt="" class="absolute right-1 bottom-[8px] cursor-pointer">
+            </div>
+          </li>`
+    }
+
 
   },
 
