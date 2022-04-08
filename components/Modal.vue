@@ -4,12 +4,14 @@
     </div>
     <div id="alp" class="fixed md:top-20 top-4 bottom-0 right-0 left-0 z-20">
       <div class="custom-modal">
-        <div @click="addWatchlist"
+        <div @click="watchlist"
              id="modal-watchlist"
-             :class="'flex ' + (checkWl() ? ' in-wl' : ' out-wl') +' cursor-pointer rounded-tr-xl pr-0.5 h-[26px] hover:bg-[#dbdbdb] border border-b-[#dbdbdb] border-l-[#dbdbdb] border-r-0 border-t-0 absolute right-0 top-0 text-sm leading-[26px]'">
+             :class="'flex ' + (checkWl() ? ' in-wl hover:bg-[#941521] ' : ' out-wl hover:bg-[#dbdbdb] ') +' cursor-pointer rounded-tr-xl pr-0.5 h-[26px] border border-b-[#dbdbdb] border-l-[#dbdbdb] border-r-0 border-t-0 absolute right-0 top-0 text-sm leading-[26px]'">
           <div class="inline-block h-[26px]">
-            <img v-if="checkWl()" src="/templates/remove.svg" alt="" class=" mt-[2px]">
-            <img v-else src="/templates/add.svg" alt="" class=" mt-[2px]">
+            <img v-show="checkWl()" src="/templates/remove.svg" alt="" class="wl-img mt-[2px]" data-do="remove"
+                 :data-state="dataState ? 'active' : 'passive' ">
+            <img v-show="!checkWl()" src="/templates/add.svg" alt="" class="wl-img mt-[2px]" data-do="add"
+                 :data-state="!dataState ? 'active' : 'passive'">
           </div>
           <div>
             <span class="">Watchlist</span>
@@ -102,7 +104,7 @@ export default {
   data() {
     return {
       colors: ["t1", "t2", "t3", "t4", "t5", "t6"],
-      checkVal: `${this.seriesNameProp} (${this.seriesYearProp})`
+      dataState: false
     }
   },
 
@@ -140,20 +142,33 @@ export default {
       return coloredTagsArray.join(" ")
 
     },
-    addWatchlist() {
+    watchlist() {
       const name = `${this.seriesNameProp} (${this.seriesYearProp})`
 
-      if (!localStorage.hasOwnProperty("f")) {
-        const arr = []
-        arr.push(name)
-        localStorage.setItem("f", JSON.stringify(arr))
+      let process = null
+      document.querySelectorAll(".wl-img").forEach(e => {
+        if (e.dataset.state === "active") {
+          process = e.dataset.do
+        }
+      })
+
+      if (process === "add") {
+        if (!localStorage.hasOwnProperty("f")) {
+          const arr = []
+          arr.push(name)
+          localStorage.setItem("f", JSON.stringify(arr))
+        } else {
+          const currentStorage = JSON.parse(localStorage.getItem("f"))
+          currentStorage.push(name)
+          localStorage.setItem("f", JSON.stringify(currentStorage))
+        }
       } else {
         const currentStorage = JSON.parse(localStorage.getItem("f"))
-        currentStorage.push(name)
-        localStorage.setItem("f", JSON.stringify(currentStorage))
+        const arr = currentStorage.filter(e => e !== name)
+        localStorage.setItem("f", JSON.stringify(arr))
       }
-
       this.$store.commit("updateWatchlist")
+
     },
     wlTemplate(serie) {
       return `<li class="h-[36px] w-full border border-b-[#dbdbdb] border-t-0 border-x-0 relative">
@@ -169,6 +184,7 @@ export default {
     checkWl() {
       const checkVal = `${this.seriesNameProp} (${this.seriesYearProp})`
       this.$store.commit("checkWatchlist", checkVal)
+      this.dataState = this.$store.state.inWatchlist
       return this.$store.state.inWatchlist;
     }
 

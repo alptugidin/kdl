@@ -13,6 +13,10 @@ export const mutations = {
 
     checkWatchlist(state, value) {
         state.inWatchlist = state.watchList.includes(value);
+    },
+
+    removeFromWatchlist(state, value) {
+        state.watchList = state.watchList.filter(e => e !== value)
     }
 }
 
