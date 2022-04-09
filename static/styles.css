@@ -249,10 +249,6 @@ body {
 
 /*Watchlist*/
 
-.wl-up {
-    @apply mb-0 w-[300px]
-}
-
 .in-wl{
     @apply bg-[#C7042C] text-[white]
 }
@@ -261,3 +257,10 @@ body {
     @apply bg-[white] text-[#C7042C]
 }
 
+.wl-max{
+    @apply w-[300px] h-[396px]
+}
+
+.wl-min{
+    @apply w-[70px] h-[36px]
+}
