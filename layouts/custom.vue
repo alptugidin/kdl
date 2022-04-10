@@ -36,12 +36,11 @@ export default {
   },
 
   mounted() {
-    // this.log()
+    this.log()
   },
 
   methods: {
     log() {
-
       const path = $nuxt.$route.name
       this.metric.lang = navigator.language
       this.metric.path = $nuxt.$route.fullPath
@@ -57,7 +56,6 @@ export default {
 
 
       if (path === "index") {
-
         document.getElementById("carousel1").addEventListener("click", e => {
           this.metric.history.card.push(e.target.closest(".custom-card").textContent.trim())
         })
@@ -67,15 +65,15 @@ export default {
         })
 
       } else if (path === "like-like") {
-        document.querySelector("#customDiv > div:nth-child(2) > div.container.mx-auto > div.flex.flex-wrap.justify-center.lg\\:gap-14.gap-8.mt-10").addEventListener("click", e => {
+        document.querySelector("#customDiv > div:nth-child(3) > div.container.mx-auto > div.flex.flex-wrap.justify-center.lg\\:gap-14.gap-8.mt-10").addEventListener("click", e => {
           this.metric.history.card = e.target.closest(".custom-card").textContent.trim()
         })
 
-        document.querySelector("#customDiv > div:nth-child(2) > div.container.mx-auto > div.flex.flex-row.justify-center.py-28 > div > div").addEventListener("click", e => {
+        document.querySelector("#customDiv > div:nth-child(3) > div.container.mx-auto > div.flex.flex-row.justify-center.py-28 > div > div").addEventListener("click", e => {
           this.metric.history.page.push(e.target.textContent)
         })
       } else if (path === "tag-tag") {
-        document.querySelector("#customDiv > div:nth-child(2) > div.container.mx-auto.min-h-\\[calc\\(100vh_-_74px\\)\\] > div.flex.flex-wrap.justify-center.lg\\:gap-14.gap-8").addEventListener("click", e => {
+        document.querySelector("#customDiv > div:nth-child(3) > div.container.mx-auto.min-h-\\[calc\\(100vh_-_74px\\)\\] > div.flex.flex-wrap.justify-center.lg\\:gap-14.gap-8").addEventListener("click", e => {
           this.metric.history.card = e.target.closest(".custom-card").textContent.trim()
         })
       }
