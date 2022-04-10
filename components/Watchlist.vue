@@ -76,7 +76,7 @@ export default {
 
   mounted() {
     window.addEventListener("click", e => {
-      if (!document.querySelector("#wl").contains(e.target) && document.querySelector("#wl").classList.contains("wl-max")) {
+      if (!document.querySelector("#wl").contains(e.target) && document.querySelector("#wl").classList.contains("wl-max") && e.target.tagName !== "IMG") {
         this.isOpen = false
         this.changeDisplay()
       }
@@ -84,13 +84,15 @@ export default {
   },
 
 
+
   methods: {
+
     changeWl() {
       this.isOpen = !this.isOpen
       this.changeDisplay()
     },
 
-    changeDisplay(){
+    changeDisplay() {
       this.dummy = true
       setTimeout(() => {
         this.dummy = false

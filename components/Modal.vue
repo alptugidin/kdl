@@ -6,11 +6,11 @@
       <div class="custom-modal">
         <div @click="watchlist"
              id="modal-watchlist"
-             :class="'flex ' + (checkWl() ? ' in-wl hover:bg-[#941521] ' : ' out-wl hover:bg-[#dbdbdb] ') +' cursor-pointer rounded-tr-xl pr-0.5 h-[26px] border border-b-[#dbdbdb] border-l-[#dbdbdb] border-r-0 border-t-0 absolute right-0 top-0 text-sm leading-[26px]'">
+             :class="checkWl(1) + 'flex cursor-pointer rounded-tr-xl rounded-bl-xl pr-1 h-[26px] border border-b-[#dbdbdb] border-l-[#dbdbdb] border-r-0 border-t-0 absolute right-0 top-0 text-sm leading-[26px]'">
           <div class="inline-block h-[26px]">
-            <img v-show="checkWl()" src="/templates/remove.svg" alt="" class="wl-img mt-[2px]" data-do="remove"
+            <img v-show="checkWl(0)" src="/templates/remove.svg" alt="" class="wl-img mt-[2px]" data-do="remove"
                  :data-state="dataState ? 'active' : 'passive' ">
-            <img v-show="!checkWl()" src="/templates/add.svg" alt="" class="wl-img mt-[2px]" data-do="add"
+            <img v-show="!checkWl(0)" src="/templates/add.svg" alt="" class="wl-img mt-[2px]" data-do="add"
                  :data-state="!dataState ? 'active' : 'passive'">
           </div>
           <div>
@@ -90,10 +90,7 @@
             </button>
           </div>
         </div>
-
-
       </div>
-
     </div>
   </div>
 </template>
@@ -104,7 +101,7 @@ export default {
   data() {
     return {
       colors: ["t1", "t2", "t3", "t4", "t5", "t6"],
-      dataState: false
+      dataState: false,
     }
   },
 
@@ -124,6 +121,7 @@ export default {
   ],
 
   methods: {
+
     closeModalOutside(e) {
       if (e.target.id === "modal-background" || e.target.id === "alp" || e.currentTarget.textContent.trim() === "Close") {
         document.querySelector("#custom-modal").style.display = "none"
@@ -144,7 +142,6 @@ export default {
     },
     watchlist() {
       const name = `${this.seriesNameProp} (${this.seriesYearProp})`
-
       let process = null
       document.querySelectorAll(".wl-img").forEach(e => {
         if (e.dataset.state === "active") {
@@ -170,28 +167,19 @@ export default {
       this.$store.commit("updateWatchlist")
 
     },
-    wlTemplate(serie) {
-      return `<li class="h-[36px] w-full border border-b-[#dbdbdb] border-t-0 border-x-0 relative">
-            <div class="pl-2 pr-[24px] leading-[36px]">
-              <p class="truncate ...">${serie}</p>
-            </div>
-            <div id="remove">
-              <img src="/templates/delete.svg" alt="" class="absolute right-1 bottom-[8px] cursor-pointer">
-            </div>
-          </li>`
-    },
 
-    checkWl() {
+    checkWl(p) {
       const checkVal = `${this.seriesNameProp} (${this.seriesYearProp})`
       this.$store.commit("checkWatchlist", checkVal)
       this.dataState = this.$store.state.inWatchlist
-      return this.$store.state.inWatchlist;
-    }
 
+      if (p === 0) {
+        return this.$store.state.inWatchlist;
+      } else if (p === 1) {
+        return this.$store.state.inWatchlist ? " in-wl hover:bg-[#941521] " : " out-wl hover:bg-[#dbdbdb] "
+      }
+    }
 
   }
 }
 </script>
-<style>
-
-</style>
