@@ -70,13 +70,9 @@ export default {
     },
 
     serverMiddleware: [
-        "~/api/metrics",
-        "~/api/tags",
-        "~/api/populars",
-        "~/api/series",
-        "~/api/calc",
-        "~/api/tagCalc",
-
+        {
+            path: "/api/v2", handler: "~/api/v2/index.js",
+        }
     ],
 
 

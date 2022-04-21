@@ -139,12 +139,13 @@ export default {
     apiCall(year) {
 
 
-      axios.get(`/api/populars?q=${year}`)
+      axios.get(`/api/v2/populars?q=${year}`)
           .catch(err => console.log(err))
           .then(res => {
             year.toString() === "2022" ? this.latestSeries = res.data : this.popularSeries = res.data
           })
           .finally(r => {
+            console.log(this.latestSeries)
             this.c1max = document.getElementById("carousel1").scrollWidth
             this.c2max = document.getElementById("carousel2").scrollWidth
             year !== "2022" ? document.getElementById("carousel2").scroll({left: 0, behavior: "smooth"}) : null
