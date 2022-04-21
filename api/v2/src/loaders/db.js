@@ -7,7 +7,7 @@ mongoose.connection.once("open", (err, state) => {
 })
 
 const connectDb = async () => {
-    await mongoose.connect("mongodb://localhost:27017/kdramalike2")
+    await mongoose.connect(process.env.CURRENT_DB)
 }
 
 

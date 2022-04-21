@@ -50,6 +50,9 @@ const queryCalculate = (req, res) => {
 
         res.send(pocket)
     })
+        .catch(err => {
+            res.send(404)
+        })
 
 }
 
