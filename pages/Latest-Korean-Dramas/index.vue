@@ -65,11 +65,10 @@ export default {
   },
 
   async asyncData(ctx) {
-    const rawData = await axios.get(  "http://localhost:3000/api/populars?q=2022")
+    const rawData = await axios.get(  process.env.NUXT_ENV_CURRENT_API + "/populars?q=2022")
         .catch(err => {
-          console.log("ERROR IN _YEAR :: " + err)
+          console.log("ERROR IN _YEAR : " + err)
         })
-    // const takenData = rawData.data[0].data
     const takenData = rawData.data
     return {
       takenData

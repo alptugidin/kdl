@@ -60,7 +60,7 @@ export default {
     let tags = ctx.params.tag
     let page = ctx.query.p
     let tagsSSR = ctx.params.tag.split("--").map(e => e.replaceAll("_", " ")).join(", ")
-    let res = await axios.get(process.env.NUXT_ENV_CURRENT_API + "tagCalc?q=" + tags + "&page=" + page)
+    let res = await axios.get(process.env.NUXT_ENV_CURRENT_API + "/tagCalc?q=" + tags + "&page=" + page)
         .catch(err => console.log("ERR :: " + err))
     let takenData = res.data
     let pageCount = Math.ceil((takenData.at(-1) / 60))

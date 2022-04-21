@@ -79,7 +79,7 @@ export default {
       const value = document.getElementById("custom-input").value.toLowerCase()
       const elementID = this.searchType === "name" ? "series-dropdown-ul" : "tag-result-left-ul"
       if (value.length > 2) {
-        const path = this.searchType === "name" ? "/api/series?q=" : "/api/tags?q="
+        const path = this.searchType === "name" ? "/api/v2/series?q=" : "/api/v2/tags?q="
         axios.get(path + value)
             .then(res => {
               this.arr = []

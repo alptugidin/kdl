@@ -74,7 +74,7 @@ export default {
 
     // ctx.params.year.substring(0, ctx.params.year.length - 4) !== "Most-popular-Korean-Dramas-" ? ctx.redirect("/404") : null
     const yearSSR = ctx.params.year.split("-").at(-1)
-    const rawData = await axios.get(`${process.env.NUXT_ENV_CURRENT_API}populars?q=${yearSSR}`)
+    const rawData = await axios.get( process.env.NUXT_ENV_CURRENT_API + "/populars?q=" + yearSSR)
         .catch(err => {
           console.log("ERROR IN _YEAR :: " + err)
         })

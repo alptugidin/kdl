@@ -1,7 +1,9 @@
 const mongoose = require("mongoose")
 
-mongoose.connection.once("open", () => {
-    console.log("DB WORKING...")
+mongoose.connection.once("open", (err, state) => {
+    if (err) {
+        console.log("Loading error : " + err)
+    }
 })
 
 const connectDb = async () => {

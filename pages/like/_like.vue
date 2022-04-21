@@ -120,20 +120,20 @@ export default {
     if (route.params.like.includes("--")) { //eğer url -- içeriyorsa
       userURL = route.params.like.split("--")[0]//urlden name alınıyor
       urlId = route.params.like.split("--")[1]//urlden id alınıyor
-      rawUrl = process.env.NUXT_ENV_CURRENT_API + "calc?q=" + urlId // api ye gönderilen number parametresi
+      rawUrl = process.env.NUXT_ENV_CURRENT_API + "/calc?q=" + urlId // api ye gönderilen number parametresi
       res = await axios.get(rawUrl, {})
           .catch((err) => {
             console.log("axios Error => " + err);
           }) //sayfa yüklenirken api ye get requesti yapılıyor
       takenData = res.data //apiden gelen veri
-      name = takenData[takenData.length - 1][0].name//name verisi en sondan alınıyor
-      trueURL = name.replace(/[^a-zA-Z0-9 ]/g, "").replace(/ /g, "-")
-      const likeSSR = takenData[takenData.length - 1][0].idx
+      name = takenData.at(-1).name//name verisi en sondan alınıyor
+      trueURL = name.replace(/[^a-zA-Z\d ]/g, "").replace(/ /g, "-")
+      const likeSSR = takenData.at(-1).idx
       const nameSSR = name
-      const hangSSR = takenData[takenData.length - 1][0].title
-      const yearSSR = takenData[takenData.length - 1][0].year
+      const hangSSR = takenData.at(-1).title
+      const yearSSR = takenData.at(-1).year
       const nameMeta = [takenData[1][1], takenData[2][1], takenData[3][1], takenData[4][1], takenData[5][1]]
-      const queryDataArray = [...takenData[takenData.length - 1]][0]
+      const queryDataArray = [takenData.at(-1)]
       takenData.shift()
       takenData.pop()
       if (trueURL !== userURL) {// adres çubuğundaki url ile olması gereken url aynı değilse
@@ -192,13 +192,13 @@ export default {
     showModal(e) {
 
       if (e.target.id === "query-card") {
-        this.nameToModal = this.queryDataArray.name
-        this.yearToModal = this.queryDataArray.year
-        this.hangToModal = this.queryDataArray.title
-        this.sumToModal = this.queryDataArray.summary
-        this.sumLinkToModal = this.queryDataArray.summary_link
-        this.videoToModal = this.queryDataArray.video
-        this.idToModal = this.queryDataArray.idx
+        this.nameToModal = this.queryDataArray[0].name
+        this.yearToModal = this.queryDataArray[0].year
+        this.hangToModal = this.queryDataArray[0].title
+        this.sumToModal = this.queryDataArray[0].summary
+        this.sumLinkToModal = this.queryDataArray[0].summary_link
+        this.videoToModal = this.queryDataArray[0].video
+        this.idToModal = this.queryDataArray[0].idx
         this.renderSvg = false
         this.renderCommonTags = false
         document.querySelector("#custom-modal").style.display = "block"
