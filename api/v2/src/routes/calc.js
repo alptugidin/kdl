@@ -5,6 +5,4 @@ const {queryCalculate} = require("../controllers/calc")
 
 router.get("/", queryCalculate)
 
-module.exports = {
-    router
-}
+module.exports = router

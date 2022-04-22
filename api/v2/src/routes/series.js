@@ -5,6 +5,4 @@ const {querySeries} = require("../controllers/series")
 
 router.get("/", querySeries)
 
-module.exports = {
-    router
-}
+module.exports = router

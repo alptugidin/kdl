@@ -6,11 +6,11 @@ const loaders = require("./src/loaders/db")
 
 loaders.connectDb().then(r => r)
 
-app.use("/populars", popularRoute.router)
-app.use("/calc", calcRoute.router)
-app.use("/series", seriesRoute.router)
-app.use("/tagCalc", tagCalcRoute.router)
-app.use("/tags", tagsRoute.router)
-app.use("/log", logRoute.router)
+app.use("/populars", popularRoute)
+app.use("/calc", calcRoute)
+app.use("/series", seriesRoute)
+app.use("/tagCalc", tagCalcRoute)
+app.use("/tags", tagsRoute)
+app.use("/log", logRoute)
 
 module.exports = app

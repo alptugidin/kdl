@@ -5,6 +5,4 @@ const {queryPopular} = require("../controllers/popular")
 router.get("/", queryPopular)
 
 
-module.exports = {
-    router
-}
+module.exports = router

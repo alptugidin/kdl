@@ -5,6 +5,4 @@ const {queryTagCalc} = require("../controllers/tagCalc")
 
 router.get("/", queryTagCalc)
 
-module.exports = {
-    router
-}
+module.exports = router

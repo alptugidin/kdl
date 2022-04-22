@@ -5,6 +5,4 @@ const {queryTags} = require("../controllers/tags")
 
 router.get("/", queryTags)
 
-module.exports = {
-    router
-}
+module.exports = router
