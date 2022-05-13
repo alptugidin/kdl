@@ -90,7 +90,7 @@ export default {
 
 
       window.addEventListener("beforeunload", () => {
-        navigator.language !== "tr-TR" ? navigator.sendBeacon("/api/metrics", JSON.stringify(this.metric)) : null
+        navigator.language !== "tr-TR" ? navigator.sendBeacon("/api/v2/log", JSON.stringify(this.metric)) : null
         // navigator.sendBeacon("/api/v2/log", JSON.stringify(this.metric))
 
       })
