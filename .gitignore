@@ -1,16 +1,1 @@
-/.nuxt/
-/node_modules/
-/static/img/
-/static/templates/
-/.idea/
-/.env
-/kdl-pem.pem
-/kdramalike-keypair.ppk
-/kdramalike-private-keypair.ppk
-/kdl-gc-openssh
-/kdl-gc-ssh.pem
-/kdl-gc-ssh.ppk
-/robots.txt
-/sitemap.xml
-/.log.txt
-/logs/
+
