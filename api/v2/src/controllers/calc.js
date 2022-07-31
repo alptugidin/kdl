@@ -11,7 +11,7 @@ const queryCalculate = (req, res) => {
         const queryTagsCount = selectedData.tags.length;
         let pocketRaw = [];
         let i = 0;
-        let k = 0; //ortak tag sayısı
+        let k = 0;
         let sum = 0;
 
         allData.forEach((element) => {
@@ -25,9 +25,9 @@ const queryCalculate = (req, res) => {
             const idx = element.idx;
             const commonTags = []
             queryTags.forEach((element1) => {
-                //seçilen dizinin tagları
+
                 allData[i].tags.forEach((element2) => {
-                    //üstünde çalışılan dizinin tagları
+    
                     if (element1[0] === element2[0]) {
                         k++;
                         sum += element2[1]
@@ -44,9 +44,9 @@ const queryCalculate = (req, res) => {
             sum = 0
         });
 
-        pocketRaw.sort((a, b) => b[0] - a[0]); //benzeşme oranına göre sıralanır
-        let pocket = pocketRaw.slice(0, 91); //yeni array oluşulup ilk 96 eleman içine eklenir
-        pocket.push(selectedData); //interpolation içine kullanılacak veri dizinin sonuna eklenir,
+        pocketRaw.sort((a, b) => b[0] - a[0]);
+        let pocket = pocketRaw.slice(0, 91); 
+        pocket.push(selectedData); 
 
         res.send(pocket)
     })
